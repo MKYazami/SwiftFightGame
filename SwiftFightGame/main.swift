@@ -8,7 +8,7 @@
 
 import Foundation
 //Wellcome and asking player name message
-print("▂▃▅▇█▓▒░  Welcome to the Swift Fight Game  ░▒▓█▇▅▃▂ \n\n"
+print("\t \t \t ▂▃▅▇█▓▒░  Welcome to the Swift Fight Game  ░▒▓█▇▅▃▂ \n\n"
     + "Enter your name:")
 
 var player = Player(playerName: readLine())
@@ -16,13 +16,20 @@ var player = Player(playerName: readLine())
 print("The player is \(player.playerName)")
 
 for choiceNumber in 1...3 {
+ 
+//    print("\(choiceNumber)/3 character(s)")
+    player.chooseCharacterMessage(choiceNumber: choiceNumber)
     
-    player.chooseCharacterMessage()
     player.chooseCharacter(characterType: readLine())
-
+    
     player.nameCharacterMessage()
     player.nameCharacter(characterName: readLine())
+    
+    //Debug
+    print("\(choiceNumber). \(player.charactersNames)")
 }
 
 
-player.resumeChooseCharacter()
+player.listChooseCharacter()
+
+

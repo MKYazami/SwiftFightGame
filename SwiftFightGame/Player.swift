@@ -7,16 +7,24 @@
 //
 
 /**
- Player class serves to initialize the player name, characters type and characrters name
+ Player class serves to initialize the player's name, characters' types and characrters' names
 */
 class Player {
     var playerName = String()
-    var charactersNames = ["combatant": "", "colossus": "", "drawf": "", "magus": ""]
-    var typeInput =  String()
-    var nameInput = String()
-    fileprivate var error = String()
+    //Dictionary that contains Type : Name characters
+    var charactersNames = [String: String]()
     
+    //Type's character chose by user
+    private var typeInput =  String()
     
+    //Name's character chose by user
+    private var nameInput = String()
+    
+    private var errorMessage = String()
+    
+    /**
+    To initialse the class, you need to get the player's name
+    */
     init(playerName: String?) {
         if let name = playerName {
             self.playerName = name
@@ -25,10 +33,12 @@ class Player {
     
     
     /**
-     Content message and details to help the player to make the choices
+     Contains message and details to help the player make choices
+        - parameters:
+            - choiceNumber: variable from loop for in, allows to know how many characters are chosen
     */
-    func chooseCharacterMessage() {
-        print("Please choose character ()==[::::::>"
+    func chooseCharacterMessage(choiceNumber: Int) {
+        print("Please choose \(choiceNumber)/3 character(s) ()==[::::::>"
                 + "\n1. Combatant〔 ℹ️  With classic attack, a good warrior 〕"
                 + "\n2. Colossus 〔 ℹ️  Very resistant to attacks, but he doesn't cause considerable domages 〕"
                 + "\n3. Drawf    〔 ℹ️  His axe generate a lot of damage, but he doesn't have many health points 〕"
@@ -37,18 +47,16 @@ class Player {
     }
     
     /**
-     Content message indicating that the player must enter the character name
-    */
+     Contains message indicating that the player must enter the character name
+     */
     func nameCharacterMessage() {
-        print("Now name it 〖❗️ Each charater must have a unique name 〗:")
+        print("Now name the it 〖❗️ Each charater must have a unique name 〗:")
     }
     
-    
-    
     /**
-     Function to dertermine the type of character according what the player entred
-        - parameters:
-            - characterType: Get character type from player
+    Function to dertermine the type of character according to what the player entres
+    - parameters:
+        - characterType: Get character type from player
     */
     func chooseCharacter(characterType: String?) {
        
@@ -56,50 +64,47 @@ class Player {
             typeInput = type
             switch typeInput {
             case "1":
-                typeInput = "combatant"
+                typeInput = "Combatant"
             case "2":
-                typeInput = "colossus"
+                typeInput = "Colossus"
             case "3":
-                typeInput = "drawf"
+                typeInput = "Drawf"
             case "4":
-                typeInput = "magus"
+                typeInput = "Magus"
             default:
-                error = "I don't uderstand, please make a choice between 1 and 4"
+                errorMessage = "I don't uderstand, please make a choice between 1 and 4"
             }
         }
+        
+        charactersNames [typeInput] = ""
     }
     
+    
     /**
-    Function allows to enter the character's name from the player
-     - parameters:
+    Function allows to enter the character's name by the player
+    - parameters:
         - characterName: Get character name from player
     */
     func nameCharacter(characterName: String?) {
         if let name = characterName {
             nameInput = name
         }
-
+        
+        charactersNames [typeInput] = nameInput
     }
     
+    
     /**
-     Extract the informations from charactersNames dictionary in order to get the list of the characters type and thier names
+    This function shows the player's name, characters type and names
     */
-    func listCharactersNames() -> String {
-        var characterName = String()
-        for (character, name) in charactersNames {
-            characterName = "➢ \(character) as \(name) \n"
+    func listChooseCharacter() {
+        
+        print("Hello \(playerName), you have chosen: ")
+        
+        //This loop allows to get the list from the charactersNames dictionary in order to list the types and names chosen
+        for (type, name) in charactersNames {
+            print("➢ \(type) as \(name)")
         }
-        
-        return characterName
-    }
-    
-    /**
-     This function shows the player's name, characters and there names
-    */
-    func resumeChooseCharacter() {
-        charactersNames = [typeInput : nameInput]
-        
-        print("Hello \(playerName), you have chosen \(listCharactersNames())")
     }
     
 }
