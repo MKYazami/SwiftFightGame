@@ -10,8 +10,15 @@
  Player class serves to initialize the player's name, characters' types and characrters' names
 */
 class Player {
+    
+    //Debud, replace it in func nameCharacter()
+    var getKeys = [String]()
+    //-----------------------------------------
+    //==================
+    // MARK: Properties
+    //==================
     var playerName = String()
-    //Dictionary that contains Type : Name characters
+    //Dictionary that contains Type : Names characters
     var charactersNames = [String: String]()
     
     //Type's character chose by user
@@ -20,24 +27,41 @@ class Player {
     //Name's character chose by user
     private var nameInput = String()
     
-    private var errorMessage = String()
+    //Allows to control the loops for any invalids entries
+    private var error = Bool()
+    
+    //============
+    // MARK: Init
+    //============
     
     /**
     To initialse the class, you need to get the player's name
     */
-    init(playerName: String?) {
-        if let name = playerName {
-            self.playerName = name
-        } 
+    init() {
+        repeat {
+            if let name = readLine() {
+                if !name.isEmpty {
+                    error = false
+                    playerName = name.uppercased()
+                } else {
+                    error = true
+                    print("The player name is empty! Please enter a name.")
+                }
+            }
+            
+        } while error == true
     }
     
+    //===============
+    // MARK: Methods
+    //===============
     
     /**
      Contains message and details to help the player make choices
         - parameters:
-            - choiceNumber: variable from loop for in, allows to know how many characters are chosen
+            - choiceNumber: variable from loop, allows to know how many characters are chosen
     */
-    func chooseCharacterMessage(choiceNumber: Int) {
+    func chooseCharacterMenu(choiceNumber: Int) {
         print("Please choose \(choiceNumber)/3 character(s) ()==[::::::>"
                 + "\n1. Combatant〔 ℹ️  With classic attack, a good warrior 〕"
                 + "\n2. Colossus 〔 ℹ️  Very resistant to attacks, but he doesn't cause considerable domages 〕"
@@ -58,25 +82,34 @@ class Player {
     - parameters:
         - characterType: Get character type from player
     */
-    func chooseCharacter(characterType: String?) {
-       
-        if let type = characterType {
-            typeInput = type
-            switch typeInput {
-            case "1":
-                typeInput = "Combatant"
-            case "2":
-                typeInput = "Colossus"
-            case "3":
-                typeInput = "Drawf"
-            case "4":
-                typeInput = "Magus"
-            default:
-                errorMessage = "I don't uderstand, please make a choice between 1 and 4"
-            }
-        }
+    func chooseCharacter() {
+        repeat {
+            
+            if let type = readLine() {
+                
+                switch type {
+                case "1":
+                    error = false
+                    typeInput = "Combatant"
+                case "2":
+                    error = false
+                    typeInput = "Colossus"
+                case "3":
+                    error = false
+                    typeInput = "Drawf"
+                case "4":
+                    error = false
+                    typeInput = "Magus"
+                default:
+                    error = true
+                    print("Incorrect choice! Please choose 1, 2, 3 or 4")
+                
+                }
+            } 
+
+        } while error == true
         
-        charactersNames [typeInput] = ""
+        
     }
     
     
@@ -85,12 +118,38 @@ class Player {
     - parameters:
         - characterName: Get character name from player
     */
-    func nameCharacter(characterName: String?) {
-        if let name = characterName {
-            nameInput = name
-        }
+    func nameCharacter() {
+        //Getting keys in this array
         
-        charactersNames [typeInput] = nameInput
+        
+        repeat {
+            if let name = readLine() {
+                if !name.isEmpty {
+                    error = false
+                    if !getKeys.contains(name) {
+                        error = false
+                        nameInput = name.uppercased()
+                    } else {
+                        error = true
+                        print("This name already exists! Please choose another one")
+                    }
+                } else {
+                    error = true
+                    print("The name is empty, please enter a valid name!")
+                }
+            } 
+        } while error == true
+        
+        charactersNames [nameInput] = typeInput
+        
+        //Puting all keys of the dictionary in array
+        var toUniqueArray = [String]()
+        for keys in charactersNames.keys {
+            
+            toUniqueArray.append(keys)
+            
+        }
+        getKeys = (Array(Set(toUniqueArray)))
     }
     
     

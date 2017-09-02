@@ -11,25 +11,27 @@ import Foundation
 print("\t \t \t ▂▃▅▇█▓▒░  Welcome to the Swift Fight Game  ░▒▓█▇▅▃▂ \n\n"
     + "Enter your name:")
 
-var player = Player(playerName: readLine())
+
+var player = Player()
+
 
 print("The player is \(player.playerName)")
-
-for choiceNumber in 1...3 {
- 
-//    print("\(choiceNumber)/3 character(s)")
-    player.chooseCharacterMessage(choiceNumber: choiceNumber)
     
-    player.chooseCharacter(characterType: readLine())
+while player.charactersNames.count < 3 {
     
-    player.nameCharacterMessage()
-    player.nameCharacter(characterName: readLine())
     
-    //Debug
-    print("\(choiceNumber). \(player.charactersNames)")
+    
+        player.chooseCharacterMenu(choiceNumber: player.charactersNames.count + 1)
+        
+        player.chooseCharacter()
+        
+        player.nameCharacterMessage()
+        player.nameCharacter()
+        
+        //Debug        
+        print("\(player.charactersNames.count). \(player.charactersNames)")
+        print(" getKeys: \(player.getKeys)")
 }
 
-
 player.listChooseCharacter()
-
 
