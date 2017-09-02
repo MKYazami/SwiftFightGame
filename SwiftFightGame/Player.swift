@@ -12,7 +12,7 @@
 class Player {
     
     //Debud, replace it in func nameCharacter()
-    var getKeys = [String]()
+    
     //-----------------------------------------
     //==================
     // MARK: Properties
@@ -119,16 +119,17 @@ class Player {
         - characterName: Get character name from player
     */
     func nameCharacter() {
-        //Getting keys in this array
-        
+        //Contains keys from charactersNames in this array
+        var getKeys = [String]()
         
         repeat {
-            if let name = readLine() {
+            if var name = readLine() {
                 if !name.isEmpty {
                     error = false
+                    name = name.uppercased()
                     if !getKeys.contains(name) {
                         error = false
-                        nameInput = name.uppercased()
+                        nameInput = name
                     } else {
                         error = true
                         print("This name already exists! Please choose another one")
@@ -142,14 +143,14 @@ class Player {
         
         charactersNames [nameInput] = typeInput
         
-        //Puting all keys of the dictionary in array
-        var toUniqueArray = [String]()
+        //Puting all keys of the dictionary in getKey array
         for keys in charactersNames.keys {
             
-            toUniqueArray.append(keys)
+            getKeys.append(keys)
             
         }
-        getKeys = (Array(Set(toUniqueArray)))
+        //Removing the duplicates characters' names
+        getKeys = (Array(Set(getKeys)))
     }
     
     

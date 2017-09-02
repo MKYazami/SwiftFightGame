@@ -30,7 +30,6 @@ while player.charactersNames.count < 3 {
         
         //Debug        
         print("\(player.charactersNames.count). \(player.charactersNames)")
-        print(" getKeys: \(player.getKeys)")
 }
 
 player.listChooseCharacter()
