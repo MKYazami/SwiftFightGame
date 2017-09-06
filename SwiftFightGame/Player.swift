@@ -10,16 +10,18 @@
  Player class serves to initialize the player's name, characters' types and characrters' names
 */
 class Player {
-    
-    //Debud, replace it in func nameCharacter()
-    
-    //-----------------------------------------
     //==================
     // MARK: Properties
     //==================
     var playerName = String()
+    
     //Dictionary that contains Type : Names characters
     var charactersNames = [String: String]()
+    
+    //Teams
+    var team = [GameCharacter]()
+    
+    
     
     //Type's character chose by user
     private var typeInput =  String()
@@ -29,6 +31,9 @@ class Player {
     
     //Allows to control the loops for any invalids entries
     private var error = Bool()
+    
+    //Contains keys from charactersNames
+    private var getKeys = [String]()
     
     //============
     // MARK: Init
@@ -79,14 +84,12 @@ class Player {
     
     /**
     Function to dertermine the type of character according to what the player entres
-    - parameters:
-        - characterType: Get character type from player
     */
     func chooseCharacter() {
         repeat {
             
             if let type = readLine() {
-                
+                //var perso
                 switch type {
                 case "1":
                     error = false
@@ -115,17 +118,13 @@ class Player {
     
     /**
     Function allows to enter the character's name by the player
-    - parameters:
-        - characterName: Get character name from player
     */
     func nameCharacter() {
-        //Contains keys from charactersNames in this array
-        var getKeys = [String]()
-        
         repeat {
             if var name = readLine() {
                 if !name.isEmpty {
                     error = false
+                    //Upper casing now to verify the name in the same conditions' case
                     name = name.uppercased()
                     if !getKeys.contains(name) {
                         error = false
@@ -143,11 +142,9 @@ class Player {
         
         charactersNames [nameInput] = typeInput
         
-        //Puting all keys of the dictionary in getKey array
+        //Puting all keys of the dictionary in getKeys array
         for keys in charactersNames.keys {
-            
             getKeys.append(keys)
-            
         }
         //Removing the duplicates characters' names
         getKeys = (Array(Set(getKeys)))

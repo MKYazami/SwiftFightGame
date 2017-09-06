@@ -7,8 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		910756381F5FC5500083F0CF /* Weapon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 910756371F5FC5500083F0CF /* Weapon.swift */; };
+		9107563A1F5FC57B0083F0CF /* WeaponAttack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 910756391F5FC57B0083F0CF /* WeaponAttack.swift */; };
+		9107563C1F5FC5AE0083F0CF /* WeaponCare.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9107563B1F5FC5AE0083F0CF /* WeaponCare.swift */; };
+		9107563E1F5FC5E20083F0CF /* WeaponAttackType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9107563D1F5FC5E20083F0CF /* WeaponAttackType.swift */; };
+		910756401F5FC61C0083F0CF /* WeaponCareType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9107563F1F5FC61C0083F0CF /* WeaponCareType.swift */; };
+		918110811F5DB4FB00229F95 /* GameCharacter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 918110801F5DB4FB00229F95 /* GameCharacter.swift */; };
+		918110831F5DBBB700229F95 /* Warrior.swift in Sources */ = {isa = PBXBuildFile; fileRef = 918110821F5DBBB700229F95 /* Warrior.swift */; };
+		918110851F5DD9E900229F95 /* WarriorType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 918110841F5DD9E900229F95 /* WarriorType.swift */; };
+		9181108B1F5E992F00229F95 /* HealerType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9181108A1F5E992F00229F95 /* HealerType.swift */; };
 		91CC9EBD1F4F1D8100EFBC05 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91CC9EBC1F4F1D8100EFBC05 /* main.swift */; };
 		91CC9EC41F4F242B00EFBC05 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91CC9EC31F4F242B00EFBC05 /* Player.swift */; };
+		91EDDE941F5E9CBB00DA0F87 /* Healer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91EDDE931F5E9CBB00DA0F87 /* Healer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -24,9 +34,19 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		910756371F5FC5500083F0CF /* Weapon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Weapon.swift; sourceTree = "<group>"; };
+		910756391F5FC57B0083F0CF /* WeaponAttack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeaponAttack.swift; sourceTree = "<group>"; };
+		9107563B1F5FC5AE0083F0CF /* WeaponCare.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeaponCare.swift; sourceTree = "<group>"; };
+		9107563D1F5FC5E20083F0CF /* WeaponAttackType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeaponAttackType.swift; sourceTree = "<group>"; };
+		9107563F1F5FC61C0083F0CF /* WeaponCareType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeaponCareType.swift; sourceTree = "<group>"; };
+		918110801F5DB4FB00229F95 /* GameCharacter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameCharacter.swift; sourceTree = "<group>"; };
+		918110821F5DBBB700229F95 /* Warrior.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Warrior.swift; sourceTree = "<group>"; };
+		918110841F5DD9E900229F95 /* WarriorType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WarriorType.swift; sourceTree = "<group>"; };
+		9181108A1F5E992F00229F95 /* HealerType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HealerType.swift; sourceTree = "<group>"; };
 		91CC9EB91F4F1D8100EFBC05 /* SwiftFightGame */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = SwiftFightGame; sourceTree = BUILT_PRODUCTS_DIR; };
 		91CC9EBC1F4F1D8100EFBC05 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		91CC9EC31F4F242B00EFBC05 /* Player.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
+		91EDDE931F5E9CBB00DA0F87 /* Healer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Healer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +81,16 @@
 			children = (
 				91CC9EBC1F4F1D8100EFBC05 /* main.swift */,
 				91CC9EC31F4F242B00EFBC05 /* Player.swift */,
+				910756371F5FC5500083F0CF /* Weapon.swift */,
+				910756391F5FC57B0083F0CF /* WeaponAttack.swift */,
+				9107563D1F5FC5E20083F0CF /* WeaponAttackType.swift */,
+				9107563B1F5FC5AE0083F0CF /* WeaponCare.swift */,
+				9107563F1F5FC61C0083F0CF /* WeaponCareType.swift */,
+				918110801F5DB4FB00229F95 /* GameCharacter.swift */,
+				918110821F5DBBB700229F95 /* Warrior.swift */,
+				918110841F5DD9E900229F95 /* WarriorType.swift */,
+				91EDDE931F5E9CBB00DA0F87 /* Healer.swift */,
+				9181108A1F5E992F00229F95 /* HealerType.swift */,
 			);
 			path = SwiftFightGame;
 			sourceTree = "<group>";
@@ -123,8 +153,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				918110811F5DB4FB00229F95 /* GameCharacter.swift in Sources */,
+				910756381F5FC5500083F0CF /* Weapon.swift in Sources */,
+				9107563C1F5FC5AE0083F0CF /* WeaponCare.swift in Sources */,
 				91CC9EC41F4F242B00EFBC05 /* Player.swift in Sources */,
+				9107563E1F5FC5E20083F0CF /* WeaponAttackType.swift in Sources */,
+				91EDDE941F5E9CBB00DA0F87 /* Healer.swift in Sources */,
+				918110831F5DBBB700229F95 /* Warrior.swift in Sources */,
+				918110851F5DD9E900229F95 /* WarriorType.swift in Sources */,
+				9181108B1F5E992F00229F95 /* HealerType.swift in Sources */,
 				91CC9EBD1F4F1D8100EFBC05 /* main.swift in Sources */,
+				910756401F5FC61C0083F0CF /* WeaponCareType.swift in Sources */,
+				9107563A1F5FC57B0083F0CF /* WeaponAttack.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -256,6 +296,7 @@
 				91CC9EC21F4F1D8100EFBC05 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

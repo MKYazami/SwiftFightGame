@@ -8,8 +8,12 @@
 
 import Foundation
 //Wellcome and asking player name message
-print("\t \t \t ▂▃▅▇█▓▒░  Welcome to the Swift Fight Game  ░▒▓█▇▅▃▂ \n\n"
-    + "Enter your name:")
+
+
+print("\t \t \t ▂▃▅▇█▓▒░  Welcome to the Swift Fight Game  ░▒▓█▇▅▃▂ \n\n")
+
+
+print("Enter your name for the team 1/2:")
 
 
 var player = Player()

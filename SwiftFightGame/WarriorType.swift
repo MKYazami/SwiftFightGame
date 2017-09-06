@@ -7,3 +7,12 @@
 //
 
 import Foundation
+/**
+ Enumerate the type of warriors
+*/
+enum WarriorType {
+    case combatant
+    case colossus
+    case drawf
+    case magus
+}
