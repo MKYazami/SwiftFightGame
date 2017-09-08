@@ -8,11 +8,34 @@
 
 import Foundation
 //Wellcome and asking player name message
-
-
 print("\t \t \t ▂▃▅▇█▓▒░  Welcome to the Swift Fight Game  ░▒▓█▇▅▃▂ \n\n")
 
-//To PlayGame.swift in the loop for presentation for the namePlayer() function
-print("Enter your name for the team 1/2:")
 
+
+
+var player = Player()
+
+player.namePlayerMessage()
+    
+player.namePlayer()
+
+
+while player.charactersTypes.count < 3 {
+
+    
+    
+    player.chooseCharacterMenu(choiceNumber: player.charactersTypes.count + 1)
+    
+    player.chooseCharacter()
+
+    player.nameCharacterMessage()
+    player.nameCharacter()
+    
+    //Debug
+    print(player.charactersTypes)
+    print(player.chractersNames)
+    
+}
+
+player.listChooseCharacter()
 

@@ -10,26 +10,31 @@ import Foundation
 
 class PlayGame {
     
+    var player = Player()
     
-    //==================
-    // MARK: Properties
-    //==================
+    player.namePlayerMessage()
+    
+    player.namePlayer()
+    
+    
+    while player.charactersTypes.count < 3 {
     
     
     
-    //============
-    // MARK: Init
-    //============
+    player.chooseCharacterMenu(choiceNumber: player.charactersTypes.count + 1)
     
-    /**
-     To initialse the class, you need to get the player's name
-     */
+    player.chooseCharacter()
     
-    //===============
-    // MARK: Methods
-    //===============
-    /**
-     
-     */
+    player.nameCharacterMessage()
+    player.nameCharacter()
+    
+    //Debug
+    print(player.charactersTypes)
+    print(player.chractersNames)
+    
+    }
+    
+    player.listChooseCharacter()
+    
 
 }
