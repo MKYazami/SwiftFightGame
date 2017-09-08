@@ -10,9 +10,8 @@ import Foundation
 /**
  Enumerate the type of warriors
 */
-enum WarriorType {
+enum WarriorType: String {
     case combatant
     case colossus
     case drawf
-    case magus
 }

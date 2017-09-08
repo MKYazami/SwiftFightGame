@@ -7,3 +7,29 @@
 //
 
 import Foundation
+
+class PlayGame {
+    
+    
+    //==================
+    // MARK: Properties
+    //==================
+    
+    
+    
+    //============
+    // MARK: Init
+    //============
+    
+    /**
+     To initialse the class, you need to get the player's name
+     */
+    
+    //===============
+    // MARK: Methods
+    //===============
+    /**
+     
+     */
+
+}

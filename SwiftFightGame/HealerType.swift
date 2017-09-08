@@ -11,6 +11,6 @@ import Foundation
 /**
  Enumerate the type of healers
  */
-enum HealerType {
+enum HealerType: String {
     case magus
 }

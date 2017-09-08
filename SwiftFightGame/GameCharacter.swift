@@ -15,29 +15,29 @@ class GameCharacter {
     //===================
     // -MARK: Properties
     //===================
-    var characterName = String()
-    //Store health points in this variable
-    var healthPoints = Int()
     
+    
+    //Health points for each character
+    var healthPoints = Int()
+
+    //Allow to dertemine if the context is in error or not
+    var error = Bool()
     
     //===================
     // -MARK: Init
     //===================
-    init(characterName: String) {
-        self.characterName = characterName
-    }
     
     
     //===================
     // -MARK: Methodes
     //===================
+    
+    
+    
+    
     /**
      Assign 0 to healthPoints and notify the player that the character is dead
         - parameters:
             - characterName: The name of character that is dead
     */
-    func deadCharacter(characterName: GameCharacter) {
-        self.healthPoints = 0
-        print("\(characterName) is dead!")
-    }
 }
