@@ -8,10 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		910756381F5FC5500083F0CF /* Weapon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 910756371F5FC5500083F0CF /* Weapon.swift */; };
-		9107563A1F5FC57B0083F0CF /* WeaponAttack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 910756391F5FC57B0083F0CF /* WeaponAttack.swift */; };
-		9107563C1F5FC5AE0083F0CF /* WeaponCare.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9107563B1F5FC5AE0083F0CF /* WeaponCare.swift */; };
-		9107563E1F5FC5E20083F0CF /* WeaponAttackType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9107563D1F5FC5E20083F0CF /* WeaponAttackType.swift */; };
-		910756401F5FC61C0083F0CF /* WeaponCareType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9107563F1F5FC61C0083F0CF /* WeaponCareType.swift */; };
+		9107563A1F5FC57B0083F0CF /* AttackWeapon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 910756391F5FC57B0083F0CF /* AttackWeapon.swift */; };
+		9107563C1F5FC5AE0083F0CF /* CareWeapon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9107563B1F5FC5AE0083F0CF /* CareWeapon.swift */; };
+		9107563E1F5FC5E20083F0CF /* AttackWeaponType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9107563D1F5FC5E20083F0CF /* AttackWeaponType.swift */; };
+		910756401F5FC61C0083F0CF /* CareWeaponType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9107563F1F5FC61C0083F0CF /* CareWeaponType.swift */; };
 		910756421F5FEAF60083F0CF /* PlayGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 910756411F5FEAF60083F0CF /* PlayGame.swift */; };
 		918110811F5DB4FB00229F95 /* GameCharacter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 918110801F5DB4FB00229F95 /* GameCharacter.swift */; };
 		918110831F5DBBB700229F95 /* Warrior.swift in Sources */ = {isa = PBXBuildFile; fileRef = 918110821F5DBBB700229F95 /* Warrior.swift */; };
@@ -36,10 +36,10 @@
 
 /* Begin PBXFileReference section */
 		910756371F5FC5500083F0CF /* Weapon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Weapon.swift; sourceTree = "<group>"; };
-		910756391F5FC57B0083F0CF /* WeaponAttack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeaponAttack.swift; sourceTree = "<group>"; };
-		9107563B1F5FC5AE0083F0CF /* WeaponCare.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeaponCare.swift; sourceTree = "<group>"; };
-		9107563D1F5FC5E20083F0CF /* WeaponAttackType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeaponAttackType.swift; sourceTree = "<group>"; };
-		9107563F1F5FC61C0083F0CF /* WeaponCareType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeaponCareType.swift; sourceTree = "<group>"; };
+		910756391F5FC57B0083F0CF /* AttackWeapon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttackWeapon.swift; sourceTree = "<group>"; };
+		9107563B1F5FC5AE0083F0CF /* CareWeapon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CareWeapon.swift; sourceTree = "<group>"; };
+		9107563D1F5FC5E20083F0CF /* AttackWeaponType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttackWeaponType.swift; sourceTree = "<group>"; };
+		9107563F1F5FC61C0083F0CF /* CareWeaponType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CareWeaponType.swift; sourceTree = "<group>"; };
 		910756411F5FEAF60083F0CF /* PlayGame.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayGame.swift; sourceTree = "<group>"; };
 		918110801F5DB4FB00229F95 /* GameCharacter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameCharacter.swift; sourceTree = "<group>"; };
 		918110821F5DBBB700229F95 /* Warrior.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Warrior.swift; sourceTree = "<group>"; };
@@ -85,10 +85,10 @@
 				910756411F5FEAF60083F0CF /* PlayGame.swift */,
 				91CC9EC31F4F242B00EFBC05 /* Player.swift */,
 				910756371F5FC5500083F0CF /* Weapon.swift */,
-				910756391F5FC57B0083F0CF /* WeaponAttack.swift */,
-				9107563D1F5FC5E20083F0CF /* WeaponAttackType.swift */,
-				9107563B1F5FC5AE0083F0CF /* WeaponCare.swift */,
-				9107563F1F5FC61C0083F0CF /* WeaponCareType.swift */,
+				910756391F5FC57B0083F0CF /* AttackWeapon.swift */,
+				9107563D1F5FC5E20083F0CF /* AttackWeaponType.swift */,
+				9107563B1F5FC5AE0083F0CF /* CareWeapon.swift */,
+				9107563F1F5FC61C0083F0CF /* CareWeaponType.swift */,
 				918110801F5DB4FB00229F95 /* GameCharacter.swift */,
 				918110821F5DBBB700229F95 /* Warrior.swift */,
 				918110841F5DD9E900229F95 /* WarriorType.swift */,
@@ -158,17 +158,17 @@
 			files = (
 				918110811F5DB4FB00229F95 /* GameCharacter.swift in Sources */,
 				910756381F5FC5500083F0CF /* Weapon.swift in Sources */,
-				9107563C1F5FC5AE0083F0CF /* WeaponCare.swift in Sources */,
+				9107563C1F5FC5AE0083F0CF /* CareWeapon.swift in Sources */,
 				91CC9EC41F4F242B00EFBC05 /* Player.swift in Sources */,
-				9107563E1F5FC5E20083F0CF /* WeaponAttackType.swift in Sources */,
+				9107563E1F5FC5E20083F0CF /* AttackWeaponType.swift in Sources */,
 				91EDDE941F5E9CBB00DA0F87 /* Healer.swift in Sources */,
 				918110831F5DBBB700229F95 /* Warrior.swift in Sources */,
 				910756421F5FEAF60083F0CF /* PlayGame.swift in Sources */,
 				918110851F5DD9E900229F95 /* WarriorType.swift in Sources */,
 				9181108B1F5E992F00229F95 /* HealerType.swift in Sources */,
 				91CC9EBD1F4F1D8100EFBC05 /* main.swift in Sources */,
-				910756401F5FC61C0083F0CF /* WeaponCareType.swift in Sources */,
-				9107563A1F5FC57B0083F0CF /* WeaponAttack.swift in Sources */,
+				910756401F5FC61C0083F0CF /* CareWeaponType.swift in Sources */,
+				9107563A1F5FC57B0083F0CF /* AttackWeapon.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

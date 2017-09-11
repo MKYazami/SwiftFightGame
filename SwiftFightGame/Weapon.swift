@@ -9,5 +9,5 @@
 import Foundation
 
 class Weapon {
-    
+    var weaponName = String()
 }

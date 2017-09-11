@@ -8,6 +8,8 @@
 
 import Foundation
 
-enum WeaponAttackType {
-    
+enum AttackWeaponType {
+    case sword
+    case bat
+    case axe
 }

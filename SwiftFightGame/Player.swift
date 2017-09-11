@@ -186,13 +186,14 @@ class Player {
     /**
     This function shows the player's name, characters type and names
     */
-    func listChooseCharacter() {
+    func listSelectedCharacters() {
         
         print("\(playerName), you have chosen:")
         
         //This loop allows to get the list from the charactersNames dictionary in order to list the types and names chosen
         for (type, name) in zip (charactersTypes, chractersNames) {
-                print("➢ \(type) as \(name)")
+            
+            print("➢ \(type) as \(name)")
             
         }
     }

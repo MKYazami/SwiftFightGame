@@ -20,8 +20,6 @@ class GameCharacter {
     //Health points for each character
     var healthPoints = Int()
 
-    //Allow to dertemine if the context is in error or not
-    var error = Bool()
     
     //===================
     // -MARK: Init

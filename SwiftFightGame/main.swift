@@ -37,5 +37,5 @@ while player.charactersTypes.count < 3 {
     
 }
 
-player.listChooseCharacter()
+player.listSelectedCharacters()
 

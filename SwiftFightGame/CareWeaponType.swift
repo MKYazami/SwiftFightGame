@@ -1,5 +1,5 @@
 //
-//  WeaponCare.swift
+//  WeaponCareType.swift
 //  SwiftFightGame
 //
 //  Created by Mehdi on 06/09/2017.
@@ -8,6 +8,6 @@
 
 import Foundation
 
-class WeaponCare: Weapon {
-    
+enum CareWeaponType {
+    case antidote
 }
