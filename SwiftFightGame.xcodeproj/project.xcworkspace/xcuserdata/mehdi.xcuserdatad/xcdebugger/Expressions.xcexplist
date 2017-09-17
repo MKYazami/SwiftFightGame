@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "Player.playerName.getter:Player.swift">
+      </ContextState>
+      <ContextState
+         contextName = "PlayGame.startGame() -&gt; ():PlayGame.swift">
+      </ContextState>
+      <ContextState
+         contextName = "Player.namePlayer(teamNumber : Int) -&gt; ():Player.swift">
+      </ContextState>
+      <ContextState
+         contextName = "PlayGame.charactersString.getter:PlayGame.swift">
+      </ContextState>
+      <ContextState
+         contextName = "Player.charactersNames.getter:Player.swift">
+      </ContextState>
+      <ContextState
+         contextName = "Player.gameCharacters.getter:Player.swift">
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>
