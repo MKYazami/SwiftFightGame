@@ -11,31 +11,45 @@ import Foundation
 print("\t \t \t ▂▃▅▇█▓▒░  Welcome to the Swift Fight Game  ░▒▓█▇▅▃▂ \n\n")
 
 
+let game = PlayGame()
+
+game.startGame()
+
+//Debug
+print(game.players)
 
 
-var player = Player()
-
-player.namePlayerMessage()
-    
-player.namePlayer()
 
 
-while player.charactersTypes.count < 3 {
 
-    
-    
-    player.chooseCharacterMenu(choiceNumber: player.charactersTypes.count + 1)
-    
-    player.chooseCharacter()
 
-    player.nameCharacterMessage()
-    player.nameCharacter()
-    
-    //Debug
-    print(player.charactersTypes)
-    print(player.chractersNames)
-    
-}
 
-player.listSelectedCharacters()
+
+
+
+//var player = Player()
+//
+//player.namePlayerMessage()
+//    
+//player.namePlayer()
+//
+//
+//while player.charactersTypes.count < 3 {
+//
+//    
+//    
+//    player.chooseCharacterMenu(choiceNumber: player.charactersTypes.count + 1)
+//    
+//    player.chooseCharacter()
+//
+//    player.nameCharacterMessage()
+//    player.nameCharacter()
+//    
+//    //Debug
+//    print(player.charactersTypes)
+//    print(player.chractersNames)
+//    
+//}
+//
+//player.listSelectedCharacters()
 

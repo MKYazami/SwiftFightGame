@@ -27,11 +27,26 @@ class Healer: GameCharacter {
     //===================
     // -MARK: Init
     //===================
-    init(type: HealerType) {
-        super.init()
+    init(type: HealerType, name: String) {
+        super.init(characterName: name)
         switch type {
         case .magus:
             healthPoints = 80
+        }
+    }
+    
+    //===================
+    // -MARK: Methodes
+    //===================
+    
+    /// Return the type of healer in the form of string
+    ///
+    /// - Parameter type: The healer Type
+    /// - Returns: Return string
+    func getCharacterTypeString(type: HealerType) -> String {
+        switch type {
+        case .magus:
+            return "MAGUS"
         }
     }
     
