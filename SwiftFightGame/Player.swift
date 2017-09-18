@@ -83,21 +83,25 @@ class Player {
         switch characterType {
         case "combatant":
             let character = Warrior(type: WarriorType.combatant, name: nameCharacter())
+            character.initialiseStrikeForce(attakWeaponType: .sword)
             appendGameCharacters(character: character)
             charactersTypes.append(character.getCharacterTypeString(type: .combatant))
             charactersNames.append(character.getCharacterNameString())
         case "colossus":
             let character = Warrior(type: WarriorType.colossus, name: nameCharacter())
+            character.initialiseStrikeForce(attakWeaponType: .bat)
             appendGameCharacters(character: character)
             charactersTypes.append(character.getCharacterTypeString(type: .colossus))
             charactersNames.append(character.getCharacterNameString())
         case "drawf":
             let character = Warrior(type: WarriorType.drawf, name: nameCharacter())
+            character.initialiseStrikeForce(attakWeaponType: .axe)
             appendGameCharacters(character: character)
             charactersTypes.append(character.getCharacterTypeString(type: .drawf))
             charactersNames.append(character.getCharacterNameString())
         case "magus":
             let character = Healer(type: HealerType.magus, name: nameCharacter())
+            character.initialiseCareCapacity(careWeaponType: .antidote)
             appendGameCharacters(character: character)
             charactersTypes.append(character.getCharacterTypeString(type: .magus))
             charactersNames.append(character.getCharacterNameString())

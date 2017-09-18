@@ -22,7 +22,10 @@ import Foundation
  Class of warriors, that is depending of WarrioType enumeration
  */
 class Healer: GameCharacter {
-    
+    //===================
+    // -MARK: Init
+    //===================
+    var careCapacity = Int()
     
     //===================
     // -MARK: Init
@@ -48,6 +51,21 @@ class Healer: GameCharacter {
         case .magus:
             return "MAGUS"
         }
+    }
+    
+    //If working correctly, I keep all OR I remove CareWeapon class
+    func initialiseCareCapacity(careWeaponType: CareWeaponType) {
+        let initCareCapacity = CareWeapon(type: careWeaponType)
+        
+        switch careWeaponType {
+        case .antidote:
+            careCapacity = initCareCapacity.heal
+        }
+    }
+    
+    func heal(character: GameCharacter) -> Int{
+        character.healthPoints += careCapacity
+        return character.healthPoints
     }
     
 }

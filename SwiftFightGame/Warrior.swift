@@ -15,7 +15,11 @@ class Warrior: GameCharacter {
     // -MARK: Properties
     //===================
     
+    //Contains the type of wepon and therefore the damages
+    var weaponAttackType = AttackWeaponType.self
     
+    //
+    var strikeForce = Int()
     
     //===================
     // -MARK: Init
@@ -34,14 +38,7 @@ class Warrior: GameCharacter {
     
     //===================
     // -MARK: Methodes
-    //===================
-    
-    /**
-     Assign 0 to healthPoints and notify the player that the character is dead
-        - parameters:
-            - characterName: The name of character that is dead
-     */
-    
+    //===================    
     
     /// Return the type of warrior in the form of string
     ///
@@ -56,6 +53,39 @@ class Warrior: GameCharacter {
         case .drawf:
             return "DRAWF"
         }
+    }
+    
+    //In this case, I remove the AttackWeapon class and keep only the AttackWeaponType class
+    func testInitialiseStrikeForce(attakWeaponType: AttackWeaponType) {
+        switch attakWeaponType {
+        case .sword:
+            strikeForce = 10
+        case .bat:
+            strikeForce = 4
+        case .axe:
+            strikeForce = 20
+        }
+    }
+    
+    //If working correctly, I keep all
+    func initialiseStrikeForce(attakWeaponType: AttackWeaponType) {
+        
+        let initStrikeForce = AttackWeapon(type: attakWeaponType)
+        
+        switch attakWeaponType {
+        case .sword:
+            strikeForce = initStrikeForce.damages
+        case .bat:
+            strikeForce = initStrikeForce.damages
+        case .axe:
+            strikeForce = initStrikeForce.damages
+        }
+    }
+    
+    
+    func strike(character: GameCharacter) -> Int {
+        character.healthPoints -= strikeForce
+        return character.healthPoints
     }
     
 }

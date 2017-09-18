@@ -21,6 +21,24 @@ class PlayGame {
     //Allow to dertemine if the context is in error or not
     private var error = Bool()
     
+    
+    /// Allow to verify if name exists in the array
+    ///
+    /// - Parameter array: Array of string that contains the names
+    /// - Returns: Return a boolean if the name exists or not
+    private func nameExists(array: [String]) -> Bool {
+        var nameExists = Bool()
+        for _ in 0..<array.count {
+            for name in array {
+                if array.contains(name) {
+                    nameExists = true
+                } else {
+                    nameExists = false
+                }
+            }
+        }
+        return nameExists
+    }
    
     //Start game
     func startGame() {
@@ -30,6 +48,7 @@ class PlayGame {
             
             //Instanciation of Player
             let player = Player()
+            
             
             //Allows to check that the player's name is unique
             repeat {
@@ -48,7 +67,16 @@ class PlayGame {
             //Allow to choose 3 characters
             while player.gameCharacters.count < 3 {
                 
-                player.chooseCharacter(characterNumber: player.gameCharacters.count + 1)
+                repeat {
+                if nameExists(array: charactersString) {
+                    error = false
+                    player.chooseCharacter(characterNumber: player.gameCharacters.count + 1)
+                } else {
+                    error = true
+                    print("🚫 This name already exists. Please choose another one…")
+                }
+                } while error == true
+                
                 //Append the all characters names to charactersString for the 2 instances
                 for name in player.charactersNames {
                     

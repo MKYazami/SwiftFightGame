@@ -21,6 +21,9 @@ class GameCharacter {
     //Health points for each character
     var healthPoints = Int()
     
+    //
+    var damages = Int()
+    
     
     //===================
     // -MARK: Init
@@ -40,11 +43,36 @@ class GameCharacter {
         return characterName
     }
     
-
     
-    /**
-     Assign 0 to healthPoints and notify the player that the character is dead
-        - parameters:
-            - characterName: The name of character that is dead
-    */
+    /// Determine if charcter is alive
+    ///
+    /// - Parameter character: Concerned character
+    /// - Returns: true if healthPoints higher than 0 and false if equal or lower than 0
+    func isAlive(character: GameCharacter) -> Bool {
+        var isAlive = Bool()
+        if character.healthPoints > 0 {
+            isAlive = true
+        } else {
+            isAlive = false
+        }
+        
+        return isAlive
+    }
+    
+    
+    /// Determine if charcter is dead
+    ///
+    /// - Parameter character: Concerned character
+    /// - Returns: true if healthPoints equal or lower than 0 and false if higher than 0
+    func isDead(character: GameCharacter) -> Bool {
+        var isDead = Bool()
+        if character.healthPoints <= 0 {
+            isDead = true
+        } else {
+            isDead = false
+        }
+        
+        return isDead
+    }
+
 }
