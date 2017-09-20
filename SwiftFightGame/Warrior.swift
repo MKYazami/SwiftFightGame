@@ -24,7 +24,13 @@ class Warrior: GameCharacter {
     //===================
     // -MARK: Init
     //===================
-    init(type: WarriorType, name: String) {
+    /// Initialize the warriors
+    ///
+    /// - Parameters:
+    ///   - type: WarriorType.combatant, WarriorType.colossus, WarriorType.drawf
+    ///   - name: String name
+    ///   - attakWeaponType: AttackWeaponType.sword, AttackWeaponType.bat, AttackWeaponType.axe
+    init(type: WarriorType, name: String, attakWeaponType: AttackWeaponType) {
         super.init(characterName: name)
         switch type {
         case .combatant:
@@ -34,6 +40,18 @@ class Warrior: GameCharacter {
         case .drawf:
             healthPoints = 25
         }
+        
+        let initStrikeForce = AttackWeapon(type: attakWeaponType)
+        
+        switch attakWeaponType {
+        case .sword:
+            strikeForce = initStrikeForce.damages
+        case .bat:
+            strikeForce = initStrikeForce.damages
+        case .axe:
+            strikeForce = initStrikeForce.damages
+        }
+
     }
     
     //===================
@@ -52,33 +70,6 @@ class Warrior: GameCharacter {
             return "COLOSSUS"
         case .drawf:
             return "DRAWF"
-        }
-    }
-    
-    //In this case, I remove the AttackWeapon class and keep only the AttackWeaponType class
-    func testInitialiseStrikeForce(attakWeaponType: AttackWeaponType) {
-        switch attakWeaponType {
-        case .sword:
-            strikeForce = 10
-        case .bat:
-            strikeForce = 4
-        case .axe:
-            strikeForce = 20
-        }
-    }
-    
-    //If working correctly, I keep all
-    func initialiseStrikeForce(attakWeaponType: AttackWeaponType) {
-        
-        let initStrikeForce = AttackWeapon(type: attakWeaponType)
-        
-        switch attakWeaponType {
-        case .sword:
-            strikeForce = initStrikeForce.damages
-        case .bat:
-            strikeForce = initStrikeForce.damages
-        case .axe:
-            strikeForce = initStrikeForce.damages
         }
     }
     

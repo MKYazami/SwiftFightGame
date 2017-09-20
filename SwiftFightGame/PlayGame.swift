@@ -16,31 +16,30 @@ class PlayGame {
     private var playersString = [String]()
     
     //Allows to store characters names in order to check their uniqueness
-    /**private**/ var charactersString = [String]()
+    var charactersString = [String]()
     
     //Allow to dertemine if the context is in error or not
     private var error = Bool()
     
     
-    /// Allow to verify if name exists in the array
-    ///
-    /// - Parameter array: Array of string that contains the names
-    /// - Returns: Return a boolean if the name exists or not
-    private func nameExists(array: [String]) -> Bool {
-        var nameExists = Bool()
-        for _ in 0..<array.count {
-            for name in array {
-                if array.contains(name) {
-                    nameExists = true
-                } else {
-                    nameExists = false
-                }
-            }
+    func selectTeamCharacter() {
+        print("Select the character to fight 🗡")
+        
+        for team in players {
+            print("\(team.playerName): \(team.name) AS  ")
         }
-        return nameExists
+        
     }
-   
-    //Start game
+    
+    func flight() {
+        
+    }
+    
+    func heal() {
+        
+    }
+    
+    /// Start game
     func startGame() {
         
         //for in loop to make 2 teams
@@ -66,17 +65,15 @@ class PlayGame {
             
             //Allow to choose 3 characters
             while player.gameCharacters.count < 3 {
-                
                 repeat {
-                if nameExists(array: charactersString) {
+                if player.verifyName(characters: charactersString, inputCharacter: player.name) {
                     error = false
                     player.chooseCharacter(characterNumber: player.gameCharacters.count + 1)
                 } else {
                     error = true
-                    print("🚫 This name already exists. Please choose another one…")
+                    print("🚫 \(player.name.uppercased()) already exists. Please choose another one…")
                 }
                 } while error == true
-                
                 //Append the all characters names to charactersString for the 2 instances
                 for name in player.charactersNames {
                     

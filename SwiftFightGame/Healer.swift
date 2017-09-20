@@ -30,12 +30,26 @@ class Healer: GameCharacter {
     //===================
     // -MARK: Init
     //===================
-    init(type: HealerType, name: String) {
+    /// Initialize the healer
+    ///
+    /// - Parameters:
+    ///   - type: HealerType.magus
+    ///   - name: String name
+    ///   - careWeaponType: CareWeaponType.antidote
+    init(type: HealerType, name: String, careWeaponType: CareWeaponType) {
         super.init(characterName: name)
         switch type {
         case .magus:
             healthPoints = 80
         }
+        
+        let initCareCapacity = CareWeapon(type: careWeaponType)
+        
+        switch careWeaponType {
+        case .antidote:
+            careCapacity = initCareCapacity.heal
+        }
+
     }
     
     //===================
@@ -53,16 +67,7 @@ class Healer: GameCharacter {
         }
     }
     
-    //If working correctly, I keep all OR I remove CareWeapon class
-    func initialiseCareCapacity(careWeaponType: CareWeaponType) {
-        let initCareCapacity = CareWeapon(type: careWeaponType)
-        
-        switch careWeaponType {
-        case .antidote:
-            careCapacity = initCareCapacity.heal
-        }
-    }
-    
+ 
     func heal(character: GameCharacter) -> Int{
         character.healthPoints += careCapacity
         return character.healthPoints

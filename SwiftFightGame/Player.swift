@@ -64,6 +64,32 @@ class Player {
         } while error == true
     }
     
+
+    func verifyName(characters: [String], inputCharacter: String) -> Bool {
+        var uniqueName = true
+        
+        if characters.contains(inputCharacter.uppercased()) {
+            uniqueName = false
+        } else {
+            uniqueName = true
+        }
+        
+        return uniqueName
+    }
+    
+//    func verifyName(characters: [PlayGame], inputCharacter: GameCharacter) -> Bool {
+//        var uniqueName = true
+//        
+//        //Verify character name
+//        for character in characters {
+//            if character.charactersString == inputCharacter.characterName.uppercased() {
+//                uniqueName = false
+//            }
+//        }
+//        
+//        return uniqueName
+//    }
+    
     /**
      Append gameCharacter array
         - Parameters:
@@ -82,26 +108,26 @@ class Player {
         
         switch characterType {
         case "combatant":
-            let character = Warrior(type: WarriorType.combatant, name: nameCharacter())
-            character.initialiseStrikeForce(attakWeaponType: .sword)
+            let character = Warrior(type: WarriorType.combatant, name: nameCharacter(), attakWeaponType: AttackWeaponType.sword)
+
             appendGameCharacters(character: character)
             charactersTypes.append(character.getCharacterTypeString(type: .combatant))
             charactersNames.append(character.getCharacterNameString())
         case "colossus":
-            let character = Warrior(type: WarriorType.colossus, name: nameCharacter())
-            character.initialiseStrikeForce(attakWeaponType: .bat)
+            let character = Warrior(type: WarriorType.colossus, name: nameCharacter(), attakWeaponType: AttackWeaponType.bat)
+
             appendGameCharacters(character: character)
             charactersTypes.append(character.getCharacterTypeString(type: .colossus))
             charactersNames.append(character.getCharacterNameString())
         case "drawf":
-            let character = Warrior(type: WarriorType.drawf, name: nameCharacter())
-            character.initialiseStrikeForce(attakWeaponType: .axe)
+            let character = Warrior(type: WarriorType.drawf, name: nameCharacter(), attakWeaponType: AttackWeaponType.axe)
+
             appendGameCharacters(character: character)
             charactersTypes.append(character.getCharacterTypeString(type: .drawf))
             charactersNames.append(character.getCharacterNameString())
         case "magus":
-            let character = Healer(type: HealerType.magus, name: nameCharacter())
-            character.initialiseCareCapacity(careWeaponType: .antidote)
+            let character = Healer(type: HealerType.magus, name: nameCharacter(), careWeaponType: CareWeaponType.antidote)
+
             appendGameCharacters(character: character)
             charactersTypes.append(character.getCharacterTypeString(type: .magus))
             charactersNames.append(character.getCharacterNameString())
@@ -109,11 +135,8 @@ class Player {
             break
         }
         
-        
-        
-        //Debug
-//        print("## Health points :\(character.healthPoints) For debug ##")
     }
+    
     /**
      Function to dertermine the type of character according to what the player entres with message requiring to choose the character type
         - parameters:

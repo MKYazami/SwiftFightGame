@@ -15,7 +15,7 @@ class GameCharacter {
     //===================
     // -MARK: Properties
     //===================
-    //Name
+    //Name of character
     var characterName: String
     
     //Health points for each character
