@@ -74,5 +74,3 @@ class Healer: GameCharacter {
     }
     
 }
-
-

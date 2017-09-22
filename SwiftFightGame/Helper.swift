@@ -67,8 +67,15 @@ class Helper {
     }
     
     
+    /// Replace numbers to ordinal
+    ///
+    /// - Parameter number: number to replace
+    /// - Returns: return the ordinal number
     static func replaceNumberToOrdinal(number: Int) -> String {
         switch number {
+        
+        case 0:
+            return "zero"
         case 1:
             return "𝟏st"
         case 2:
@@ -76,7 +83,7 @@ class Helper {
         case 3:
             return "𝟑rd"
         default:
-            return "Unknow"
+            return "❌ Error: Update this function to get ordinal beyond 3!"
         }
     }
     

@@ -21,7 +21,7 @@ class GameCharacter {
     //Health points for each character
     var healthPoints = Int()
     
-    //
+    //Damage
     var damages = Int()
     
     
@@ -49,14 +49,12 @@ class GameCharacter {
     /// - Parameter character: Concerned character
     /// - Returns: true if healthPoints higher than 0 and false if equal or lower than 0
     func isAlive(character: GameCharacter) -> Bool {
-        var isAlive = Bool()
         if character.healthPoints > 0 {
-            isAlive = true
+            return true
         } else {
-            isAlive = false
+            return false
         }
         
-        return isAlive
     }
     
     
@@ -65,14 +63,11 @@ class GameCharacter {
     /// - Parameter character: Concerned character
     /// - Returns: true if healthPoints equal or lower than 0 and false if higher than 0
     func isDead(character: GameCharacter) -> Bool {
-        var isDead = Bool()
         if character.healthPoints <= 0 {
-            isDead = true
+            return true
         } else {
-            isDead = false
+            return false
         }
-        
-        return isDead
     }
 
 }

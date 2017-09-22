@@ -18,10 +18,10 @@ class PlayGame {
     /// Start game
     func startGame() {
         
-        //for in loop to make 2 teams
+        //for in loop to make 2 players
         for teamNumber in 1...2 {
-            //Allow to dertemine if the context is in error or not
-            var error = Bool()
+            //Contains true if the name is not unique
+            var notUniqueName = Bool()
             
             //Instanciation of Player
             let player = Player()
@@ -30,8 +30,8 @@ class PlayGame {
             //Allows to check that the player's name is unique
             repeat {
                 player.namePlayer(teamNumber: teamNumber)
-                error = Helper.checkUniqueName(name: player.playerName, players: players)
-            } while error == true
+                notUniqueName = Helper.checkUniqueName(name: player.playerName, players: players)
+            } while notUniqueName == true
             
             //Append players array
             players.append(player)
@@ -44,7 +44,7 @@ class PlayGame {
                 
 
             }
-            
+            //Display the selected characters
             player.listSelectedCharacters()
         }
 

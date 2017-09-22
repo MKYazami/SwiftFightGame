@@ -32,7 +32,7 @@ class Player {
     //===============
     
     /**
-     Allow to get the player name and verify if empty or not with message requiring to enter player name
+     Allow to get the player name and verify if empty or not
         - parameters:
             - teamNumber: Allow to know how many teams numbers from the loop => for teamNumber in 1...2 {…}
      */
@@ -40,7 +40,7 @@ class Player {
         //Contains true if the user input is empty
         var empty = Bool()
         //Message to ask the player to enter his name
-        print("Enter your name for the team \(teamNumber)/2:")
+        print("↳ Enter your name for the team \(Helper.replaceNumberToOrdinal(number: teamNumber))/2:")
         
         repeat {
             if let name = readLine() {
@@ -84,9 +84,10 @@ class Player {
     
     
     /**
-     Creat the characters
+     Create the characters
         - parameters: 
             - characterType: String value to know what type of character to initialise
+            - players: The array that contains the players
      */
     private func createCharacter(characterType: String, players: [Player]) {
         
@@ -138,7 +139,7 @@ class Player {
         repeat {
             
             if let type = readLine() {
-                //var perso
+                
                 switch type {
                 case "1":
                     badChoice = false
@@ -165,17 +166,13 @@ class Player {
     }
 
     
-    /**
-     Function allows to enter the character's name by the player with message requiring to enter character name
-    */
-    
     /// Function allows to enter the character's name by the player with message requiring to enter character name
     ///
     /// - Parameter players: The array that contains the names chosen
     /// - Returns: return name of characters uppercased
     func nameCharacter(players: [Player]) -> String {
         //Message indicating that the player must enter the character name
-        print("Now name the it 〖❗️ Each charater must have a unique name ❗️〗:")
+        print("↳ Now name the it 〖❗️ Each charater must have a unique name ❗️〗:")
         
         //Contains true if the user input is empty
         var empty = Bool()
