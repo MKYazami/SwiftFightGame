@@ -15,7 +15,7 @@ let game = PlayGame()
 
 game.startGame()
 
-game.selectTeamCharacter()
+
 //Debug
 print(game.players)
 

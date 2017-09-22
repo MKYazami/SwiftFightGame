@@ -20,17 +20,7 @@ class Player {
     //Array which contains the 3 characters chosen
     var gameCharacters = [GameCharacter]()
     
-    //Contains the names of the charater. For displaying the list of characters
-    var charactersNames = [String]()
-    
-    //Contains the name of character to make check to avoid duplicates
-    var name = String()
-    
-    //Contains the names of the charater. For displaying the list of characters
-    private var charactersTypes = [String]()
-    
-    //Allow to dertemine if the context is in error or not
-    private var error = Bool()
+   
     
     //============
     // MARK: Init
@@ -47,48 +37,24 @@ class Player {
             - teamNumber: Allow to know how many teams numbers from the loop => for teamNumber in 1...2 {…}
      */
     func namePlayer(teamNumber: Int) {
+        //Contains true if the user input is empty
+        var empty = Bool()
         //Message to ask the player to enter his name
         print("Enter your name for the team \(teamNumber)/2:")
         
         repeat {
             if let name = readLine() {
-                if !name.isEmpty {
-                    error = false
+                empty = !Helper.isNotEmpty(name: name)
+                
+                if !empty {
                     playerName = name.uppercased()
-                } else {
-                    error = true
-                    print("🚫 The player name is empty! Please enter a name.")
                 }
             }
             
-        } while error == true
+        } while empty == true
     }
     
 
-    func verifyName(characters: [String], inputCharacter: String) -> Bool {
-        var uniqueName = true
-        
-        if characters.contains(inputCharacter.uppercased()) {
-            uniqueName = false
-        } else {
-            uniqueName = true
-        }
-        
-        return uniqueName
-    }
-    
-//    func verifyName(characters: [PlayGame], inputCharacter: GameCharacter) -> Bool {
-//        var uniqueName = true
-//        
-//        //Verify character name
-//        for character in characters {
-//            if character.charactersString == inputCharacter.characterName.uppercased() {
-//                uniqueName = false
-//            }
-//        }
-//        
-//        return uniqueName
-//    }
     
     /**
      Append gameCharacter array
@@ -99,38 +65,52 @@ class Player {
         gameCharacters.append(character)
     }
     
+    
+    /// Check if the name is unique and append to gameCharacter array
+    ///
+    /// - Parameters:
+    ///   - name: Input name
+    ///   - character: character to append
+    ///   - players: The array that contains the players
+    private func checkUniqueNameAndAppendGameCharacter(name: String, character: GameCharacter, players: [Player]) {
+        //Returns true if name already exists
+        let notUniqueName = Helper.checkUniqueName(name: name, players: players)
+        
+        if !notUniqueName {
+            
+            appendGameCharacters(character: character)
+        }
+    }
+    
+    
     /**
      Creat the characters
         - parameters: 
             - characterType: String value to know what type of character to initialise
      */
-    private func createCharacter(characterType: String) {
+    private func createCharacter(characterType: String, players: [Player]) {
         
         switch characterType {
         case "combatant":
-            let character = Warrior(type: WarriorType.combatant, name: nameCharacter(), attakWeaponType: AttackWeaponType.sword)
+            let character = Warrior(type: WarriorType.combatant, name: nameCharacter(players: players), attakWeaponType: AttackWeaponType.sword)
 
-            appendGameCharacters(character: character)
-            charactersTypes.append(character.getCharacterTypeString(type: .combatant))
-            charactersNames.append(character.getCharacterNameString())
+            checkUniqueNameAndAppendGameCharacter(name: character.characterName, character: character, players: players)
+            
         case "colossus":
-            let character = Warrior(type: WarriorType.colossus, name: nameCharacter(), attakWeaponType: AttackWeaponType.bat)
-
-            appendGameCharacters(character: character)
-            charactersTypes.append(character.getCharacterTypeString(type: .colossus))
-            charactersNames.append(character.getCharacterNameString())
+            let character = Warrior(type: WarriorType.colossus, name: nameCharacter(players: players), attakWeaponType: AttackWeaponType.bat)
+            
+            checkUniqueNameAndAppendGameCharacter(name: character.characterName, character: character, players: players)
+            
         case "drawf":
-            let character = Warrior(type: WarriorType.drawf, name: nameCharacter(), attakWeaponType: AttackWeaponType.axe)
+            let character = Warrior(type: WarriorType.drawf, name: nameCharacter(players: players), attakWeaponType: AttackWeaponType.axe)
 
-            appendGameCharacters(character: character)
-            charactersTypes.append(character.getCharacterTypeString(type: .drawf))
-            charactersNames.append(character.getCharacterNameString())
+            checkUniqueNameAndAppendGameCharacter(name: character.characterName, character: character, players: players)
+            
         case "magus":
-            let character = Healer(type: HealerType.magus, name: nameCharacter(), careWeaponType: CareWeaponType.antidote)
+            let character = Healer(type: HealerType.magus, name: nameCharacter(players: players), careWeaponType: CareWeaponType.antidote)
 
-            appendGameCharacters(character: character)
-            charactersTypes.append(character.getCharacterTypeString(type: .magus))
-            charactersNames.append(character.getCharacterNameString())
+            checkUniqueNameAndAppendGameCharacter(name: character.characterName, character: character, players: players)
+            
         default:
             break
         }
@@ -141,11 +121,14 @@ class Player {
      Function to dertermine the type of character according to what the player entres with message requiring to choose the character type
         - parameters:
             - characterNumber: Allows to know how many characters you have to choose
+            - players: The array that contains the names chosen
      */
-    func chooseCharacter(characterNumber: Int) {
+    func chooseCharacter(characterNumber: Int, players: [Player]) {
+        //Contains false if the choice is bad
+        var badChoice = Bool()
         
         //Contains message and details to help the player make choices
-        print("\(playerName), please choose \(characterNumber)/3 character(s) ()==[::::::>"
+        print("\(playerName), please choose \(Helper.replaceNumberToOrdinal(number: characterNumber))/3️⃣ character ()==[::::::> ☟"
             + "\n1. Combatant〔 ℹ️  With classic attack, a good warrior 〕"
             + "\n2. Colossus 〔 ℹ️  Very resistant to attacks, but he doesn't cause considerable domages 〕"
             + "\n3. Drawf    〔 ℹ️  His axe generate a lot of damage, but he doesn't have many health points 〕"
@@ -158,25 +141,25 @@ class Player {
                 //var perso
                 switch type {
                 case "1":
-                    error = false
-                    createCharacter(characterType: "combatant")
+                    badChoice = false
+                    createCharacter(characterType: "combatant", players: players)
                 case "2":
-                    error = false
-                    createCharacter(characterType: "colossus")
+                    badChoice = false
+                    createCharacter(characterType: "colossus", players: players)
                 case "3":
-                    error = false
-                    createCharacter(characterType: "drawf")
+                    badChoice = false
+                    createCharacter(characterType: "drawf", players: players)
                 case "4":
-                    error = false
-                    createCharacter(characterType: "magus")
+                    badChoice = false
+                    createCharacter(characterType: "magus", players: players)
                 default:
-                    error = true
+                    badChoice = true
                     print("❌ Incorrect choice! Please choose 1, 2, 3 or 4")
                     
                 }
             }
             
-        } while error == true
+        } while badChoice == true
         
         
     }
@@ -185,32 +168,39 @@ class Player {
     /**
      Function allows to enter the character's name by the player with message requiring to enter character name
     */
-    func nameCharacter() -> String {
+    
+    /// Function allows to enter the character's name by the player with message requiring to enter character name
+    ///
+    /// - Parameter players: The array that contains the names chosen
+    /// - Returns: return name of characters uppercased
+    func nameCharacter(players: [Player]) -> String {
         //Message indicating that the player must enter the character name
-        print("Now name the it 〖❗️ Each charater must have a unique name 〗:")
+        print("Now name the it 〖❗️ Each charater must have a unique name ❗️〗:")
+        
+        //Contains true if the user input is empty
+        var empty = Bool()
+        
+        //Contains true if the name is duplicated
+        var duplicatedName = Bool()
+        
+        //Contains name uppercased
         var nameUppercased = String()
         repeat {
             
             if let name = readLine() {
-                if !name.isEmpty {
-                    error = false
-                    self.name = name
-                    
-                    if !charactersNames.contains(name.uppercased()) {
-                        error = false
-                        nameUppercased = name.uppercased()
-                    } else {
-                        error = true
-                        
-                        print("🚫 \(name.uppercased()) already exists! Please choose another one")
-                    }
-                } else {
-                    error = true
-                    print("🚫 The character name is empty! Please enter a name")
+                
+                empty = !Helper.isNotEmpty(name: name)
+                
+                
+                duplicatedName = Helper.checkUniqueName(name: name, players: players)
+                if !duplicatedName {
+                    nameUppercased = name.uppercased()
                 }
+                
+                    
             }
             
-        } while error == true
+        } while empty == true || duplicatedName == true
         
         return nameUppercased
     }
@@ -223,14 +213,13 @@ class Player {
     func listSelectedCharacters() {
         
         
-        print("✔️ \(playerName), you have chosen:")
+        print("✅ \(playerName), you have chosen:")
         
         //This loop allows to get the list from the charactersNames dictionary in order to list the types and names chosen
-        for (type, name) in zip (charactersTypes, charactersNames) {
-            
-            print("➢ \(type) as \(name)")
-            
+        for index in 0..<gameCharacters.count {
+            print("\(index + 1) ➸ as \(gameCharacters[index].characterName)")
         }
+        
     }
 
 }
