@@ -14,10 +14,9 @@
 		910756401F5FC61C0083F0CF /* CareWeaponType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9107563F1F5FC61C0083F0CF /* CareWeaponType.swift */; };
 		910756421F5FEAF60083F0CF /* PlayGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 910756411F5FEAF60083F0CF /* PlayGame.swift */; };
 		915E9DF01F73B5500073C5ED /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 915E9DEF1F73B5500073C5ED /* Helper.swift */; };
+		915E9DF21F7510E70073C5ED /* CharacterType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 915E9DF11F7510E70073C5ED /* CharacterType.swift */; };
 		918110811F5DB4FB00229F95 /* GameCharacter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 918110801F5DB4FB00229F95 /* GameCharacter.swift */; };
 		918110831F5DBBB700229F95 /* Warrior.swift in Sources */ = {isa = PBXBuildFile; fileRef = 918110821F5DBBB700229F95 /* Warrior.swift */; };
-		918110851F5DD9E900229F95 /* WarriorType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 918110841F5DD9E900229F95 /* WarriorType.swift */; };
-		9181108B1F5E992F00229F95 /* HealerType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9181108A1F5E992F00229F95 /* HealerType.swift */; };
 		91CC9EBD1F4F1D8100EFBC05 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91CC9EBC1F4F1D8100EFBC05 /* main.swift */; };
 		91CC9EC41F4F242B00EFBC05 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91CC9EC31F4F242B00EFBC05 /* Player.swift */; };
 		91EDDE941F5E9CBB00DA0F87 /* Healer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91EDDE931F5E9CBB00DA0F87 /* Healer.swift */; };
@@ -43,10 +42,9 @@
 		9107563F1F5FC61C0083F0CF /* CareWeaponType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CareWeaponType.swift; sourceTree = "<group>"; };
 		910756411F5FEAF60083F0CF /* PlayGame.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayGame.swift; sourceTree = "<group>"; };
 		915E9DEF1F73B5500073C5ED /* Helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
+		915E9DF11F7510E70073C5ED /* CharacterType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CharacterType.swift; sourceTree = "<group>"; };
 		918110801F5DB4FB00229F95 /* GameCharacter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameCharacter.swift; sourceTree = "<group>"; };
 		918110821F5DBBB700229F95 /* Warrior.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Warrior.swift; sourceTree = "<group>"; };
-		918110841F5DD9E900229F95 /* WarriorType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WarriorType.swift; sourceTree = "<group>"; };
-		9181108A1F5E992F00229F95 /* HealerType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HealerType.swift; sourceTree = "<group>"; };
 		91CC9EB91F4F1D8100EFBC05 /* SwiftFightGame */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = SwiftFightGame; sourceTree = BUILT_PRODUCTS_DIR; };
 		91CC9EBC1F4F1D8100EFBC05 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		91CC9EC31F4F242B00EFBC05 /* Player.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
@@ -94,9 +92,8 @@
 				9107563F1F5FC61C0083F0CF /* CareWeaponType.swift */,
 				918110801F5DB4FB00229F95 /* GameCharacter.swift */,
 				918110821F5DBBB700229F95 /* Warrior.swift */,
-				918110841F5DD9E900229F95 /* WarriorType.swift */,
 				91EDDE931F5E9CBB00DA0F87 /* Healer.swift */,
-				9181108A1F5E992F00229F95 /* HealerType.swift */,
+				915E9DF11F7510E70073C5ED /* CharacterType.swift */,
 			);
 			path = SwiftFightGame;
 			sourceTree = "<group>";
@@ -168,11 +165,10 @@
 				91EDDE941F5E9CBB00DA0F87 /* Healer.swift in Sources */,
 				918110831F5DBBB700229F95 /* Warrior.swift in Sources */,
 				910756421F5FEAF60083F0CF /* PlayGame.swift in Sources */,
-				918110851F5DD9E900229F95 /* WarriorType.swift in Sources */,
-				9181108B1F5E992F00229F95 /* HealerType.swift in Sources */,
 				91CC9EBD1F4F1D8100EFBC05 /* main.swift in Sources */,
 				910756401F5FC61C0083F0CF /* CareWeaponType.swift in Sources */,
 				9107563A1F5FC57B0083F0CF /* AttackWeapon.swift in Sources */,
+				915E9DF21F7510E70073C5ED /* CharacterType.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

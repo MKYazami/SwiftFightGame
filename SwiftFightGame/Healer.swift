@@ -33,14 +33,16 @@ class Healer: GameCharacter {
     /// Initialize the healer
     ///
     /// - Parameters:
-    ///   - type: HealerType.magus
+    ///   - type: CharacterType.magus
     ///   - name: String name
     ///   - careWeaponType: CareWeaponType.antidote
-    init(type: HealerType, name: String, careWeaponType: CareWeaponType) {
-        super.init(characterName: name)
-        switch type {
+    init(characterType: CharacterType, name: String, careWeaponType: CareWeaponType) {
+        super.init(characterName: name, characterType: characterType)
+        switch characterType {
         case .magus:
             healthPoints = 80
+        default:
+            break
         }
         
         let initCareCapacity = CareWeapon(type: careWeaponType)
@@ -55,17 +57,6 @@ class Healer: GameCharacter {
     //===================
     // -MARK: Methodes
     //===================
-    
-    /// Return the type of healer in the form of string
-    ///
-    /// - Parameter type: The healer Type
-    /// - Returns: Return string
-    func getCharacterTypeString(type: HealerType) -> String {
-        switch type {
-        case .magus:
-            return "MAGUS"
-        }
-    }
     
  
     func heal(character: GameCharacter) -> Int{

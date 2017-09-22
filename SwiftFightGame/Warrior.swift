@@ -27,18 +27,20 @@ class Warrior: GameCharacter {
     /// Initialize the warriors
     ///
     /// - Parameters:
-    ///   - type: WarriorType.combatant, WarriorType.colossus, WarriorType.drawf
+    ///   - characterType: CharacterType.combatant, CharacterType.colossus, CharacterType.drawf
     ///   - name: String name
     ///   - attakWeaponType: AttackWeaponType.sword, AttackWeaponType.bat, AttackWeaponType.axe
-    init(type: WarriorType, name: String, attakWeaponType: AttackWeaponType) {
-        super.init(characterName: name)
-        switch type {
+    init(characterType: CharacterType, name: String, attakWeaponType: AttackWeaponType) {
+        super.init(characterName: name, characterType: characterType)
+        switch characterType {
         case .combatant:
             healthPoints = 100
         case .colossus:
             healthPoints = 180
         case .drawf:
             healthPoints = 25
+        default:
+            break
         }
         
         let initStrikeForce = AttackWeapon(type: attakWeaponType)
@@ -56,22 +58,7 @@ class Warrior: GameCharacter {
     
     //===================
     // -MARK: Methodes
-    //===================    
-    
-    /// Return the type of warrior in the form of string
-    ///
-    /// - Parameter type: The warrior Type
-    /// - Returns: Return string
-    func getCharacterTypeString(type: WarriorType) -> String {
-        switch type {
-        case .combatant:
-            return "COBATANT"
-        case .colossus:
-            return "COLOSSUS"
-        case .drawf:
-            return "DRAWF"
-        }
-    }
+    //===================
     
     
     func strike(character: GameCharacter) -> Int {

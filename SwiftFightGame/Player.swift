@@ -93,22 +93,22 @@ class Player {
         
         switch characterType {
         case "combatant":
-            let character = Warrior(type: WarriorType.combatant, name: nameCharacter(players: players), attakWeaponType: AttackWeaponType.sword)
+            let character = Warrior(characterType: CharacterType.combatant, name: nameCharacter(players: players), attakWeaponType: AttackWeaponType.sword)
 
             checkUniqueNameAndAppendGameCharacter(name: character.characterName, character: character, players: players)
             
         case "colossus":
-            let character = Warrior(type: WarriorType.colossus, name: nameCharacter(players: players), attakWeaponType: AttackWeaponType.bat)
+            let character = Warrior(characterType: CharacterType.colossus, name: nameCharacter(players: players), attakWeaponType: AttackWeaponType.bat)
             
             checkUniqueNameAndAppendGameCharacter(name: character.characterName, character: character, players: players)
             
         case "drawf":
-            let character = Warrior(type: WarriorType.drawf, name: nameCharacter(players: players), attakWeaponType: AttackWeaponType.axe)
+            let character = Warrior(characterType: CharacterType.drawf, name: nameCharacter(players: players), attakWeaponType: AttackWeaponType.axe)
 
             checkUniqueNameAndAppendGameCharacter(name: character.characterName, character: character, players: players)
             
         case "magus":
-            let character = Healer(type: HealerType.magus, name: nameCharacter(players: players), careWeaponType: CareWeaponType.antidote)
+            let character = Healer(characterType: CharacterType.magus, name: nameCharacter(players: players), careWeaponType: CareWeaponType.antidote)
 
             checkUniqueNameAndAppendGameCharacter(name: character.characterName, character: character, players: players)
             

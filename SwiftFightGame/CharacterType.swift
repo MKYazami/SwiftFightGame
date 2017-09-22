@@ -7,3 +7,13 @@
 //
 
 import Foundation
+
+/**
+ Enumerate the character's types
+ */
+enum CharacterType: String {
+    case combatant
+    case colossus
+    case drawf
+    case magus
+}

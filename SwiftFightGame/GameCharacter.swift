@@ -18,6 +18,9 @@ class GameCharacter {
     //Name of character
     var characterName: String
     
+    //Character type
+    var characterType: CharacterType
+    
     //Health points for each character
     var healthPoints = Int()
     
@@ -28,19 +31,37 @@ class GameCharacter {
     //===================
     // -MARK: Init
     //===================
-    init(characterName: String) {
+    init(characterName: String, characterType: CharacterType) {
         self.characterName = characterName
+        self.characterType = characterType
     }
     
     //===================
     // -MARK: Methodes
     //===================
     
-    /**
-     Return character name in the form of string
-     */
+    /// Return character name in the form of string
+    ///
+    /// - Returns: string
     func getCharacterNameString() -> String {
         return characterName
+    }
+    
+    
+    /// Return character type in the form of string
+    ///
+    /// - Returns: string
+    func getCharacterTypeString() -> String {
+        switch characterType {
+        case .combatant:
+            return "COMBATANT"
+        case .colossus:
+            return "COLOSSUS"
+        case .drawf:
+            return "DRAWF"
+        case .magus:
+            return "MAGUS"
+        }
     }
     
     
