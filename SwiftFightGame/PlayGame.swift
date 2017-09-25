@@ -12,7 +12,16 @@ class PlayGame {
     //Contains 2 players for the game
     var players = [Player]()
     
-    
+    func selectCharacterForAction() {
+        for playerIndex in 0..<players.count {
+            print("\(players[playerIndex].playerName), select your character to make action: ")
+            
+            
+                for characterIndex in 0..<players[playerIndex].gameCharacters.count {
+                    print("☞ \(characterIndex + 1). \(players[playerIndex].gameCharacters[characterIndex].getCharacterNameString()): ✤ Type: \(players[playerIndex].gameCharacters[characterIndex].getCharacterTypeString()) ⎮ Health points: \(players[playerIndex].gameCharacters[characterIndex].healthPoints) ✤")
+                }
+        }
+    }
    
     
     /// Start game
@@ -48,6 +57,6 @@ class PlayGame {
             player.listSelectedCharacters()
         }
 
-    
+        selectCharacterForAction()
     }
 }

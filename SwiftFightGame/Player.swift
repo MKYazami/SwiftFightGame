@@ -172,7 +172,7 @@ class Player {
     /// - Returns: return name of characters uppercased
     func nameCharacter(players: [Player]) -> String {
         //Message indicating that the player must enter the character name
-        print("↳ Now name the it 〖❗️ Each charater must have a unique name ❗️〗:")
+        print("↳ Now name it 〖❗️ Each charater must have a unique name ❗️〗:")
         
         //Contains true if the user input is empty
         var empty = Bool()
@@ -212,9 +212,9 @@ class Player {
         
         print("✅ \(playerName), you have chosen:")
         
-        //This loop allows to get the list from the charactersNames dictionary in order to list the types and names chosen
+        //This loop allows to get the list from the gameCharacters array in order to list the types and names chosen
         for index in 0..<gameCharacters.count {
-            print("\(index + 1) ➸ as \(gameCharacters[index].characterName)")
+            print("\(index + 1). \(gameCharacters[index].characterName) as ➸ \(gameCharacters[index].getCharacterTypeString())")
         }
         
     }
