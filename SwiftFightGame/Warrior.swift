@@ -61,9 +61,8 @@ class Warrior: GameCharacter {
     //===================
     
     
-    func strike(character: GameCharacter) -> Int {
+    func strike(character: GameCharacter) {
         character.healthPoints -= strikeForce
-        return character.healthPoints
     }
     
 }

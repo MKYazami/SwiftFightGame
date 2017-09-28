@@ -9,93 +9,109 @@
 import Foundation
 
 class PlayGame {
+    //==================
+    // MARK: Properties
+    //==================
+    
     //Contains 2 players for the game
     var players = [Player]()
     
-    private func selectOwnCharacter(characterToUse: GameCharacter) {
-        var characterToUse = characterToUse
-        var badChoice = Bool()
-        repeat {
-            if let character = readLine() {
-                if Helper.isNotEmpty(name: character) {
-                    switch character {
-                    case "1":
-                        badChoice = false
-                        characterToUse = players[0].gameCharacters[0]
-                    case "2":
-                        badChoice = false
-                        characterToUse = players[0].gameCharacters[1]
-                    case "3":
-                        badChoice = false
-                        characterToUse = players[0].gameCharacters[2]
-                    default:
-                        badChoice = true
-                        print("❌ Incorrect choice! Please choose 1, 2 or 3")
-                    }
-                }
-            }
-        } while badChoice == true
+    
+    //==================
+    // MARK: Methods
+    //==================
+    
+    
+    /// Get amounts of strike force or healing ability depending of type of character
+    ///
+    /// - Parameter character: game character
+    /// - Returns: amounts of strike force or healing ability
+    private func getAmountOfAbility(character: GameCharacter) -> Int {
+        var amountOfAbility = Int()
+        if let warrior = character as? Warrior {
+            amountOfAbility = warrior.strikeForce
+        } else if let healer = character as? Healer {
+            amountOfAbility = healer.healingAbility
+        }
+        return amountOfAbility
     }
     
-    private func selectOtherCharacter(characterToFight: GameCharacter) {
-        var characterToFight = characterToFight
-        var badChoice = Bool()
-        repeat {
-            if let character = readLine() {
-                if Helper.isNotEmpty(name: character) {
-                    switch character {
-                    case "1":
-                        badChoice = false
-                        characterToFight = players[1].gameCharacters[0]
-                    case "2":
-                        badChoice = false
-                        characterToFight = players[1].gameCharacters[1]
-                    case "3":
-                        badChoice = false
-                        characterToFight = players[1].gameCharacters[2]
-                    default:
-                        badChoice = true
-                        print("❌ Incorrect choice! Please choose 1, 2 or 3")
-                    }
-                }
-            }
-        } while badChoice == true
-
+    /// Get type of ability as string, depending of type of character
+    ///
+    /// - Parameter character: game character
+    /// - Returns: String "Strike force: " OR "Healing ability: "
+    private func getTypeOfAbility(character: GameCharacter) -> String {
+        var typeOfAbility = String()
+        if character is Warrior {
+            typeOfAbility = "Strike force: "
+        } else if character is Healer {
+            typeOfAbility = "Healing ability: "
+        }
+        return typeOfAbility
     }
     
-    private func selectCharacterForAction() {
-        var characterToUse = GameCharacter(characterName: "", characterType: .combatant)
-        var characterToFight = GameCharacter(characterName: "", characterType: .combatant)
-        
-        print("\(players[0].playerName), select your character to make action: ")
-        
+    private func teamCharacters() -> GameCharacter {
         
         for characterIndex in 0..<players[0].gameCharacters.count {
-            print("☞ \(characterIndex + 1). \(players[0].gameCharacters[characterIndex].getCharacterNameString()): ✤ Type: \(players[0].gameCharacters[characterIndex].getCharacterTypeString()) ⎮ Health points: \(players[0].gameCharacters[characterIndex].healthPoints) ✤")
+            print("👤 ☞ \(characterIndex + 1). \(players[0].gameCharacters[characterIndex].getCharacterNameString()): ✤ Type: \(players[0].gameCharacters[characterIndex].getCharacterTypeString()) ⎮ Health points: \(players[0].gameCharacters[characterIndex].healthPoints) ⎮ \(getTypeOfAbility(character: players[0].gameCharacters[characterIndex])) \(getAmountOfAbility(character: players[0].gameCharacters[characterIndex])) ✤ ")
         }
         
-        selectOwnCharacter(characterToUse: characterToUse)
+        return players[0].selectCharacter(from: players[0])
+    }
+    
+    
+    private func adversaryCharacters() -> GameCharacter {
+        for characterIndex in 0..<players[1].gameCharacters.count {
+            print("🆚 ☞ \(characterIndex + 1). \(players[1].gameCharacters[characterIndex].getCharacterNameString()): ✤ Type: \(players[1].gameCharacters[characterIndex].getCharacterTypeString()) ⎮ Health points: \(players[1].gameCharacters[characterIndex].healthPoints) ⎮ \(getTypeOfAbility(character: players[1].gameCharacters[characterIndex])) \(getAmountOfAbility(character: players[1].gameCharacters[characterIndex])) ✤")
+        }
         
-        
-        
-        print("Your adversary is \(players[1].playerName) and has: ")
+        return players[1].selectCharacter(from: players[1])
+    }
+    
+    
+    private func selectCharacterForAction() {
+        var characterToUse = GameCharacter()
+        var characterToMakeAction = GameCharacter()
+        //Adversary List presentation
+        print("Your adversary is \(players[1].playerName) and has ℹ️: ")
         
         
         for characterIndex in 0..<players[1].gameCharacters.count {
-            print("☞ \(characterIndex + 1). \(players[1].gameCharacters[characterIndex].getCharacterNameString()): ✤ Type: \(players[1].gameCharacters[characterIndex].getCharacterTypeString()) ⎮ Health points: \(players[1].gameCharacters[characterIndex].healthPoints) ✤")
+            print("ℹ️ \(players[1].gameCharacters[characterIndex].getCharacterNameString()): ✤ Type: \(players[1].gameCharacters[characterIndex].getCharacterTypeString()) ⎮ Health points: \(players[1].gameCharacters[characterIndex].healthPoints) ⎮ \(getTypeOfAbility(character: players[1].gameCharacters[characterIndex])) \(getAmountOfAbility(character: players[1].gameCharacters[characterIndex])) ✤")
         }
+
+        
+        
+        //Selection of team characters for action
+        print("\(players[0].playerName), select your character to make action 👇: ")
+        
+        
+        characterToUse = teamCharacters()
         
         
         
+        //Summary of actions depending if striking or healing
         if let warrior = characterToUse as? Warrior {
-            print("\(warrior) is Warrior Type")
-            warrior.strike(character: characterToFight)
-            print("\(characterToFight.characterName) has lost \(warrior.strikeForce) of health points and still has \(characterToFight.healthPoints) health points")
+            //Adversary selection to strike
+            print("Now select a adversary’s character to strike 🗡: ")
+            
+            characterToMakeAction = adversaryCharacters()
+            
+            //Strike
+            warrior.strike(character: characterToMakeAction)
+            
+            //Summary of action
+            print("🌶 \(characterToMakeAction.characterName) has lost \(warrior.strikeForce) of health points and still has \(characterToMakeAction.healthPoints) health points")
         } else if let healer = characterToUse as? Healer {
-            print("\(healer) is Healer Type")
-            selectOwnCharacter(characterToUse: characterToUse)
+            //Team selection to heal
+            print("Now select a team’s character to heal 💊:")
+            
+            characterToUse = teamCharacters()
+            
             healer.heal(character: characterToUse)
-            print("\(characterToFight.characterName) has got \(healer.careCapacity) of health points and still has \(characterToFight.healthPoints) health points")
+            
+            //Summary of action
+            print("🍀 \(characterToUse.characterName) got \(healer.healingAbility) of health points and now has \(characterToUse.healthPoints) health points")
         }
         
     }
@@ -133,8 +149,9 @@ class PlayGame {
             //Display the selected characters
             player.listSelectedCharacters()
         }
-        print("===============================")
-        print("===============================")
+        print(" ❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅")
+        print("❅                START FIGHT               ❅")
+        print(" ❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅")
         
         selectCharacterForAction()
     }

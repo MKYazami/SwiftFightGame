@@ -36,6 +36,11 @@ class GameCharacter {
         self.characterType = characterType
     }
     
+    convenience init() {
+        
+        self.init(characterName: "", characterType: .combatant)
+    }
+    
     //===================
     // -MARK: Methodes
     //===================

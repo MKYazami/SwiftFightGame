@@ -25,7 +25,7 @@ class Healer: GameCharacter {
     //===================
     // -MARK: Init
     //===================
-    var careCapacity = Int()
+    var healingAbility = Int()
     
     //===================
     // -MARK: Init
@@ -49,7 +49,7 @@ class Healer: GameCharacter {
         
         switch careWeaponType {
         case .antidote:
-            careCapacity = initCareCapacity.heal
+            healingAbility = initCareCapacity.heal
         }
 
     }
@@ -59,9 +59,8 @@ class Healer: GameCharacter {
     //===================
     
  
-    func heal(character: GameCharacter) -> Int{
-        character.healthPoints += careCapacity
-        return character.healthPoints
+    func heal(character: GameCharacter) {
+        character.healthPoints += healingAbility
     }
     
 }
