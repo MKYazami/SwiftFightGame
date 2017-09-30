@@ -41,16 +41,46 @@ class Helper {
     
     /// Allow to know if a string is empty or not
     ///
-    /// - Parameter name: The string to check
-    /// - Returns: Returns true if not empty
-    static func isNotEmpty(name: String) -> Bool {
+    /// - Parameters:
+    ///   - name: The string to check
+    /// - Returns: true if not empty
+    static func nameIsNotEmpty(name: String) -> Bool {
         if !name.isEmpty {
             return true
         }
         
-        print("❌ The name is empty! Please enter a name")
+        print("❌ The name is empty! Please enter a name…")
         return false
     }
+    
+    
+    // Allow to know if a selection is did or not
+    ///
+    /// - Parameters:
+    ///   - name: character input to check from readLine()
+    /// - Returns: true if not empty
+    static func characterSelectionIsNotEmpty(name: String) -> Bool {
+        if !name.isEmpty {
+            return true
+        }
+        
+        print("❌ No character selected! Please select a character…")
+        return false
+    }
+    
+    
+    /// Allow to check if object contains Warrior OR Healer type
+    ///
+    /// - Parameter character: object to check
+    /// - Returns: true if Warrior OR Healer type exist
+    static func characterSelectionExists(character: GameCharacter) ->Bool {
+        if character is Warrior || character is Healer {
+            return true
+        }
+        
+        return false
+    }
+
     
     /// Add S to character word depending if is singular or plural
     ///
@@ -75,13 +105,13 @@ class Helper {
         switch number {
         
         case 0:
-            return "zero"
+            return "0️⃣"
         case 1:
-            return "𝟏st"
+            return "1️⃣st"
         case 2:
-            return "𝟐nd"
+            return "2️⃣nd"
         case 3:
-            return "𝟑rd"
+            return "3️⃣rd"
         default:
             return "❌ Error: Update this function to get ordinal beyond 3!"
         }

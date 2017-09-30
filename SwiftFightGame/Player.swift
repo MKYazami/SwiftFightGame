@@ -40,11 +40,11 @@ class Player {
         //Contains true if the user input is empty
         var empty = Bool()
         //Message to ask the player to enter his name
-        print("↳ Enter your name for the team \(Helper.replaceNumberToOrdinal(number: teamNumber))/2:")
+        print("↳ Enter your name for the team \(Helper.replaceNumberToOrdinal(number: teamNumber))/2️⃣:")
         
         repeat {
             if let name = readLine() {
-                empty = !Helper.isNotEmpty(name: name)
+                empty = !Helper.nameIsNotEmpty(name: name)
                 
                 if !empty {
                     playerName = name.uppercased()
@@ -186,7 +186,7 @@ class Player {
             
             if let name = readLine() {
                 
-                empty = !Helper.isNotEmpty(name: name)
+                empty = !Helper.nameIsNotEmpty(name: name)
                 
                 
                 duplicatedName = Helper.checkUniqueName(name: name, players: players)
@@ -228,7 +228,7 @@ class Player {
         var badChoice = Bool()
         repeat {
             if let characterInput = readLine() {
-                if Helper.isNotEmpty(name: characterInput) {
+                if Helper.characterSelectionIsNotEmpty(name: characterInput) {
                     switch characterInput {
                     case "1":
                         badChoice = false
@@ -249,7 +249,6 @@ class Player {
         
         return character
     }
-
 
 }
 
