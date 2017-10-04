@@ -219,30 +219,31 @@ class Player {
         
     }
     
-     /// Allow to select character to make action (strike or heal)
-     ///
-     /// - Parameter player: player who will choose the character
-     /// - Returns: GameCharacter
-     func selectCharacter(from player: Player) -> GameCharacter {
+    /// Allow to select character to make action (strike or heal)
+    ///
+    /// - Parameter player: player who will choose the character
+    /// - Returns: GameCharacter
+    func selectCharacter(from player: Player) -> GameCharacter {
         var character = GameCharacter()
         var badChoice = Bool()
         repeat {
             if let characterInput = readLine() {
                 if Helper.characterSelectionIsNotEmpty(name: characterInput) {
-                    switch characterInput {
-                    case "1":
+                    
+                    if characterInput == "1" {
                         badChoice = false
                         character = player.gameCharacters[0]
-                    case "2":
+                    } else if characterInput == "2" && gameCharacters.count >= 2 {
                         badChoice = false
                         character = player.gameCharacters[1]
-                    case "3":
+                    } else if characterInput == "3" && gameCharacters.count >= 3 {
                         badChoice = false
                         character = player.gameCharacters[2]
-                    default:
+                    } else {
                         badChoice = true
-                        print("❌ Incorrect choice! Please choose 1, 2 or 3")
+                        print("❌ Incorrect choice! Please choose from the displayed list")
                     }
+                    
                 }
             }
         } while badChoice == true
