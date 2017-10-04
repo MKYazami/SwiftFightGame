@@ -95,7 +95,7 @@ class PlayGame {
         var characterToFight = GameCharacter()
         var characterToHeal = GameCharacter()
         
-        repeat {
+        while players.count > 1 { //Repeat while there is 2 players in players array 
             for playerIndex in 0..<players.count {
             
                 repeat {
@@ -215,7 +215,7 @@ class PlayGame {
                 
             }
             
-        } while players.count > 1 //Repeat while there is 2 players in players array
+        }
         
     }
    
