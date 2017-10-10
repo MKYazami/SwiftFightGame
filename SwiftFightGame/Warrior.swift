@@ -16,10 +16,14 @@ class Warrior: GameCharacter {
     //===================
     
     //Contains the type of wepon and therefore the damages
-    var weaponAttackType = AttackWeaponType.self
+    var weaponAttackType = AttackWeaponType.sword
     
     //
     var strikeForce = Int()
+    
+    var strikeForceWithWeaponChange = Int()
+    
+    var weaponAttackName = String()
     
     //===================
     // -MARK: Init
@@ -34,11 +38,11 @@ class Warrior: GameCharacter {
         super.init(characterName: name, characterType: characterType)
         switch characterType {
         case .combatant:
-            healthPoints = 10 //CHANGING FOR TEST
+            healthPoints = 10 //CHANGING FOR TEST — Initially 100
         case .colossus:
             healthPoints = 180
         case .drawf:
-            healthPoints = 10 //CHANGING FOR TEST
+            healthPoints = 10 //CHANGING FOR TEST - Initially 25
         default:
             break
         }
@@ -48,10 +52,13 @@ class Warrior: GameCharacter {
         switch attakWeaponType {
         case .sword:
             strikeForce = initStrikeForce.damages
+            weaponAttackType = .sword
         case .bat:
             strikeForce = initStrikeForce.damages
+            weaponAttackType = .bat
         case .axe:
             strikeForce = initStrikeForce.damages
+            weaponAttackType = .axe
         }
 
     }
@@ -59,10 +66,50 @@ class Warrior: GameCharacter {
     //===================
     // -MARK: Methodes
     //===================
-    
-    
     func strike(character: GameCharacter) {
         character.healthPoints -= strikeForce
+    }
+    
+    /// Same as strike function, except when there is a change of weapon
+    ///
+    /// - Parameter character: Character to strike
+    func strikeWithWeaponChange(character: GameCharacter) {
+        character.healthPoints -= strikeForceWithWeaponChange
+    }
+    
+    /// Allow to change weapon attack from instance
+    ///
+    /// - Parameter typeOfWeapon: Type of weapon to make change
+    func weaponChange(typeOfWeapon: AttackWeaponType) {
+        
+        let changeStrikeForce = AttackWeapon(type: typeOfWeapon)
+        
+        switch typeOfWeapon {
+        case .sword:
+            strikeForceWithWeaponChange = changeStrikeForce.damages
+            weaponAttackName = "SWORD"
+        case .bat:
+            strikeForceWithWeaponChange = changeStrikeForce.damages
+            weaponAttackName = "BAT"
+        case .axe:
+            strikeForceWithWeaponChange = changeStrikeForce.damages
+            weaponAttackName = "AXE"
+        }
+    }
+    
+    
+    /// Return character type in the form of string
+    ///
+    /// - Returns: string
+    func getWeaponAttackString() -> String {
+        switch weaponAttackType {
+        case .sword:
+            return "SWORD"
+        case .bat:
+            return "BAT"
+        case .axe:
+            return "AXE"
+        }
     }
     
 }

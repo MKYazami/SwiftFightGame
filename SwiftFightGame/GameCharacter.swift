@@ -68,21 +68,7 @@ class GameCharacter {
             return "MAGUS"
         }
     }
-    
-    
-    /// Determine if charcter is alive
-    ///
-    /// - Parameter character: Concerned character
-    /// - Returns: true if healthPoints higher than 0 and false if equal or lower than 0
-    func isAlive() -> Bool {
-        if healthPoints > 0 {
-            return true
-        } else {
-            return false
-        }
         
-    }
-    
     
     /// Determine if charcter is dead
     ///

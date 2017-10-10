@@ -87,7 +87,43 @@ class PlayGame {
             return index - 1
         }
     }
-
+    
+    
+    /// Generate a random attack wepon
+    ///
+    /// - Returns: Attack weapon type
+    private func weaponAttackChange() -> AttackWeaponType {
+        var weaponAttack: [AttackWeaponType] = [.sword, .axe, .bat]
+        
+        let randomWeaponAttackIndex: Int = Int(arc4random_uniform(UInt32(weaponAttack.count)))
+        
+        
+        let randomWeaponAttack = weaponAttack[randomWeaponAttackIndex]
+        
+        
+        return randomWeaponAttack
+    }
+    
+    /// Generate a random number between 0 and 10
+    ///
+    /// - Returns: Random number
+    private func randomNumberToOpenChest() -> Int {
+        let randomNumber = Int(arc4random_uniform(UInt32(10)))
+        
+        return randomNumber
+    }
+    
+    
+    /// Determine to open the chest in random conditions
+    ///
+    /// - Returns: True to open chest
+    private func openChest() -> Bool {
+        if randomNumberToOpenChest() >= 2 && randomNumberToOpenChest() <= 6 {
+            return true
+        } else {
+            return false
+        }
+    }
     
     /// Start the fight phase
     private func fightPhase() {
@@ -118,9 +154,17 @@ class PlayGame {
                     
                     
                     
-                    
                     //Actions and summary of actions, depending if striking or healing
                     if let warrior = characterToUse as? Warrior {
+                        //********** Action to open the chest and get a attack weapon **********
+                        print()
+                        print("📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦")
+                        warrior.weaponChange(typeOfWeapon: weaponAttackChange())
+                        print("\t🗃 The attack weapon chest is at your disposal you got: \(warrior.weaponAttackName) with strike force of \(warrior.strikeForceWithWeaponChange) 🗃")
+                        print("📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦")
+                        print()
+                        
+                        
                         
                         //Adversary selection to strike
                         repeat {
@@ -129,7 +173,8 @@ class PlayGame {
                             characterToFight = adversaryCharacters(player: players[adversaryIndex(index: playerIndex)])
                             
                             //Strike
-                            warrior.strike(character: characterToFight)
+//                            warrior.strike(character: characterToFight)
+                            warrior.strikeWithWeaponChange(character: characterToFight)
                             
                             //Display summary, only if a characterToMakeAction is selected. Allow to avoid an empty summary
                             if Helper.characterSelectionExists(character: characterToFight) {
@@ -165,7 +210,7 @@ class PlayGame {
                                     print()
                                     
                                     
-                                    //Add stat here for bonus?
+                                    //********* Add stat here for bonus? *********
                                     print()
                                     print("\t 🎊🎊🎊🎊🎊🎊🎊🎊🎊🎊🎊🎊🎊🎊🎊🎊🎊🎊🎊🎊🎊🎊🎊🎊🎊🎊")
                                     print("\t \t \t The winner is \(players[playerIndex].playerName) 😄🥇🤗")
