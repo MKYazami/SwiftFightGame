@@ -8,6 +8,7 @@
 
 import Foundation
 
+/// Care weapon initialized by enumeration CareWeaponType
 class CareWeapon: Weapon {
     var heal: Int
     

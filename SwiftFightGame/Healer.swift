@@ -19,7 +19,7 @@ import Foundation
 import Foundation
 
 /**
- Class of warriors, that is depending of WarrioType enumeration
+ Class of healers, initialized by enumeration CharacterType
  */
 class Healer: GameCharacter {
     //===================
@@ -40,7 +40,7 @@ class Healer: GameCharacter {
         super.init(characterName: name, characterType: characterType)
         switch characterType {
         case .magus:
-            healthPoints = 80
+            healthPoints = 10 //CHANGING FOR TEST - Initially 60
         default:
             break
         }

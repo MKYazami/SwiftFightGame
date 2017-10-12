@@ -8,6 +8,11 @@
 
 import Foundation
 
+/// Enumering the weapon attacks type
+///
+/// - sword: sword
+/// - bat: bat
+/// - axe: axe
 enum AttackWeaponType {
     case sword
     case bat

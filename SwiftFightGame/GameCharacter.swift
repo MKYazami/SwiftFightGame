@@ -36,6 +36,7 @@ class GameCharacter {
         self.characterType = characterType
     }
     
+    //Allow to makes it easy to declare the type in certain cases
     convenience init() {
         
         self.init(characterName: "", characterType: .combatant)

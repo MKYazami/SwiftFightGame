@@ -8,6 +8,9 @@
 
 import Foundation
 
+/// Enumering the weapon cares type
+///
+/// - antidote: antidote
 enum CareWeaponType {
     case antidote
 }

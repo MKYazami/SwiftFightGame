@@ -8,6 +8,7 @@
 
 import Foundation
 
+/// Attack weapon initialized by enumeration AttackWeaponType
 class AttackWeapon: Weapon {
     var damages: Int
     

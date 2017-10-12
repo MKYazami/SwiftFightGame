@@ -8,6 +8,7 @@
 
 import Foundation
 
+/// Super class for other weapon classes, no special thing inside but can serves for a possible evolution
 class Weapon {
-    var weaponName = AttackWeaponType.self
+    var weaponType = AttackWeaponType.self
 }

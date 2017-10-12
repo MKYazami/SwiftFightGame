@@ -8,21 +8,19 @@
 
 import Foundation
 /**
- Super class of all game characters
+ Class of warriors, initialized by enumeration CharacterType
  */
 class Warrior: GameCharacter {
     //===================
     // -MARK: Properties
     //===================
     
-    //Contains the type of wepon and therefore the damages
-    var weaponAttackType = AttackWeaponType.sword
-    
-    //
     var strikeForce = Int()
     
+    //Strike force when changing the weapon
     var strikeForceWithWeaponChange = Int()
     
+    //Contains the attack weapon in the form of string
     var weaponAttackName = String()
     
     //===================
@@ -40,9 +38,9 @@ class Warrior: GameCharacter {
         case .combatant:
             healthPoints = 10 //CHANGING FOR TEST — Initially 100
         case .colossus:
-            healthPoints = 180
+            healthPoints = 20 //CHANGING FOR TEST — Initially 150
         case .drawf:
-            healthPoints = 10 //CHANGING FOR TEST - Initially 25
+            healthPoints = 10 //CHANGING FOR TEST - Initially 30
         default:
             break
         }
@@ -52,13 +50,10 @@ class Warrior: GameCharacter {
         switch attakWeaponType {
         case .sword:
             strikeForce = initStrikeForce.damages
-            weaponAttackType = .sword
         case .bat:
             strikeForce = initStrikeForce.damages
-            weaponAttackType = .bat
         case .axe:
             strikeForce = initStrikeForce.damages
-            weaponAttackType = .axe
         }
 
     }
@@ -97,19 +92,5 @@ class Warrior: GameCharacter {
         }
     }
     
-    
-    /// Return character type in the form of string
-    ///
-    /// - Returns: string
-    func getWeaponAttackString() -> String {
-        switch weaponAttackType {
-        case .sword:
-            return "SWORD"
-        case .bat:
-            return "BAT"
-        case .axe:
-            return "AXE"
-        }
-    }
     
 }

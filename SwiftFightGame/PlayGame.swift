@@ -8,6 +8,7 @@
 
 import Foundation
 
+/// Play the game
 class PlayGame {
     //==================
     // MARK: Properties
@@ -22,7 +23,7 @@ class PlayGame {
     //==================
     
     
-    /// Get amounts of strike force or healing ability depending of type of character
+    /// Get amounts of strike force or healing ability depending of character's type
     ///
     /// - Parameter character: game character
     /// - Returns: amounts of strike force or healing ability
@@ -36,7 +37,7 @@ class PlayGame {
         return amountOfAbility
     }
     
-    /// Get type of ability as string, depending of type of character
+    /// Get type of ability as string, depending of character's type
     ///
     /// - Parameter character: game character
     /// - Returns: String "Strike force: " OR "Healing ability: "
@@ -89,26 +90,29 @@ class PlayGame {
     }
     
     
-    /// Generate a random attack wepon
+    /// Generate a random attack weapon
     ///
     /// - Returns: Attack weapon type
     private func weaponAttackChange() -> AttackWeaponType {
+        //Array of weapon type
         var weaponAttack: [AttackWeaponType] = [.sword, .axe, .bat]
         
+        //Generate random index
         let randomWeaponAttackIndex: Int = Int(arc4random_uniform(UInt32(weaponAttack.count)))
         
-        
+        //Get random weapon attack
         let randomWeaponAttack = weaponAttack[randomWeaponAttackIndex]
         
         
         return randomWeaponAttack
     }
     
-    /// Generate a random number between 0 and 10
+    /// Generate a random number between 1 and 10
     ///
     /// - Returns: Random number
     private func randomNumberToOpenChest() -> Int {
-        let randomNumber = Int(arc4random_uniform(UInt32(10)))
+        //Get random number between 1 & 10
+        let randomNumber = Int(arc4random_uniform(UInt32(11))) + 1
         
         return randomNumber
     }
@@ -118,10 +122,25 @@ class PlayGame {
     ///
     /// - Returns: True to open chest
     private func openChest() -> Bool {
+        //Open chest when random number is generated between 2 and 6 included
         if randomNumberToOpenChest() >= 2 && randomNumberToOpenChest() <= 6 {
             return true
         } else {
             return false
+        }
+    }
+    
+    /// Allows to show if the healer has cured him self by the display of "healerName has healed him self"
+    ///
+    /// - Parameters:
+    ///   - characterToHeal: character to heal
+    ///   - characterToUse: character to use
+    /// - Returns: him self or characterToheal name, depanding of the situation
+    private func summaryOfHealing(characterToHeal: GameCharacter, characterToUse: GameCharacter) -> String {
+        if characterToHeal.characterName.uppercased() == characterToUse.characterName.uppercased() {
+            return " him self"
+        } else {
+            return " \(characterToHeal.characterName)"
         }
     }
     
@@ -138,13 +157,15 @@ class PlayGame {
             print("\t ☠️☠️☠️☠️☠️☠️☠️☠️☠️☠️☠️☠️☠️☠️☠️☠️☠️☠️☠️☠️☠️☠️☠️☠️☠️☠️")
             print()
             
+            //Get the index of character to remove from gameCharacters array
             let indexToRemove = player.gameCharacters.index(where: {$0 === character})!
             
+            //Remove from gameCharacters array
             player.gameCharacters.remove(at: indexToRemove)
         }
     }
     
-    /// //Check if player has lost the game and remove it from players array
+    /// Check if player has lost the game and remove it from players array
     ///
     /// - Parameters:
     ///   - looser: The attacked player
@@ -153,14 +174,14 @@ class PlayGame {
         //Check if player has lost the game and remove from players array
         if looser.gameCharacters.count <= 0 {
             
+            //Looser message
             print()
             print("\t 🌀🌀🌀🌀🌀🌀🌀🌀🌀🌀🌀🌀🌀🌀🌀🌀🌀🌀🌀🌀🌀🌀🌀🌀🌀🌀")
             print("\t \t \t \(looser.playerName) has lost the game 😭😭😭")
             print("\t 🌀🌀🌀🌀🌀🌀🌀🌀🌀🌀🌀🌀🌀🌀🌀🌀🌀🌀🌀🌀🌀🌀🌀🌀🌀🌀")
             print()
             
-            
-            //********* Add stat here for bonus? *********
+            //Winner message
             print()
             print("\t 🎊🎊🎊🎊🎊🎊🎊🎊🎊🎊🎊🎊🎊🎊🎊🎊🎊🎊🎊🎊🎊🎊🎊🎊🎊🎊")
             print("\t \t \t The winner is \(winner.playerName) 😄🥇🤗")
@@ -168,8 +189,10 @@ class PlayGame {
             print()
             
             
-            //Removing the looser from players array
+            //Get the index of player to remove from players array
             let indexToRemove = players.index(where: {$0 === looser})
+            
+            //Removing the looser from players array
             players.remove(at: indexToRemove!)
         }
     }
@@ -180,141 +203,157 @@ class PlayGame {
         var characterToUse = GameCharacter()
         var characterToFight = GameCharacter()
         var characterToHeal = GameCharacter()
+    
+        //The player index to iterate players array
+        var playerIndex = 0
         
-        while players.count > 1 { //Repeat while there is 2 players in players array 
-            for playerIndex in 0..<players.count {
+        while players.count > 1 { //Repeat while there is 2 players in players array
             
-                repeat {
-                    //Adversary List presentation
-                    print()
-                    print("⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃")
-                    print("Your adversary is \(players[adversaryIndex(index: playerIndex)].playerName) and has ℹ️: ")
+            repeat {
+                //Adversary List for information
+                print()
+                print("⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃")
+                print("Your adversary is \(players[adversaryIndex(index: playerIndex)].playerName) and has ℹ️: ")
+                
+                for characterIndex in 0..<players[adversaryIndex(index: playerIndex)].gameCharacters.count {
+                    print("ℹ️ \(players[adversaryIndex(index: playerIndex)].gameCharacters[characterIndex].getCharacterNameString()): ✤ Type: \(players[adversaryIndex(index: playerIndex)].gameCharacters[characterIndex].getCharacterTypeString()) ⎮ Health points: \(players[adversaryIndex(index: playerIndex)].gameCharacters[characterIndex].healthPoints) ⎮ \(getTypeOfAbility(character: players[adversaryIndex(index: playerIndex)].gameCharacters[characterIndex])) \(getAmountOfAbility(character: players[adversaryIndex(index: playerIndex)].gameCharacters[characterIndex])) ✤")
+                }
+                
+                print("⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃")
+                print()
+                
+                
+                //Selection of team characters for action
+                print("\(players[playerIndex].playerName), select your character to make action 👇: ")
+                
+                characterToUse = teamCharacters(player: players[playerIndex])
+                
+                
+                
+                //Actions and summary of actions, depending if striking or healing
+                if let warrior = characterToUse as? Warrior {
+                    //********** Action to open the chest and get a attack weapon **********
                     
-                    for characterIndex in 0..<players[adversaryIndex(index: playerIndex)].gameCharacters.count {
-                        print("ℹ️ \(players[adversaryIndex(index: playerIndex)].gameCharacters[characterIndex].getCharacterNameString()): ✤ Type: \(players[adversaryIndex(index: playerIndex)].gameCharacters[characterIndex].getCharacterTypeString()) ⎮ Health points: \(players[adversaryIndex(index: playerIndex)].gameCharacters[characterIndex].healthPoints) ⎮ \(getTypeOfAbility(character: players[adversaryIndex(index: playerIndex)].gameCharacters[characterIndex])) \(getAmountOfAbility(character: players[adversaryIndex(index: playerIndex)].gameCharacters[characterIndex])) ✤")
-                    }
-                    
-                    print("⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃")
-                    print()
-                    
-                    //Selection of team characters for action
-                    print("\(players[playerIndex].playerName), select your character to make action 👇: ")
-                    
-                    characterToUse = teamCharacters(player: players[playerIndex])
-                    
-                    
-                    
-                    //Actions and summary of actions, depending if striking or healing
-                    if let warrior = characterToUse as? Warrior {
-                        //********** Action to open the chest and get a attack weapon **********
+                    //Case of open chest
+                    if openChest() {
+                        print()
+                        print("📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦")
+                        warrior.weaponChange(typeOfWeapon: weaponAttackChange())
+                        print("\t🗃 The attack weapon chest is at your disposal you got: \(warrior.weaponAttackName) with strike force of \(warrior.strikeForceWithWeaponChange) 🗃")
+                        print("📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦")
+                        print()
                         
-                        //Case of open chest
-                        if openChest() {
-                            print()
-                            print("📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦")
-                            warrior.weaponChange(typeOfWeapon: weaponAttackChange())
-                            print("\t🗃 The attack weapon chest is at your disposal you got: \(warrior.weaponAttackName) with strike force of \(warrior.strikeForceWithWeaponChange) 🗃")
-                            print("📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦")
-                            print()
                         
                         
-                        
-                            //Adversary selection to strike
-                            repeat {
-                                print("Now select a adversary’s character to strike 🗡: ")
-                                
-                                characterToFight = adversaryCharacters(player: players[adversaryIndex(index: playerIndex)])
-                                
-                                //Strike
-                                warrior.strikeWithWeaponChange(character: characterToFight)
-                                
-                                //Display summary, only if a characterToMakeAction is selected. Allow to avoid an empty summary
-                                if Helper.characterSelectionExists(character: characterToFight) {
-                                    
-                                    //Summary of action
-                                    print("🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶")
-                                    print("\t \(characterToUse.characterName) stroke \(characterToFight.characterName) 👊  \n \t \(characterToFight.characterName) has lost -\(warrior.strikeForceWithWeaponChange) of health points and still has \(characterToFight.healthPoints) health points")
-                                    print("🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶")
-                                    
-                                    //Check if character stroke is dead, and if is dead it will be removed from the array gameCharacter
-                                    deadCharacter(character: characterToFight, player: players[adversaryIndex(index: playerIndex)])
-                                    
-                                    //Check if player has lost the game and remove from players array
-                                    defeatedPlayer(looser: players[adversaryIndex(index: playerIndex)], winner: players[playerIndex])
-                                    
-                                }
-                                
-                            } while !Helper.characterSelectionExists(character: characterToFight)//Will repeat while the adversary character is not selected to strike
-                            
-                        //Normal case
-                        } else {
-                            //Adversary selection to strike
-                            repeat {
-                                print("Now select a adversary’s character to strike 🗡: ")
-                                
-                                characterToFight = adversaryCharacters(player: players[adversaryIndex(index: playerIndex)])
-                                
-                                //Strike
-                                warrior.strike(character: characterToFight)
-                                
-                                //Display summary, only if a characterToMakeAction is selected. Allow to avoid an empty summary
-                                if Helper.characterSelectionExists(character: characterToFight) {
-                                    
-                                    //Summary of action
-                                    print("🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶")
-                                    print("\t \(characterToUse.characterName) stroke \(characterToFight.characterName) 👊  \n \t \(characterToFight.characterName) has lost -\(warrior.strikeForce) of health points and still has \(characterToFight.healthPoints) health points")
-                                    print("🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶")
-                                    
-                                    //Check if character stroke is dead, and if is dead it will be removed from the array gameCharacter
-                                    deadCharacter(character: characterToFight, player: players[adversaryIndex(index: playerIndex)])
-                                    
-                                    //Check if player has lost the game and remove from players array
-                                    defeatedPlayer(looser: players[adversaryIndex(index: playerIndex)], winner: players[playerIndex])
-                                    
-                                }
-                                
-                            } while !Helper.characterSelectionExists(character: characterToFight)//Will repeat while the adversary character is not selected to strike
-                        }
-                    } else if let healer = characterToUse as? Healer {
-                        
-                        //Team selection to heal
+                        //Adversary selection to strike
                         repeat {
-                            print("Now select a team’s character to heal 💊:")
+                            print("Now select a adversary’s character to strike 🗡: ")
                             
-                            characterToHeal = teamCharacters(player: players[playerIndex])
+                            characterToFight = adversaryCharacters(player: players[adversaryIndex(index: playerIndex)])
                             
-                            //Check if characterToUse contains a character
-                            if Helper.characterSelectionExists(character: characterToHeal) {
+                            //Strike
+                            warrior.strikeWithWeaponChange(character: characterToFight)
+                            
+                            //Display summary, only if a characterToMakeAction is selected. Allow to avoid an empty summary
+                            if Helper.characterSelectionExists(character: characterToFight) {
                                 
-                                //Heal
-                                healer.heal(character: characterToHeal)
+                                //Summary of action
+                                print("🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶")
+                                print("\t \(characterToUse.characterName) stroke \(characterToFight.characterName) 👊  \n \t \(characterToFight.characterName) has lost -\(warrior.strikeForceWithWeaponChange) of health points and still has \(characterToFight.healthPoints) health points")
+                                print("🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶")
                                 
-                                //Display summary, only if a characterToUse is selected. Allow to avoid an empty summary
-                                if Helper.characterSelectionExists(character: characterToHeal) {
-                                    
-                                    //Summary of action
-                                    print("🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀")
-                                    print("\t \(characterToUse.characterName) has healed \(characterToHeal.characterName) 💊 \n \t \(characterToHeal.characterName) got +\(healer.healingAbility) of health points and now has \(characterToHeal.healthPoints) health points")
-                                    print("🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀")
-                                    
-                                }
+                                //Check if character stroke is dead, and if is dead it will be removed from the array gameCharacter
+                                deadCharacter(character: characterToFight, player: players[adversaryIndex(index: playerIndex)])
+                                
+                                //Check if player has lost the game and remove from players array
+                                defeatedPlayer(looser: players[adversaryIndex(index: playerIndex)], winner: players[playerIndex])
+                                
                             }
                             
-                        } while !Helper.characterSelectionExists(character: characterToHeal)//Will repeat while the team character is not selected to heal
+                        } while !Helper.characterSelectionExists(character: characterToFight)//Will repeat while the adversary character is not selected to strike
                         
+                      //Normal case (chest not open)
+                    } else {
+                        //Adversary selection to strike
+                        repeat {
+                            print("Now select a adversary’s character to strike 🗡: ")
+                            
+                            characterToFight = adversaryCharacters(player: players[adversaryIndex(index: playerIndex)])
+                            
+                            //Strike
+                            warrior.strike(character: characterToFight)
+                            
+                            //Display summary, only if a characterToMakeAction is selected. Allow to avoid an empty summary
+                            if Helper.characterSelectionExists(character: characterToFight) {
+                                
+                                //Summary of strike
+                                print("🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶")
+                                print("\t \(characterToUse.characterName) stroke \(characterToFight.characterName) 👊  \n \t \(characterToFight.characterName) has lost -\(warrior.strikeForce) of health points and still has \(characterToFight.healthPoints) health points")
+                                print("🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶")
+                                
+                                //Check if character stroke is dead, and if is dead it will be removed from the array gameCharacter
+                                deadCharacter(character: characterToFight, player: players[adversaryIndex(index: playerIndex)])
+                                
+                                //Check if player has lost the game and remove from players array
+                                defeatedPlayer(looser: players[adversaryIndex(index: playerIndex)], winner: players[playerIndex])
+                                
+                            }
+                            
+                        } while !Helper.characterSelectionExists(character: characterToFight)//Will repeat while the adversary character is not selected to strike
                     }
+                } else if let healer = characterToUse as? Healer {
                     
-                } while !Helper.characterSelectionExists(character: characterToUse)//Will repeat while the team character is not selected to make action
+                    //Team selection to heal
+                    repeat {
+                        print("Now select a team’s character to heal 💊:")
+                        
+                        characterToHeal = teamCharacters(player: players[playerIndex])
+                        
+                        //Check if characterToUse contains a character
+                        if Helper.characterSelectionExists(character: characterToHeal) {
+                            
+                            //Heal
+                            healer.heal(character: characterToHeal)
+                            
+                            //Display summary, only if a characterToUse is selected. Allow to avoid an empty summary
+                            if Helper.characterSelectionExists(character: characterToHeal) {
+                                
+                                //Summary of healing
+                                print("🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀")
+                                print("\t \(characterToUse.characterName) has healed \(summaryOfHealing(characterToHeal: characterToHeal, characterToUse: characterToUse)) 💊 \n \t \(characterToHeal.characterName) got +\(healer.healingAbility) of health points and now has \(characterToHeal.healthPoints) health points")
+                                print("🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀")
+                                
+                            }
+                        }
+                        
+                    } while !Helper.characterSelectionExists(character: characterToHeal)//Will repeat while the team character is not selected to heal
+                    
+                }
                 
-            }
+            } while !Helper.characterSelectionExists(character: characterToUse)//Will repeat while the team character is not selected to make action
             
+            //Condition allow to control the player index and not to be found in index out of range
+            if playerIndex == 0 {
+                playerIndex = 1
+                
+            } else {
+                playerIndex = 0
+            }
         }
-        
+            
     }
+
    
     
     /// Start game
     func startGame() {
+        //Wellcome message
+        print("\t \t \t ▂▃▅▇█▓▒░  ⚔️  Welcome to the Swift Fight Game  ⚔️  ░▒▓█▇▅▃▂ \n\n")
+        
+        print(" ❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅")
+        print("❅                SET PLAYERS               ❅")
+        print(" ❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅")
+        
         
         //for in loop to make 2 players
         for teamNumber in 1...2 {
@@ -345,6 +384,7 @@ class PlayGame {
             //Display the selected characters
             player.listSelectedCharacters()
         }
+        //Start fight message
         print()
         print(" ❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅")
         print("❅                START FIGHT               ❅")
