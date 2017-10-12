@@ -134,7 +134,7 @@ class PlayGame {
     ///
     /// - Parameters:
     ///   - characterToHeal: character to heal
-    ///   - characterToUse: character to use
+    ///   - characterToUse: character to use for healing
     /// - Returns: him self or characterToheal name, depanding of the situation
     private func summaryOfHealing(characterToHeal: GameCharacter, characterToUse: GameCharacter) -> String {
         if characterToHeal.characterName.uppercased() == characterToUse.characterName.uppercased() {
@@ -339,6 +339,7 @@ class PlayGame {
             } else {
                 playerIndex = 0
             }
+            
         }
             
     }
