@@ -117,4 +117,37 @@ class Helper {
         }
     }
     
+    /// Check if the maximum of health points is at the maximum allowed by character type
+    ///
+    /// - Parameter character: character to heal
+    /// - Returns: False if the character is at the maximum of health points
+    static func checkIfCharacterIsMaxHealthPoints(character: GameCharacter) -> Bool {
+        
+        switch character.characterType {
+        case .combatant:
+            if character.healthPoints >= GameCharacter.combatantMaxHealthPoints {
+                return false
+
+            }
+            return true
+        case .colossus:
+            if character.healthPoints >= GameCharacter.colossustMaxHealthPoints {
+                return false
+            }
+            return true
+        case .drawf:
+            if character.healthPoints >= GameCharacter.drawfMaxHealthPoints {
+                return false
+            }
+            return true
+        case .magus:
+            if character.healthPoints >= GameCharacter.magusMaxHealthPoints {
+                return false
+            }
+            return true
+        }
+        
+    }
+    
+    
 }

@@ -22,11 +22,47 @@ class GameCharacter {
     var characterType: CharacterType
     
     //Health points for each character
-    var healthPoints = Int()
+    var healthPoints = Int() {
+        //Setting the maximum of health points a character can get
+        didSet {
+            switch characterType {
+            case .combatant:
+                if healthPoints > GameCharacter.combatantMaxHealthPoints {
+                    healthPoints = GameCharacter.combatantMaxHealthPoints
+                }
+                
+            case .colossus:
+                if healthPoints > GameCharacter.colossustMaxHealthPoints {
+                    healthPoints = GameCharacter.colossustMaxHealthPoints
+                }
+                
+            case .drawf:
+                if healthPoints > GameCharacter.drawfMaxHealthPoints {
+                    healthPoints = GameCharacter.drawfMaxHealthPoints
+                }
+                
+            case .magus:
+                if healthPoints > GameCharacter.magusMaxHealthPoints {
+                    healthPoints = GameCharacter.magusMaxHealthPoints
+                }
+                
+            }
+
+        }
+    }
     
-    //Damage
-    var damages = Int()
     
+    /// The maximum of health points allowed for combatant
+    static let combatantMaxHealthPoints = 100
+    
+    /// The maximum of health points allowed for colossus
+    static let colossustMaxHealthPoints = 150
+    
+    /// The maximum of health points allowed for drawf
+    static let drawfMaxHealthPoints = 30
+    
+    /// The maximum of health points allowed for magus
+    static let magusMaxHealthPoints = 60
     
     //===================
     // -MARK: Init
@@ -80,6 +116,23 @@ class GameCharacter {
             return true
         } else {
             return false
+        }
+    }
+    
+    /// Display the maximum of health points allowed for each type of character
+    ///
+    /// - Returns: Health points
+    func displayMaxHealthPoints() -> Int {
+        switch characterType {
+        case .combatant:
+            return GameCharacter.combatantMaxHealthPoints
+        case .colossus:
+            return GameCharacter.colossustMaxHealthPoints
+        case .drawf:
+            return GameCharacter.drawfMaxHealthPoints
+        case .magus:
+            return GameCharacter.magusMaxHealthPoints
+            
         }
     }
 

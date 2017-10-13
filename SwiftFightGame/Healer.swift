@@ -8,16 +8,6 @@
 
 import Foundation
 
-//
-//  Healer.swift
-//  SwiftFightGame
-//
-//  Created by Mehdi on 05/09/2017.
-//  Copyright © 2017 Medev. All rights reserved.
-//
-
-import Foundation
-
 /**
  Class of healers, initialized by enumeration CharacterType
  */
@@ -40,7 +30,7 @@ class Healer: GameCharacter {
         super.init(characterName: name, characterType: characterType)
         switch characterType {
         case .magus:
-            healthPoints = 10 //CHANGING FOR TEST - Initially 60
+            healthPoints = GameCharacter.magusMaxHealthPoints
         default:
             break
         }
