@@ -36,11 +36,11 @@ class Warrior: GameCharacter {
         super.init(characterName: name, characterType: characterType)
         switch characterType {
         case .combatant:
-            healthPoints = GameCharacter.combatantMaxHealthPoints
+            healthPoints = GameSetting.combatantMaxHealthPoints
         case .colossus:
-            healthPoints = GameCharacter.colossustMaxHealthPoints
+            healthPoints = GameSetting.colossusMaxHealthPoints
         case .drawf:
-            healthPoints = GameCharacter.drawfMaxHealthPoints
+            healthPoints = GameSetting.drawfMaxHealthPoints
         default:
             break
         }

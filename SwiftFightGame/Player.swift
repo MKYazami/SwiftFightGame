@@ -233,10 +233,10 @@ class Player {
                     if characterInput == "1" {
                         badChoice = false
                         character = player.gameCharacters[0]
-                    } else if characterInput == "2" && gameCharacters.count >= 2 {
+                    } else if characterInput == "2" && gameCharacters.count >= GameSetting.numberOfCharactersByPlayer - 1 {
                         badChoice = false
                         character = player.gameCharacters[1]
-                    } else if characterInput == "3" && gameCharacters.count >= 3 {
+                    } else if characterInput == "3" && gameCharacters.count >= GameSetting.numberOfCharactersByPlayer {
                         badChoice = false
                         character = player.gameCharacters[2]
                     } else {

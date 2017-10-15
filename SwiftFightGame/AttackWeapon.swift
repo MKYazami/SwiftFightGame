@@ -15,11 +15,11 @@ class AttackWeapon: Weapon {
     init(type: AttackWeaponType) {
         switch type {
         case .sword:
-            damages = 10
+            damages = GameSetting.swordDamages
         case .bat:
-            damages = 4
+            damages = GameSetting.batDamages
         case .axe:
-            damages = 20
+            damages = GameSetting.axeDamages
         }
     }
 }

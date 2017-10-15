@@ -30,7 +30,7 @@ class Healer: GameCharacter {
         super.init(characterName: name, characterType: characterType)
         switch characterType {
         case .magus:
-            healthPoints = GameCharacter.magusMaxHealthPoints
+            healthPoints = GameSetting.magusMaxHealthPoints
         default:
             break
         }

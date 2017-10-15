@@ -20,6 +20,7 @@
 		91CC9EBD1F4F1D8100EFBC05 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91CC9EBC1F4F1D8100EFBC05 /* main.swift */; };
 		91CC9EC41F4F242B00EFBC05 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91CC9EC31F4F242B00EFBC05 /* Player.swift */; };
 		91EDDE941F5E9CBB00DA0F87 /* Healer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91EDDE931F5E9CBB00DA0F87 /* Healer.swift */; };
+		91FB6FBD1F9225BF00677FA2 /* GameSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91FB6FBC1F9225BF00677FA2 /* GameSetting.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -49,6 +50,7 @@
 		91CC9EBC1F4F1D8100EFBC05 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		91CC9EC31F4F242B00EFBC05 /* Player.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		91EDDE931F5E9CBB00DA0F87 /* Healer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Healer.swift; sourceTree = "<group>"; };
+		91FB6FBC1F9225BF00677FA2 /* GameSetting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSetting.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +85,7 @@
 			children = (
 				91CC9EBC1F4F1D8100EFBC05 /* main.swift */,
 				910756411F5FEAF60083F0CF /* PlayGame.swift */,
+				91FB6FBC1F9225BF00677FA2 /* GameSetting.swift */,
 				91CC9EC31F4F242B00EFBC05 /* Player.swift */,
 				915E9DEF1F73B5500073C5ED /* Helper.swift */,
 				910756371F5FC5500083F0CF /* Weapon.swift */,
@@ -166,6 +169,7 @@
 				91EDDE941F5E9CBB00DA0F87 /* Healer.swift in Sources */,
 				918110831F5DBBB700229F95 /* Warrior.swift in Sources */,
 				910756421F5FEAF60083F0CF /* PlayGame.swift in Sources */,
+				91FB6FBD1F9225BF00677FA2 /* GameSetting.swift in Sources */,
 				91CC9EBD1F4F1D8100EFBC05 /* main.swift in Sources */,
 				910756401F5FC61C0083F0CF /* CareWeaponType.swift in Sources */,
 				9107563A1F5FC57B0083F0CF /* AttackWeapon.swift in Sources */,

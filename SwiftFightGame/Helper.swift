@@ -125,23 +125,23 @@ class Helper {
         
         switch character.characterType {
         case .combatant:
-            if character.healthPoints >= GameCharacter.combatantMaxHealthPoints {
+            if character.healthPoints >= GameSetting.combatantMaxHealthPoints {
                 return false
 
             }
             return true
         case .colossus:
-            if character.healthPoints >= GameCharacter.colossustMaxHealthPoints {
+            if character.healthPoints >= GameSetting.colossusMaxHealthPoints {
                 return false
             }
             return true
         case .drawf:
-            if character.healthPoints >= GameCharacter.drawfMaxHealthPoints {
+            if character.healthPoints >= GameSetting.drawfMaxHealthPoints {
                 return false
             }
             return true
         case .magus:
-            if character.healthPoints >= GameCharacter.magusMaxHealthPoints {
+            if character.healthPoints >= GameSetting.magusMaxHealthPoints {
                 return false
             }
             return true
@@ -149,5 +149,96 @@ class Helper {
         
     }
     
+    /// Check if all charaters are at the maximum of health points
+    ///
+    /// - Parameter player: Player who possesses the characters
+    /// - Returns: True if all characters are at max of health points
+    static func CheckIfAllTeamCharactersAtMaxHealthPoints(player: Player) -> Bool {
+        //Array with indexes that lets know how many characters are at maximum of health points
+        var characterAtMaxHealthPoints = [Int]()
+        
+        //Iterate the character array
+        for character in player.gameCharacters {
+            switch character.characterType {
+            case .combatant:
+                if character.healthPoints >= GameSetting.combatantMaxHealthPoints  {
+                    characterAtMaxHealthPoints.append(1)
+                }
+            case .colossus:
+                if character.healthPoints >= GameSetting.colossusMaxHealthPoints  {
+                    characterAtMaxHealthPoints.append(2)
+                }
+            case .drawf:
+                if character.healthPoints >= GameSetting.drawfMaxHealthPoints  {
+                    characterAtMaxHealthPoints.append(3)
+                }
+            case .magus:
+                if character.healthPoints >= GameSetting.magusMaxHealthPoints  {
+                    characterAtMaxHealthPoints.append(4)
+                }
+            }
+        }
+        
+        //Controling if all charaters are at maximum of health points depending of number of character in the gameCharacters array
+        switch player.gameCharacters.count {
+        case GameSetting.numberOfCharactersByPlayer:
+            if characterAtMaxHealthPoints.count >= GameSetting.numberOfCharactersByPlayer {
+                return true
+            }
+            return false
+        case GameSetting.numberOfCharactersByPlayer - 1:
+            if characterAtMaxHealthPoints.count >= GameSetting.numberOfCharactersByPlayer - 1 {
+                return true
+            }
+            return false
+        case GameSetting.numberOfCharactersByPlayer - 2:
+            if characterAtMaxHealthPoints.count >= GameSetting.numberOfCharactersByPlayer - 2 {
+                return true
+            }
+            return false
+        default:
+            return false
+        }
+        
+    }
+    
+    
+    /// Check if all characters are healers type
+    ///
+    /// - Parameter player: Player who possesses the characters
+    /// - Returns: True if all characters are healers
+    static func checkIfAllCharactersAreHealers(player: Player) -> Bool {
+        
+        /// Contains the number of healer
+        var numberOfHealers = [Int]()
+        
+        //Allow to count how much healer in gameCharaters array
+        for character in player.gameCharacters {
+            if character is Healer {
+                numberOfHealers.append(1)
+            }
+        }
+        
+        //Controling if all charaters are healers depending of number of character in the gameCharacters array
+        switch player.gameCharacters.count {
+        case GameSetting.numberOfCharactersByPlayer:
+            if numberOfHealers.count >= GameSetting.numberOfCharactersByPlayer {
+                return true
+            }
+            return false
+        case GameSetting.numberOfCharactersByPlayer - 1:
+            if numberOfHealers.count >= GameSetting.numberOfCharactersByPlayer - 1 {
+                return true
+            }
+            return false
+        case GameSetting.numberOfCharactersByPlayer - 2:
+            if numberOfHealers.count >= GameSetting.numberOfCharactersByPlayer - 2 {
+                return true
+            }
+            return false
+        default:
+            return false
+        }
+    }
     
 }

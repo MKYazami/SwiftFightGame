@@ -48,26 +48,26 @@ class PlayGame {
         //Cheking the health points given by the healer to get a logical amount for healing summary
         switch character.characterType {
         case .combatant:
-            if character.healthPoints > (GameCharacter.combatantMaxHealthPoints - healer.healingAbility) {
-                return GameCharacter.combatantMaxHealthPoints - character.healthPoints
+            if character.healthPoints > (GameSetting.combatantMaxHealthPoints - healer.healingAbility) {
+                return GameSetting.combatantMaxHealthPoints - character.healthPoints
             } else {
                 return healer.healingAbility
             }
         case .colossus:
-            if character.healthPoints > (GameCharacter.colossustMaxHealthPoints - healer.healingAbility) {
-                return GameCharacter.colossustMaxHealthPoints - character.healthPoints
+            if character.healthPoints > (GameSetting.colossusMaxHealthPoints - healer.healingAbility) {
+                return GameSetting.colossusMaxHealthPoints - character.healthPoints
             } else {
                 return healer.healingAbility
             }
         case .drawf:
-            if character.healthPoints > (GameCharacter.drawfMaxHealthPoints - healer.healingAbility) {
-                return GameCharacter.drawfMaxHealthPoints - character.healthPoints
+            if character.healthPoints > (GameSetting.drawfMaxHealthPoints - healer.healingAbility) {
+                return GameSetting.drawfMaxHealthPoints - character.healthPoints
             } else {
                 return healer.healingAbility
             }
         case .magus:
-            if character.healthPoints > (GameCharacter.magusMaxHealthPoints - healer.healingAbility) {
-                return GameCharacter.magusMaxHealthPoints - character.healthPoints
+            if character.healthPoints > (GameSetting.magusMaxHealthPoints - healer.healingAbility) {
+                return GameSetting.magusMaxHealthPoints - character.healthPoints
                 
             } else {
                 return healer.healingAbility
@@ -89,13 +89,30 @@ class PlayGame {
         return typeOfAbility
     }
     
+    /// Display the weapon type according to the type of character
+    ///
+    /// - Parameter character: Character to know what type of weapon
+    /// - Returns: Type of weapon in the form of string
+    private func defaultWeponTypeToDisplay(character: GameCharacter) -> String {
+        switch character.characterType {
+        case .combatant:
+            return "SWORD"
+        case .colossus:
+            return "BAT"
+        case .drawf:
+            return "AXE"
+        case .magus:
+            return "ANTIDOTE"
+        }
+    }
+    
     /// List the team characters
     ///
     /// - Returns: team character selected for action
     private func teamCharacters(player: Player) -> GameCharacter {
         
         for characterIndex in 0..<player.gameCharacters.count {
-            print("👤 ☞ \(characterIndex + 1). \(player.gameCharacters[characterIndex].getCharacterNameString()): ✤ Type: \(player.gameCharacters[characterIndex].getCharacterTypeString()) ⎮ Health points: \(player.gameCharacters[characterIndex].healthPoints)/\(player.gameCharacters[characterIndex].displayMaxHealthPoints()) ⎮ \(getTypeOfAbility(character: player.gameCharacters[characterIndex])) \(getAmountOfAbility(character: player.gameCharacters[characterIndex])) ✤ ")
+            print("👤 ☞ \(characterIndex + 1). \(player.gameCharacters[characterIndex].getCharacterNameString()): ✤ Type: \(player.gameCharacters[characterIndex].getCharacterTypeString()) ⎮ Health points: \(player.gameCharacters[characterIndex].healthPoints)/\(player.gameCharacters[characterIndex].displayMaxHealthPoints()) ⎮ Default weapon: \(defaultWeponTypeToDisplay(character: player.gameCharacters[characterIndex])) with \(getTypeOfAbility(character: player.gameCharacters[characterIndex])) \(getAmountOfAbility(character: player.gameCharacters[characterIndex])) ✤ ")
         }
         
         return player.selectCharacter(from: player)
@@ -107,7 +124,7 @@ class PlayGame {
     /// - Returns: adversary character to fight
     private func adversaryCharacters(player: Player) -> GameCharacter {
         for characterIndex in 0..<player.gameCharacters.count {
-            print("🆚 ☞ \(characterIndex + 1). \(player.gameCharacters[characterIndex].getCharacterNameString()): ✤ Type: \(player.gameCharacters[characterIndex].getCharacterTypeString()) ⎮ Health points: \(player.gameCharacters[characterIndex].healthPoints)/\(player.gameCharacters[characterIndex].displayMaxHealthPoints()) ⎮ \(getTypeOfAbility(character: player.gameCharacters[characterIndex])) \(getAmountOfAbility(character: player.gameCharacters[characterIndex])) ✤")
+            print("🆚 ☞ \(characterIndex + 1). \(player.gameCharacters[characterIndex].getCharacterNameString()): ✤ Type: \(player.gameCharacters[characterIndex].getCharacterTypeString()) ⎮ Health points: \(player.gameCharacters[characterIndex].healthPoints)/\(player.gameCharacters[characterIndex].displayMaxHealthPoints()) ⎮ Default weapon: \(defaultWeponTypeToDisplay(character: player.gameCharacters[characterIndex])) with \(getTypeOfAbility(character: player.gameCharacters[characterIndex])) \(getAmountOfAbility(character: player.gameCharacters[characterIndex])) ✤")
         }
         
             return player.selectCharacter(from: player)
@@ -247,14 +264,37 @@ class PlayGame {
         
         while players.count > 1 { //Repeat while there is 2 players in players array
             
+            //Contains true if all team's character are at maximum of health points
+            var allCharacterAtMaxHealthPoints = Bool()
+            
             repeat {
+                //False to avoid to repeat the same loop
+                allCharacterAtMaxHealthPoints = false
+                
+                //Check if all characters are healer type AND if they have reached the maximum health points
+                if Helper.CheckIfAllTeamCharactersAtMaxHealthPoints(player: players[playerIndex]) && Helper.checkIfAllCharactersAreHealers(player: players[playerIndex]) {
+                    
+                    //Removing all characters from gameCharacters array
+                    players[playerIndex].gameCharacters.removeAll()
+                    
+                    //Message that the player has lost
+                    print()
+                    print("💤💤 \(players[playerIndex].playerName) you lost! \n\tYour characters are all healers and their health points are at maximum allowed. They have no more action to do 💤💤")
+                    print()
+                    
+                    //Complete the game
+                    defeatedPlayer(looser: players[playerIndex], winner: players[adversaryIndex(index: playerIndex)])
+                    
+                    break
+                }
+                
                 //Adversary List for information
                 print()
                 print("⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃")
                 print("Your adversary is \(players[adversaryIndex(index: playerIndex)].playerName) and has ℹ️: ")
                 
                 for characterIndex in 0..<players[adversaryIndex(index: playerIndex)].gameCharacters.count {
-                    print("ℹ️ \(players[adversaryIndex(index: playerIndex)].gameCharacters[characterIndex].getCharacterNameString()): ✤ Type: \(players[adversaryIndex(index: playerIndex)].gameCharacters[characterIndex].getCharacterTypeString()) ⎮ Health points: \(players[adversaryIndex(index: playerIndex)].gameCharacters[characterIndex].healthPoints)/\(players[adversaryIndex(index: playerIndex)].gameCharacters[characterIndex].displayMaxHealthPoints()) ⎮ \(getTypeOfAbility(character: players[adversaryIndex(index: playerIndex)].gameCharacters[characterIndex])) \(getAmountOfAbility(character: players[adversaryIndex(index: playerIndex)].gameCharacters[characterIndex])) ✤")
+                    print("ℹ️ \(players[adversaryIndex(index: playerIndex)].gameCharacters[characterIndex].getCharacterNameString()): ✤ Type: \(players[adversaryIndex(index: playerIndex)].gameCharacters[characterIndex].getCharacterTypeString()) ⎮ Health points: \(players[adversaryIndex(index: playerIndex)].gameCharacters[characterIndex].healthPoints)/\(players[adversaryIndex(index: playerIndex)].gameCharacters[characterIndex].displayMaxHealthPoints()) ⎮ Default weapon: \(defaultWeponTypeToDisplay(character: players[adversaryIndex(index: playerIndex)].gameCharacters[characterIndex])) with \(getTypeOfAbility(character: players[adversaryIndex(index: playerIndex)].gameCharacters[characterIndex])) \(getAmountOfAbility(character: players[adversaryIndex(index: playerIndex)].gameCharacters[characterIndex])) ✤")
                 }
                 
                 print("⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃")
@@ -341,44 +381,54 @@ class PlayGame {
                     }
                 } else if let healer = characterToUse as? Healer {
                     
-                    //Team selection to heal
-                    
-                    //Bool that define if a character is at the maximum of health points
-                    var characterWithMaxHealthPoints = Bool()
-                    repeat {
-                        characterWithMaxHealthPoints = false
-                        print("Now select a team’s character to heal 💊:")
+                    if  !Helper.CheckIfAllTeamCharactersAtMaxHealthPoints(player: players[playerIndex]) {
+                        //Team selection to heal
                         
-                        characterToHeal = teamCharacters(player: players[playerIndex])
+                        //Bool that define if a character is at the maximum of health points
+                        var characterWithMaxHealthPoints = Bool()
                         
-                        //Check if characterToHeal contains a character
-                        if Helper.characterSelectionExists(character: characterToHeal) {
+                        repeat {
+                            characterWithMaxHealthPoints = false
+                            print("Now select a team’s character to heal 💊:")
                             
-                            //Check if the character selected to heal is not at the maximum of health points
-                            if Helper.checkIfCharacterIsMaxHealthPoints(character: characterToHeal) {
-                                
-                                //Calculated health points that will be given by the healer to display
-                                let heathPointsAdded = getHealthPointsAddedForHealingSummary(character: characterToHeal, healer: healer)
-                                
-                                //Heal
-                                healer.heal(character: characterToHeal)
+                            characterToHeal = teamCharacters(player: players[playerIndex])
                             
-                                //Summary of healing
-                                print("🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀")
-                                print("\t \(characterToUse.characterName) has healed \(summaryOfHealing(characterToHeal: characterToHeal, characterToUse: characterToUse)) 💊 \n \t \(characterToHeal.characterName) got +\(heathPointsAdded) of health points and now has \(characterToHeal.healthPoints) health points")
-                                print("🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀")
+                            //Check if characterToHeal contains a character
+                            if Helper.characterSelectionExists(character: characterToHeal) {
                                 
-                            } else {
-                                print("⚠️ \(characterToHeal.characterName) has reached the maximum of health points, please choose another character to heal")
-                                characterWithMaxHealthPoints = true
+                                //Check if the character selected to heal is not at the maximum of health points
+                                if Helper.checkIfCharacterIsMaxHealthPoints(character: characterToHeal) {
+                                    
+                                    //Calculated health points that will be given by the healer to display
+                                    let heathPointsAdded = getHealthPointsAddedForHealingSummary(character: characterToHeal, healer: healer)
+                                    
+                                    //Heal
+                                    healer.heal(character: characterToHeal)
+                                
+                                    //Summary of healing
+                                    print("🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀")
+                                    print("\t \(characterToUse.characterName) has healed \(summaryOfHealing(characterToHeal: characterToHeal, characterToUse: characterToUse)) 💊 \n \t \(characterToHeal.characterName) got +\(heathPointsAdded) of health points and now has \(characterToHeal.healthPoints) health points")
+                                    print("🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀")
+                                    
+                                } else {
+                                    print()
+                                    print("⚠️ \(characterToHeal.characterName) has reached the maximum of health points, please choose another character to heal")
+                                    characterWithMaxHealthPoints = true
+                                    print()
+                                }
                             }
-                        }
+                            
+                        } while !Helper.characterSelectionExists(character: characterToHeal) || characterWithMaxHealthPoints == true //Will repeat while the team character is not selected to heal OR the character selected is at the maximum of health points
                         
-                    } while !Helper.characterSelectionExists(character: characterToHeal) || characterWithMaxHealthPoints == true //Will repeat while the team character is not selected to heal
-                    
+                    } else {
+                        print()
+                        print("⚠️ All of your characters have reached the maximum of health points, please choose another action except to heal")
+                        allCharacterAtMaxHealthPoints = true
+                        print()
+                    }
                 }
                 
-            } while !Helper.characterSelectionExists(character: characterToUse)//Will repeat while the team character is not selected to make action
+            } while !Helper.characterSelectionExists(character: characterToUse) || allCharacterAtMaxHealthPoints == true //Will repeat while the team character is not selected to make action OR all charaters are at max health points
             
             //Condition allow to control the player index and not to be found in index out of range
             if playerIndex == 0 {
@@ -405,7 +455,7 @@ class PlayGame {
         
         
         //for in loop to make 2 players
-        for teamNumber in 1...2 {
+        for teamNumber in 1...GameSetting.numberOfplayersByGame {
             //Contains true if the name is not unique
             var notUniqueName = Bool()
             
@@ -424,7 +474,7 @@ class PlayGame {
             
             
             //Allow to choose 3 characters
-            while player.gameCharacters.count < 3 {
+            while player.gameCharacters.count < GameSetting.numberOfCharactersByPlayer {
 
                 player.chooseCharacter(characterNumber: player.gameCharacters.count + 1, players: players)
                 

@@ -27,23 +27,23 @@ class GameCharacter {
         didSet {
             switch characterType {
             case .combatant:
-                if healthPoints > GameCharacter.combatantMaxHealthPoints {
-                    healthPoints = GameCharacter.combatantMaxHealthPoints
+                if healthPoints > GameSetting.combatantMaxHealthPoints {
+                    healthPoints = GameSetting.combatantMaxHealthPoints
                 }
                 
             case .colossus:
-                if healthPoints > GameCharacter.colossustMaxHealthPoints {
-                    healthPoints = GameCharacter.colossustMaxHealthPoints
+                if healthPoints > GameSetting.colossusMaxHealthPoints {
+                    healthPoints = GameSetting.colossusMaxHealthPoints
                 }
                 
             case .drawf:
-                if healthPoints > GameCharacter.drawfMaxHealthPoints {
-                    healthPoints = GameCharacter.drawfMaxHealthPoints
+                if healthPoints > GameSetting.drawfMaxHealthPoints {
+                    healthPoints = GameSetting.drawfMaxHealthPoints
                 }
                 
             case .magus:
-                if healthPoints > GameCharacter.magusMaxHealthPoints {
-                    healthPoints = GameCharacter.magusMaxHealthPoints
+                if healthPoints > GameSetting.magusMaxHealthPoints {
+                    healthPoints = GameSetting.magusMaxHealthPoints
                 }
                 
             }
@@ -51,18 +51,7 @@ class GameCharacter {
         }
     }
     
-    
-    /// The maximum of health points allowed for combatant
-    static let combatantMaxHealthPoints = 100
-    
-    /// The maximum of health points allowed for colossus
-    static let colossustMaxHealthPoints = 150
-    
-    /// The maximum of health points allowed for drawf
-    static let drawfMaxHealthPoints = 30
-    
-    /// The maximum of health points allowed for magus
-    static let magusMaxHealthPoints = 60
+   
     
     //===================
     // -MARK: Init
@@ -125,13 +114,13 @@ class GameCharacter {
     func displayMaxHealthPoints() -> Int {
         switch characterType {
         case .combatant:
-            return GameCharacter.combatantMaxHealthPoints
+            return GameSetting.combatantMaxHealthPoints
         case .colossus:
-            return GameCharacter.colossustMaxHealthPoints
+            return GameSetting.colossusMaxHealthPoints
         case .drawf:
-            return GameCharacter.drawfMaxHealthPoints
+            return GameSetting.drawfMaxHealthPoints
         case .magus:
-            return GameCharacter.magusMaxHealthPoints
+            return GameSetting.magusMaxHealthPoints
             
         }
     }

@@ -15,7 +15,7 @@ class CareWeapon: Weapon {
     init(type: CareWeaponType) {
         switch type {
         case .antidote:
-            heal = 15
+            heal = GameSetting.antidoteHealingAbility
         }
     }
 }
