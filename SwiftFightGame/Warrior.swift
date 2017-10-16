@@ -23,6 +23,9 @@ class Warrior: GameCharacter {
     //Contains the attack weapon in the form of string
     var weaponAttackName = String()
     
+    //Allow to get a random number between 1 and 10 to get random super strike
+    let randomNumberForSuperStrike: Int = Helper.randomNumber(fromNumber: 1, toNumber: 10)
+    
     //===================
     // -MARK: Init
     //===================
@@ -61,18 +64,76 @@ class Warrior: GameCharacter {
     //===================
     // -MARK: Methodes
     //===================
-    func strike(character: GameCharacter) {
-        character.healthPoints -= strikeForce
+    
+    /// Allows to get randomly the super strike and all other methods in relation with super strike
+    ///
+    /// - Returns: True if get super strike
+    private func randomSuperStrike() -> Bool {
+        
+        //Get super strike force when the random number is between 3 and 8 included
+        if randomNumberForSuperStrike >= 3 && randomNumberForSuperStrike <= 8 {
+            return true
+        } else {
+            return false
+        }
     }
+    
+    /// Allows to get strike * 2
+    ///
+    /// - Parameters:
+    ///   - characterToStrike: The character to strike
+    ///   - typeOfStrikeForce: The type of strike
+    private func superStrike(characterToStrike: GameCharacter, typeOfStrikeForce: Int) {
+        
+        characterToStrike.healthPoints -= typeOfStrikeForce * 2
+    }
+    
+    
+    /// Strike a character and remove her health points depending of the force strike of character striking
+    ///
+    /// - Parameter character: The character to strike
+    func strike(character: GameCharacter) {
+        
+        if isAtthirdOfHealthPoints(character: self) && randomSuperStrike() {
+            superStrike(characterToStrike: character, typeOfStrikeForce: strikeForce)
+        } else {
+            character.healthPoints -= strikeForce
+        }
+        
+    }
+    
     
     /// Same as strike function, except when there is a change of weapon
     ///
     /// - Parameter character: Character to strike
     func strikeWithWeaponChange(character: GameCharacter) {
-        character.healthPoints -= strikeForceWithWeaponChange
+        
+        if isAtthirdOfHealthPoints(character: self) && randomSuperStrike() {
+            superStrike(characterToStrike: character, typeOfStrikeForce: strikeForceWithWeaponChange)
+        } else {
+            character.healthPoints -= strikeForceWithWeaponChange
+        }
+        
     }
     
-    /// Allow to change weapon attack from instance
+    func superStrikeForceMessage(typeOfStrikeForce: Int) {
+        if isAtthirdOfHealthPoints(character: self) && randomSuperStrike() {
+            print()
+            print("\t💪💪💪 You got a SUPER STRIKE FORCE of \(typeOfStrikeForce * 2) 👊👊👊")
+            print()
+        }
+    }
+    
+    func getLostHealthPointsValue(typeOfForce: Int) -> Int {
+        if isAtthirdOfHealthPoints(character: self) && randomSuperStrike() {
+            return typeOfForce * 2
+        }
+        
+        return typeOfForce
+    }
+    
+    
+    /// Allows to change weapon attack from instance
     ///
     /// - Parameter typeOfWeapon: Type of weapon to make change
     func weaponChange(typeOfWeapon: AttackWeaponType) {

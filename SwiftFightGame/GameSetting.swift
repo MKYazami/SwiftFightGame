@@ -16,16 +16,16 @@ class GameSetting {
     //===============================================================
     
     /// The maximum of health points allowed for combatant (Default value = 100)
-    static let combatantMaxHealthPoints: Int = 10
+    static let combatantMaxHealthPoints: Int = 30
     
     /// The maximum of health points allowed for colossus (Default value = 150)
-    static let colossusMaxHealthPoints: Int = 15
+    static let colossusMaxHealthPoints: Int = 40
     
     /// The maximum of health points allowed for drawf (Default value = 30)
-    static let drawfMaxHealthPoints: Int = 10
+    static let drawfMaxHealthPoints: Int = 20
     
     /// The maximum of health points allowed for magus (Default value = 60)
-    static let magusMaxHealthPoints: Int = 10
+    static let magusMaxHealthPoints: Int = 25
     
     
     //==================================================

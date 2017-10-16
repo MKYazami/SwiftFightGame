@@ -124,5 +124,36 @@ class GameCharacter {
             
         }
     }
-
+    
+    /// Check if a character is at third or lower of health points
+    ///
+    /// - Parameter character: Character to check
+    /// - Returns: True if at third or bellow of health points
+    func isAtthirdOfHealthPoints(character: GameCharacter) -> Bool {
+        
+        switch character.characterType {
+        case .combatant:
+            if character.healthPoints <= GameSetting.combatantMaxHealthPoints/3 {
+                return true
+            }
+            return false
+        case .colossus:
+            if character.healthPoints <= GameSetting.colossusMaxHealthPoints/3 {
+                return true
+            }
+            return false
+        case .drawf:
+            if character.healthPoints <= GameSetting.drawfMaxHealthPoints/3 {
+                return true
+            }
+            return false
+        case .magus:
+            if character.healthPoints <= GameSetting.magusMaxHealthPoints/3 {
+                return true
+            }
+            return false
+        }
+        
+    }
+    
 }

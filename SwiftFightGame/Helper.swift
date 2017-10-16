@@ -241,4 +241,18 @@ class Helper {
         }
     }
     
+    
+    /// Generate an unsigned random number
+    ///
+    /// - Parameters:
+    ///   - fromNumber: First number included by which, we want to get the random number
+    ///   - toNumber: Last number included by which, we want to get the random number
+    /// - Returns: Random number
+    static func randomNumber(fromNumber: Int, toNumber: Int) -> Int {
+        //Get random number between fromNumber & toNumber
+        let randomNumber = Int(arc4random_uniform(UInt32(toNumber + 1))) + fromNumber
+        
+        return randomNumber
+    }
+    
 }

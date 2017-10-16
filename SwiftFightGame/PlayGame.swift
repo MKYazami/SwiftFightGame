@@ -106,13 +106,26 @@ class PlayGame {
         }
     }
     
+    /// Warn the player if the character is at 1/3 or lower of health points
+    ///
+    /// - Parameter character: character to check
+    /// - Returns: Message that the health points are low
+    private func warnWeakHealthPoints(character: GameCharacter) -> String {
+        
+        if character.isAtthirdOfHealthPoints(character: character) {
+            return "🤢 Health points are low 🤢 "
+        }
+        
+        return ""
+    }
+    
     /// List the team characters
     ///
     /// - Returns: team character selected for action
     private func teamCharacters(player: Player) -> GameCharacter {
         
         for characterIndex in 0..<player.gameCharacters.count {
-            print("👤 ☞ \(characterIndex + 1). \(player.gameCharacters[characterIndex].getCharacterNameString()): ✤ Type: \(player.gameCharacters[characterIndex].getCharacterTypeString()) ⎮ Health points: \(player.gameCharacters[characterIndex].healthPoints)/\(player.gameCharacters[characterIndex].displayMaxHealthPoints()) ⎮ Default weapon: \(defaultWeponTypeToDisplay(character: player.gameCharacters[characterIndex])) with \(getTypeOfAbility(character: player.gameCharacters[characterIndex])) \(getAmountOfAbility(character: player.gameCharacters[characterIndex])) ✤ ")
+            print("👤 ☞ \(characterIndex + 1). \(player.gameCharacters[characterIndex].getCharacterNameString()): ✤ Type: \(player.gameCharacters[characterIndex].getCharacterTypeString()) ⎮ Health points: \(player.gameCharacters[characterIndex].healthPoints)/\(player.gameCharacters[characterIndex].displayMaxHealthPoints()) \(warnWeakHealthPoints(character: player.gameCharacters[characterIndex]))⎮ Default weapon: \(defaultWeponTypeToDisplay(character: player.gameCharacters[characterIndex])) with \(getTypeOfAbility(character: player.gameCharacters[characterIndex])) \(getAmountOfAbility(character: player.gameCharacters[characterIndex])) ✤ ")
         }
         
         return player.selectCharacter(from: player)
@@ -124,12 +137,25 @@ class PlayGame {
     /// - Returns: adversary character to fight
     private func adversaryCharacters(player: Player) -> GameCharacter {
         for characterIndex in 0..<player.gameCharacters.count {
-            print("🆚 ☞ \(characterIndex + 1). \(player.gameCharacters[characterIndex].getCharacterNameString()): ✤ Type: \(player.gameCharacters[characterIndex].getCharacterTypeString()) ⎮ Health points: \(player.gameCharacters[characterIndex].healthPoints)/\(player.gameCharacters[characterIndex].displayMaxHealthPoints()) ⎮ Default weapon: \(defaultWeponTypeToDisplay(character: player.gameCharacters[characterIndex])) with \(getTypeOfAbility(character: player.gameCharacters[characterIndex])) \(getAmountOfAbility(character: player.gameCharacters[characterIndex])) ✤")
+            print("🆚 ☞ \(characterIndex + 1). \(player.gameCharacters[characterIndex].getCharacterNameString()): ✤ Type: \(player.gameCharacters[characterIndex].getCharacterTypeString()) ⎮ Health points: \(player.gameCharacters[characterIndex].healthPoints)/\(player.gameCharacters[characterIndex].displayMaxHealthPoints()) \(warnWeakHealthPoints(character: player.gameCharacters[characterIndex]))⎮ Default weapon: \(defaultWeponTypeToDisplay(character: player.gameCharacters[characterIndex])) with \(getTypeOfAbility(character: player.gameCharacters[characterIndex])) \(getAmountOfAbility(character: player.gameCharacters[characterIndex])) ✤")
         }
         
             return player.selectCharacter(from: player)
     }
-
+    
+    /// Display the summary after strike action
+    ///
+    /// - Parameters:
+    ///   - characterToUseName: Character striking
+    ///   - characterToFightName: Character struck
+    ///   - lostHealthPoints: The health points lost during the strike
+    ///   - characterToFightHealthPoints: The total of health points remaining after the strike
+    private func stikeSummary(characterToUseName: String, characterToFightName: String, lostHealthPoints: Int, characterToFightHealthPoints: Int) {
+        print("🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶")
+        print("\t \(characterToUseName) stroke \(characterToFightName) 👊  \n \t \(characterToFightName) has lost -\(lostHealthPoints) of health points and still has \(characterToFightHealthPoints) health points")
+        print("🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶")
+    }
+    
     
     /// Allow to get an adversary index for 2 players
     ///
@@ -162,23 +188,16 @@ class PlayGame {
         return randomWeaponAttack
     }
     
-    /// Generate a random number between 1 and 10
-    ///
-    /// - Returns: Random number
-    private func randomNumberToOpenChest() -> Int {
-        //Get random number between 1 & 10
-        let randomNumber = Int(arc4random_uniform(UInt32(11))) + 1
-        
-        return randomNumber
-    }
-    
     
     /// Determine to open the chest in random conditions
     ///
     /// - Returns: True to open chest
     private func openChest() -> Bool {
+        //Get random number between 1 & 10
+        let randomNumber = Helper.randomNumber(fromNumber: 1, toNumber: 10)
+        
         //Open chest when random number is generated between 2 and 6 included
-        if randomNumberToOpenChest() >= 2 && randomNumberToOpenChest() <= 6 {
+        if randomNumber >= 2 && randomNumber <= 6 {
             return true
         } else {
             return false
@@ -285,6 +304,7 @@ class PlayGame {
                     //Complete the game
                     defeatedPlayer(looser: players[playerIndex], winner: players[adversaryIndex(index: playerIndex)])
                     
+                    //Exit method
                     break
                 }
                 
@@ -294,7 +314,7 @@ class PlayGame {
                 print("Your adversary is \(players[adversaryIndex(index: playerIndex)].playerName) and has ℹ️: ")
                 
                 for characterIndex in 0..<players[adversaryIndex(index: playerIndex)].gameCharacters.count {
-                    print("ℹ️ \(players[adversaryIndex(index: playerIndex)].gameCharacters[characterIndex].getCharacterNameString()): ✤ Type: \(players[adversaryIndex(index: playerIndex)].gameCharacters[characterIndex].getCharacterTypeString()) ⎮ Health points: \(players[adversaryIndex(index: playerIndex)].gameCharacters[characterIndex].healthPoints)/\(players[adversaryIndex(index: playerIndex)].gameCharacters[characterIndex].displayMaxHealthPoints()) ⎮ Default weapon: \(defaultWeponTypeToDisplay(character: players[adversaryIndex(index: playerIndex)].gameCharacters[characterIndex])) with \(getTypeOfAbility(character: players[adversaryIndex(index: playerIndex)].gameCharacters[characterIndex])) \(getAmountOfAbility(character: players[adversaryIndex(index: playerIndex)].gameCharacters[characterIndex])) ✤")
+                    print("ℹ️ \(players[adversaryIndex(index: playerIndex)].gameCharacters[characterIndex].getCharacterNameString()): ✤ Type: \(players[adversaryIndex(index: playerIndex)].gameCharacters[characterIndex].getCharacterTypeString()) ⎮ Health points: \(players[adversaryIndex(index: playerIndex)].gameCharacters[characterIndex].healthPoints)/\(players[adversaryIndex(index: playerIndex)].gameCharacters[characterIndex].displayMaxHealthPoints()) \(warnWeakHealthPoints(character: players[adversaryIndex(index: playerIndex)].gameCharacters[characterIndex]))⎮ Default weapon: \(defaultWeponTypeToDisplay(character: players[adversaryIndex(index: playerIndex)].gameCharacters[characterIndex])) with \(getTypeOfAbility(character: players[adversaryIndex(index: playerIndex)].gameCharacters[characterIndex])) \(getAmountOfAbility(character: players[adversaryIndex(index: playerIndex)].gameCharacters[characterIndex])) ✤")
                 }
                 
                 print("⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃")
@@ -304,13 +324,13 @@ class PlayGame {
                 //Selection of team characters for action
                 print("\(players[playerIndex].playerName), select your character to make action 👇: ")
                 
+                //Select character to use for action
                 characterToUse = teamCharacters(player: players[playerIndex])
                 
                 
                 
                 //Actions and summary of actions, depending if striking or healing
                 if let warrior = characterToUse as? Warrior {
-                    //********** Action to open the chest and get a attack weapon **********
                     
                     //Case of open chest
                     if openChest() {
@@ -321,12 +341,14 @@ class PlayGame {
                         print("📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦")
                         print()
                         
-                        
+                        //Super strike message if all condions are true
+                        warrior.superStrikeForceMessage(typeOfStrikeForce: warrior.strikeForceWithWeaponChange)
                         
                         //Adversary selection to strike
                         repeat {
                             print("Now select a adversary’s character to strike 🗡: ")
                             
+                            //Select character to fight
                             characterToFight = adversaryCharacters(player: players[adversaryIndex(index: playerIndex)])
                             
                             //Strike
@@ -335,10 +357,8 @@ class PlayGame {
                             //Display summary, only if a characterToMakeAction is selected. Allow to avoid an empty summary
                             if Helper.characterSelectionExists(character: characterToFight) {
                                 
-                                //Summary of action
-                                print("🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶")
-                                print("\t \(characterToUse.characterName) stroke \(characterToFight.characterName) 👊  \n \t \(characterToFight.characterName) has lost -\(warrior.strikeForceWithWeaponChange) of health points and still has \(characterToFight.healthPoints) health points")
-                                print("🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶")
+                                //Summary of strike
+                                stikeSummary(characterToUseName: characterToUse.characterName, characterToFightName: characterToFight.characterName, lostHealthPoints: warrior.getLostHealthPointsValue(typeOfForce: warrior.strikeForceWithWeaponChange), characterToFightHealthPoints: characterToFight.healthPoints)
                                 
                                 //Check if character stroke is dead, and if is dead it will be removed from the array gameCharacter
                                 deadCharacter(character: characterToFight, player: players[adversaryIndex(index: playerIndex)])
@@ -352,10 +372,15 @@ class PlayGame {
                         
                       //Normal case (chest not open)
                     } else {
+                        
+                        //Super strike message if all condions are true
+                        warrior.superStrikeForceMessage(typeOfStrikeForce: warrior.strikeForce)
+                        
                         //Adversary selection to strike
                         repeat {
                             print("Now select a adversary’s character to strike 🗡: ")
                             
+                            //Select character to use for action
                             characterToFight = adversaryCharacters(player: players[adversaryIndex(index: playerIndex)])
                             
                             //Strike
@@ -365,9 +390,7 @@ class PlayGame {
                             if Helper.characterSelectionExists(character: characterToFight) {
                                 
                                 //Summary of strike
-                                print("🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶")
-                                print("\t \(characterToUse.characterName) stroke \(characterToFight.characterName) 👊  \n \t \(characterToFight.characterName) has lost -\(warrior.strikeForce) of health points and still has \(characterToFight.healthPoints) health points")
-                                print("🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶")
+                                stikeSummary(characterToUseName: characterToUse.characterName, characterToFightName: characterToFight.characterName, lostHealthPoints: warrior.getLostHealthPointsValue(typeOfForce: warrior.strikeForce), characterToFightHealthPoints: characterToFight.healthPoints)
                                 
                                 //Check if character stroke is dead, and if is dead it will be removed from the array gameCharacter
                                 deadCharacter(character: characterToFight, player: players[adversaryIndex(index: playerIndex)])
@@ -391,6 +414,7 @@ class PlayGame {
                             characterWithMaxHealthPoints = false
                             print("Now select a team’s character to heal 💊:")
                             
+                            //Select character to heal
                             characterToHeal = teamCharacters(player: players[playerIndex])
                             
                             //Check if characterToHeal contains a character
@@ -410,21 +434,25 @@ class PlayGame {
                                     print("\t \(characterToUse.characterName) has healed \(summaryOfHealing(characterToHeal: characterToHeal, characterToUse: characterToUse)) 💊 \n \t \(characterToHeal.characterName) got +\(heathPointsAdded) of health points and now has \(characterToHeal.healthPoints) health points")
                                     print("🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀🍀")
                                     
-                                } else {
+                                } else { //Case if character to heal is at the maximum of health points
                                     print()
                                     print("⚠️ \(characterToHeal.characterName) has reached the maximum of health points, please choose another character to heal")
-                                    characterWithMaxHealthPoints = true
                                     print()
+                                    
+                                    //True allows to repeat the loop
+                                    characterWithMaxHealthPoints = true
                                 }
                             }
                             
                         } while !Helper.characterSelectionExists(character: characterToHeal) || characterWithMaxHealthPoints == true //Will repeat while the team character is not selected to heal OR the character selected is at the maximum of health points
                         
-                    } else {
+                    } else { //Case if all characters to heal are at the maximum of health points
                         print()
                         print("⚠️ All of your characters have reached the maximum of health points, please choose another action except to heal")
-                        allCharacterAtMaxHealthPoints = true
                         print()
+                        
+                        //True allows to choose another action
+                        allCharacterAtMaxHealthPoints = true
                     }
                 }
                 
