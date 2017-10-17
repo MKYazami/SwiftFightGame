@@ -59,9 +59,9 @@ class PlayGame {
             } else {
                 return healer.healingAbility
             }
-        case .drawf:
-            if character.healthPoints > (GameSetting.drawfMaxHealthPoints - healer.healingAbility) {
-                return GameSetting.drawfMaxHealthPoints - character.healthPoints
+        case .dwarf:
+            if character.healthPoints > (GameSetting.dwarfMaxHealthPoints - healer.healingAbility) {
+                return GameSetting.dwarfMaxHealthPoints - character.healthPoints
             } else {
                 return healer.healingAbility
             }
@@ -99,7 +99,7 @@ class PlayGame {
             return "SWORD"
         case .colossus:
             return "BAT"
-        case .drawf:
+        case .dwarf:
             return "AXE"
         case .magus:
             return "ANTIDOTE"
@@ -112,7 +112,7 @@ class PlayGame {
     /// - Returns: Message that the health points are low
     private func warnWeakHealthPoints(character: GameCharacter) -> String {
         
-        if character.isAtthirdOfHealthPoints(character: character) {
+        if character.isAtthirdOfHealthPoints() {
             return "🤢 Health points are low 🤢 "
         }
         
@@ -122,10 +122,13 @@ class PlayGame {
     /// List the team characters
     ///
     /// - Returns: team character selected for action
-    private func teamCharacters(player: Player) -> GameCharacter {
+    private func teamCharactersList(player: Player) -> GameCharacter {
         
         for characterIndex in 0..<player.gameCharacters.count {
-            print("👤 ☞ \(characterIndex + 1). \(player.gameCharacters[characterIndex].getCharacterNameString()): ✤ Type: \(player.gameCharacters[characterIndex].getCharacterTypeString()) ⎮ Health points: \(player.gameCharacters[characterIndex].healthPoints)/\(player.gameCharacters[characterIndex].displayMaxHealthPoints()) \(warnWeakHealthPoints(character: player.gameCharacters[characterIndex]))⎮ Default weapon: \(defaultWeponTypeToDisplay(character: player.gameCharacters[characterIndex])) with \(getTypeOfAbility(character: player.gameCharacters[characterIndex])) \(getAmountOfAbility(character: player.gameCharacters[characterIndex])) ✤ ")
+            
+            let team = player.gameCharacters[characterIndex]
+            
+            print("👤 ☞ \(characterIndex + 1). \(player.gameCharacters[characterIndex].getCharacterNameString()): ✤ Type: \(team.getCharacterTypeString()) ⎮ Health points: \(team.healthPoints)/\(team.displayMaxHealthPoints()) \(warnWeakHealthPoints(character: team))⎮ Default weapon: \(defaultWeponTypeToDisplay(character: team)) with \(getTypeOfAbility(character: team)) \(getAmountOfAbility(character: team)) ✤ ")
         }
         
         return player.selectCharacter(from: player)
@@ -135,9 +138,12 @@ class PlayGame {
     /// List the adversary characters
     ///
     /// - Returns: adversary character to fight
-    private func adversaryCharacters(player: Player) -> GameCharacter {
+    private func adversaryCharactersList(player: Player) -> GameCharacter {
         for characterIndex in 0..<player.gameCharacters.count {
-            print("🆚 ☞ \(characterIndex + 1). \(player.gameCharacters[characterIndex].getCharacterNameString()): ✤ Type: \(player.gameCharacters[characterIndex].getCharacterTypeString()) ⎮ Health points: \(player.gameCharacters[characterIndex].healthPoints)/\(player.gameCharacters[characterIndex].displayMaxHealthPoints()) \(warnWeakHealthPoints(character: player.gameCharacters[characterIndex]))⎮ Default weapon: \(defaultWeponTypeToDisplay(character: player.gameCharacters[characterIndex])) with \(getTypeOfAbility(character: player.gameCharacters[characterIndex])) \(getAmountOfAbility(character: player.gameCharacters[characterIndex])) ✤")
+            
+            let adversary = player.gameCharacters[characterIndex]
+            
+            print("🆚 ☞ \(characterIndex + 1). \(player.gameCharacters[characterIndex].getCharacterNameString()): ✤ Type: \(adversary.getCharacterTypeString()) ⎮ Health points: \(adversary.healthPoints)/\(adversary.displayMaxHealthPoints()) \(warnWeakHealthPoints(character: adversary))⎮ Default weapon: \(defaultWeponTypeToDisplay(character: adversary)) with \(getTypeOfAbility(character: adversary)) \(getAmountOfAbility(character: adversary)) ✤")
         }
         
             return player.selectCharacter(from: player)
@@ -283,6 +289,10 @@ class PlayGame {
         
         while players.count > 1 { //Repeat while there is 2 players in players array
             
+            //team var
+            
+            //adversary var
+            
             //Contains true if all team's character are at maximum of health points
             var allCharacterAtMaxHealthPoints = Bool()
             
@@ -325,7 +335,7 @@ class PlayGame {
                 print("\(players[playerIndex].playerName), select your character to make action 👇: ")
                 
                 //Select character to use for action
-                characterToUse = teamCharacters(player: players[playerIndex])
+                characterToUse = teamCharactersList(player: players[playerIndex])
                 
                 
                 
@@ -349,7 +359,7 @@ class PlayGame {
                             print("Now select a adversary’s character to strike 🗡: ")
                             
                             //Select character to fight
-                            characterToFight = adversaryCharacters(player: players[adversaryIndex(index: playerIndex)])
+                            characterToFight = adversaryCharactersList(player: players[adversaryIndex(index: playerIndex)])
                             
                             //Strike
                             warrior.strikeWithWeaponChange(character: characterToFight)
@@ -381,7 +391,7 @@ class PlayGame {
                             print("Now select a adversary’s character to strike 🗡: ")
                             
                             //Select character to use for action
-                            characterToFight = adversaryCharacters(player: players[adversaryIndex(index: playerIndex)])
+                            characterToFight = adversaryCharactersList(player: players[adversaryIndex(index: playerIndex)])
                             
                             //Strike
                             warrior.strike(character: characterToFight)
@@ -415,7 +425,7 @@ class PlayGame {
                             print("Now select a team’s character to heal 💊:")
                             
                             //Select character to heal
-                            characterToHeal = teamCharacters(player: players[playerIndex])
+                            characterToHeal = teamCharactersList(player: players[playerIndex])
                             
                             //Check if characterToHeal contains a character
                             if Helper.characterSelectionExists(character: characterToHeal) {

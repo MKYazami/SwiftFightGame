@@ -14,6 +14,6 @@ import Foundation
 enum CharacterType: String {
     case combatant
     case colossus
-    case drawf
+    case dwarf
     case magus
 }

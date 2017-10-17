@@ -135,8 +135,8 @@ class Helper {
                 return false
             }
             return true
-        case .drawf:
-            if character.healthPoints >= GameSetting.drawfMaxHealthPoints {
+        case .dwarf:
+            if character.healthPoints >= GameSetting.dwarfMaxHealthPoints {
                 return false
             }
             return true
@@ -168,8 +168,8 @@ class Helper {
                 if character.healthPoints >= GameSetting.colossusMaxHealthPoints  {
                     characterAtMaxHealthPoints.append(2)
                 }
-            case .drawf:
-                if character.healthPoints >= GameSetting.drawfMaxHealthPoints  {
+            case .dwarf:
+                if character.healthPoints >= GameSetting.dwarfMaxHealthPoints  {
                     characterAtMaxHealthPoints.append(3)
                 }
             case .magus:

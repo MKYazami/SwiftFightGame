@@ -102,8 +102,8 @@ class Player {
             
             checkUniqueNameAndAppendGameCharacter(name: character.characterName, character: character, players: players)
             
-        case "drawf":
-            let character = Warrior(characterType: CharacterType.drawf, name: nameCharacter(players: players), attakWeaponType: AttackWeaponType.axe)
+        case "dwarf":
+            let character = Warrior(characterType: CharacterType.dwarf, name: nameCharacter(players: players), attakWeaponType: AttackWeaponType.axe)
 
             checkUniqueNameAndAppendGameCharacter(name: character.characterName, character: character, players: players)
             
@@ -132,7 +132,7 @@ class Player {
         print("\(playerName), please choose \(Helper.replaceNumberToOrdinal(number: characterNumber))/3️⃣ character ()==[::::::> ☟"
             + "\n1. Combatant〔 ℹ️  With classic attack, a good warrior 〕"
             + "\n2. Colossus 〔 ℹ️  Very resistant to attacks, but he doesn't cause considerable domages 〕"
-            + "\n3. Drawf    〔 ℹ️  His axe generate a lot of damage, but he doesn't have many health points 〕"
+            + "\n3. dwarf    〔 ℹ️  His axe generate a lot of damage, but he doesn't have many health points 〕"
             + "\n4. Magus    〔 ℹ️  He doesn't fight, however he can cure you team members 〕"
         )
         
@@ -149,7 +149,7 @@ class Player {
                     createCharacter(characterType: "colossus", players: players)
                 case "3":
                     badChoice = false
-                    createCharacter(characterType: "drawf", players: players)
+                    createCharacter(characterType: "dwarf", players: players)
                 case "4":
                     badChoice = false
                     createCharacter(characterType: "magus", players: players)

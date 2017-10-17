@@ -36,9 +36,9 @@ class GameCharacter {
                     healthPoints = GameSetting.colossusMaxHealthPoints
                 }
                 
-            case .drawf:
-                if healthPoints > GameSetting.drawfMaxHealthPoints {
-                    healthPoints = GameSetting.drawfMaxHealthPoints
+            case .dwarf:
+                if healthPoints > GameSetting.dwarfMaxHealthPoints {
+                    healthPoints = GameSetting.dwarfMaxHealthPoints
                 }
                 
             case .magus:
@@ -88,8 +88,8 @@ class GameCharacter {
             return "COMBATANT"
         case .colossus:
             return "COLOSSUS"
-        case .drawf:
-            return "DRAWF"
+        case .dwarf:
+            return "dwarf"
         case .magus:
             return "MAGUS"
         }
@@ -117,8 +117,8 @@ class GameCharacter {
             return GameSetting.combatantMaxHealthPoints
         case .colossus:
             return GameSetting.colossusMaxHealthPoints
-        case .drawf:
-            return GameSetting.drawfMaxHealthPoints
+        case .dwarf:
+            return GameSetting.dwarfMaxHealthPoints
         case .magus:
             return GameSetting.magusMaxHealthPoints
             
@@ -129,26 +129,26 @@ class GameCharacter {
     ///
     /// - Parameter character: Character to check
     /// - Returns: True if at third or bellow of health points
-    func isAtthirdOfHealthPoints(character: GameCharacter) -> Bool {
+    func isAtthirdOfHealthPoints() -> Bool {
         
-        switch character.characterType {
+        switch characterType {
         case .combatant:
-            if character.healthPoints <= GameSetting.combatantMaxHealthPoints/3 {
+            if healthPoints <= GameSetting.combatantMaxHealthPoints/3 {
                 return true
             }
             return false
         case .colossus:
-            if character.healthPoints <= GameSetting.colossusMaxHealthPoints/3 {
+            if healthPoints <= GameSetting.colossusMaxHealthPoints/3 {
                 return true
             }
             return false
-        case .drawf:
-            if character.healthPoints <= GameSetting.drawfMaxHealthPoints/3 {
+        case .dwarf:
+            if healthPoints <= GameSetting.dwarfMaxHealthPoints/3 {
                 return true
             }
             return false
         case .magus:
-            if character.healthPoints <= GameSetting.magusMaxHealthPoints/3 {
+            if healthPoints <= GameSetting.magusMaxHealthPoints/3 {
                 return true
             }
             return false

@@ -32,7 +32,7 @@ class Warrior: GameCharacter {
     /// Initialize the warriors
     ///
     /// - Parameters:
-    ///   - characterType: CharacterType.combatant, CharacterType.colossus, CharacterType.drawf
+    ///   - characterType: CharacterType.combatant, CharacterType.colossus, CharacterType.dwarf
     ///   - name: String name
     ///   - attakWeaponType: AttackWeaponType.sword, AttackWeaponType.bat, AttackWeaponType.axe
     init(characterType: CharacterType, name: String, attakWeaponType: AttackWeaponType) {
@@ -42,8 +42,8 @@ class Warrior: GameCharacter {
             healthPoints = GameSetting.combatantMaxHealthPoints
         case .colossus:
             healthPoints = GameSetting.colossusMaxHealthPoints
-        case .drawf:
-            healthPoints = GameSetting.drawfMaxHealthPoints
+        case .dwarf:
+            healthPoints = GameSetting.dwarfMaxHealthPoints
         default:
             break
         }
@@ -94,7 +94,7 @@ class Warrior: GameCharacter {
     /// - Parameter character: The character to strike
     func strike(character: GameCharacter) {
         
-        if isAtthirdOfHealthPoints(character: self) && randomSuperStrike() {
+        if isAtthirdOfHealthPoints() && randomSuperStrike() {
             superStrike(characterToStrike: character, typeOfStrikeForce: strikeForce)
         } else {
             character.healthPoints -= strikeForce
@@ -108,7 +108,7 @@ class Warrior: GameCharacter {
     /// - Parameter character: Character to strike
     func strikeWithWeaponChange(character: GameCharacter) {
         
-        if isAtthirdOfHealthPoints(character: self) && randomSuperStrike() {
+        if isAtthirdOfHealthPoints() && randomSuperStrike() {
             superStrike(characterToStrike: character, typeOfStrikeForce: strikeForceWithWeaponChange)
         } else {
             character.healthPoints -= strikeForceWithWeaponChange
@@ -116,16 +116,23 @@ class Warrior: GameCharacter {
         
     }
     
+    /// Allow to display the message when condions are true for super strike force
+    ///
+    /// - Parameter typeOfStrikeForce: The type of strike force
     func superStrikeForceMessage(typeOfStrikeForce: Int) {
-        if isAtthirdOfHealthPoints(character: self) && randomSuperStrike() {
+        if isAtthirdOfHealthPoints() && randomSuperStrike() {
             print()
             print("\t💪💪💪 You got a SUPER STRIKE FORCE of \(typeOfStrikeForce * 2) 👊👊👊")
             print()
         }
     }
     
+    /// Allow to give lost health points value depending if in super strike force condion or normal strike force
+    ///
+    /// - Parameter typeOfForce: The type of strike force
+    /// - Returns: 2 * typeOfForce is super strike force is active or 1 * typeOfForce in normal condition
     func getLostHealthPointsValue(typeOfForce: Int) -> Int {
-        if isAtthirdOfHealthPoints(character: self) && randomSuperStrike() {
+        if isAtthirdOfHealthPoints() && randomSuperStrike() {
             return typeOfForce * 2
         }
         
