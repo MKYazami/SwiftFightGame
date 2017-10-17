@@ -21,133 +21,26 @@ class PlayGame {
     //==================
     // MARK: Methods
     //==================
+
     
-    
-    /// Get amounts of strike force or healing ability depending of character's type
-    ///
-    /// - Parameter character: game character
-    /// - Returns: amounts of strike force or healing ability
-//    private func getAmountOfAbility(character: GameCharacter) -> Int {
-//        var amountOfAbility = Int()
-//        if let warrior = character as? Warrior {
-//            amountOfAbility = warrior.strikeForce
-//        } else if let healer = character as? Healer {
-//            amountOfAbility = healer.healingAbility
-//        }
-//        return amountOfAbility
-//    }
-    
-    ///Calculation of health points that will be given by the healer to display logically
+    /// Display the list of characters and return the game character selected
     ///
     /// - Parameters:
-    ///   - character: Character to heal
-    ///   - healer: Healer that makes cure
-    /// - Returns: Health points given by the healer
-    private func getHealthPointsAddedForHealingSummary(character: GameCharacter, healer: Healer) -> Int {
-        
-        //Cheking the health points given by the healer to get a logical amount for healing summary
-        switch character.characterType {
-        case .combatant:
-            if character.healthPoints > (GameSetting.combatantMaxHealthPoints - healer.healingAbility) {
-                return GameSetting.combatantMaxHealthPoints - character.healthPoints
-            } else {
-                return healer.healingAbility
-            }
-        case .colossus:
-            if character.healthPoints > (GameSetting.colossusMaxHealthPoints - healer.healingAbility) {
-                return GameSetting.colossusMaxHealthPoints - character.healthPoints
-            } else {
-                return healer.healingAbility
-            }
-        case .dwarf:
-            if character.healthPoints > (GameSetting.dwarfMaxHealthPoints - healer.healingAbility) {
-                return GameSetting.dwarfMaxHealthPoints - character.healthPoints
-            } else {
-                return healer.healingAbility
-            }
-        case .magus:
-            if character.healthPoints > (GameSetting.magusMaxHealthPoints - healer.healingAbility) {
-                return GameSetting.magusMaxHealthPoints - character.healthPoints
-                
-            } else {
-                return healer.healingAbility
-            }
-        }
-    }
-    
-    /// Get type of ability as string, depending of character's type
-    ///
-    /// - Parameter character: game character
-    /// - Returns: String "Strike force: " OR "Healing ability: "
-    private func getTypeOfAbility(character: GameCharacter) -> String {
-        var typeOfAbility = String()
-        if character is Warrior {
-            typeOfAbility = "Strike force: "
-        } else if character is Healer {
-            typeOfAbility = "Healing ability: "
-        }
-        return typeOfAbility
-    }
-    
-    /// Display the weapon type according to the type of character
-    ///
-    /// - Parameter character: Character to know what type of weapon
-    /// - Returns: Type of weapon in the form of string
-//    private func defaultWeponTypeToDisplay(character: GameCharacter) -> String {
-//        switch character.characterType {
-//        case .combatant:
-//            return "SWORD"
-//        case .colossus:
-//            return "BAT"
-//        case .dwarf:
-//            return "AXE"
-//        case .magus:
-//            return "ANTIDOTE"
-//        }
-//    }
-    
-    /// Warn the player if the character is at 1/3 or lower of health points
-    ///
-    /// - Parameter character: character to check
-    /// - Returns: Message that the health points are low
-    private func warnWeakHealthPoints(character: GameCharacter) -> String {
-        
-        if character.isAtthirdOfHealthPoints() {
-            return "🤢 Health points are low 🤢 "
-        }
-        
-        return ""
-    }
-    
-    /// List the team characters
-    ///
-    /// - Returns: team character selected for action
-    private func teamCharactersList(player: Player) -> GameCharacter {
+    ///   - player: Playerthe who owns the characters (Team or Adversary)
+    ///   - icon: Icon to customize the display at the beginning of the list
+    /// - Returns: Character selected
+    private func charactersList(player: Player, icon: String) -> GameCharacter {
         
         for characterIndex in 0..<player.gameCharacters.count {
             
-            let team = player.gameCharacters[characterIndex]
+            let character = player.gameCharacters[characterIndex]
             
-            print("👤 ☞ \(characterIndex + 1). \(player.gameCharacters[characterIndex].getCharacterNameString()): ✤ Type: \(team.getCharacterTypeString()) ⎮ Health points: \(team.healthPoints)/\(team.displayMaxHealthPoints()) \(warnWeakHealthPoints(character: team))⎮ Default weapon: \(Weapon.defaultWeponTypeToDisplay(character: team)) with \(getTypeOfAbility(character: team)) \(team.getAmountOfAbility()) ✤ ")
+            print("\(icon) \(characterIndex + 1). \(character.characterName): ✤ Type: \(character.characterType) ⎮ Health points: \(character.healthPoints)/\(character.displayMaxHealthPoints()) \(character.warnWeakHealthPoints())⎮ Default weapon: \(Weapon.defaultWeponTypeToDisplay(character: character)) with \(character.getTypeOfAbility()) \(character.getAmountOfAbility()) ✤ ")
         }
         
         return player.selectCharacter(from: player)
     }
-    
-    
-    /// List the adversary characters
-    ///
-    /// - Returns: adversary character to fight
-    private func adversaryCharactersList(player: Player) -> GameCharacter {
-        for characterIndex in 0..<player.gameCharacters.count {
-            
-            let adversary = player.gameCharacters[characterIndex]
-            
-            print("🆚 ☞ \(characterIndex + 1). \(player.gameCharacters[characterIndex].getCharacterNameString()): ✤ Type: \(adversary.getCharacterTypeString()) ⎮ Health points: \(adversary.healthPoints)/\(adversary.displayMaxHealthPoints()) \(warnWeakHealthPoints(character: adversary))⎮ Default weapon: \(Weapon.defaultWeponTypeToDisplay(character: adversary)) with \(getTypeOfAbility(character: adversary)) \(adversary.getAmountOfAbility()) ✤")
-        }
-        
-            return player.selectCharacter(from: player)
-    }
+
     
     /// Display the summary after strike action
     ///
@@ -224,12 +117,13 @@ class PlayGame {
         }
     }
     
+    
     /// Check if character stroke is dead, and if is dead it will be removed from the array gameCharacter
     ///
     /// - Parameters:
     ///   - character: Character to check
     ///   - player: Player who will be get the character deleted
-    private func deadCharacter(character: GameCharacter, player: Player) {
+    private func deadCharacterNotification(character: GameCharacter, player: Player) {
         if character.isDead() {
             print()
             print("\t ☠️☠️☠️☠️☠️☠️☠️☠️☠️☠️☠️☠️☠️☠️☠️☠️☠️☠️☠️☠️☠️☠️☠️☠️☠️☠️")
@@ -250,22 +144,17 @@ class PlayGame {
     /// - Parameters:
     ///   - looser: The attacked player
     ///   - winner: The attacking player
-    private func defeatedPlayer(looser: Player, winner: Player) {
+    private func defeatedPlayerNotification(looser: Player, winner: Player, turnCounter: Int) {
         //Check if player has lost the game and remove from players array
         if looser.gameCharacters.count <= 0 {
             
-            //Game overs message
+            //Game over message
             print()
-            print(" ❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅")
-            print("❅                GAME OVER                 ❅")
-            print(" ❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅")
+            print("\t ❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅")
+            print("\t❅                GAME OVER                 ❅")
+            print("\t ❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅")
             
-            //Looser message
-            print()
-            print("\t 🌀🌀🌀🌀🌀🌀🌀🌀🌀🌀🌀🌀🌀🌀🌀🌀🌀🌀🌀🌀🌀🌀🌀🌀🌀🌀")
-            print("\t \t \t \(looser.playerName) has lost the game 😭😭😭")
-            print("\t 🌀🌀🌀🌀🌀🌀🌀🌀🌀🌀🌀🌀🌀🌀🌀🌀🌀🌀🌀🌀🌀🌀🌀🌀🌀🌀")
-            print()
+            
             
             //Winner message
             print()
@@ -274,6 +163,19 @@ class PlayGame {
             print("\t 🎊🎊🎊🎊🎊🎊🎊🎊🎊🎊🎊🎊🎊🎊🎊🎊🎊🎊🎊🎊🎊🎊🎊🎊🎊🎊")
             print()
             
+            //Number of game turns 
+            print()
+            print("\t 🎡🎡🎡🎡🎡🎡🎡🎡🎡🎡🎡🎡🎡🎡🎡🎡🎡🎡🎡🎡🎡🎡🎡🎡🎡🎡")
+            print("\t \t \t \t In \(turnCounter) game turns")
+            print("\t 🎡🎡🎡🎡🎡🎡🎡🎡🎡🎡🎡🎡🎡🎡🎡🎡🎡🎡🎡🎡🎡🎡🎡🎡🎡🎡")
+            print()
+            
+            //Looser message
+            print()
+            print("\t 🌀🌀🌀🌀🌀🌀🌀🌀🌀🌀🌀🌀🌀🌀🌀🌀🌀🌀🌀🌀🌀🌀🌀🌀🌀🌀")
+            print("\t \t \t \(looser.playerName) has lost the game 😭😭😭")
+            print("\t 🌀🌀🌀🌀🌀🌀🌀🌀🌀🌀🌀🌀🌀🌀🌀🌀🌀🌀🌀🌀🌀🌀🌀🌀🌀🌀")
+            print()
             
             //Get the index of player to remove from players array
             let indexToRemove = players.index(where: {$0 === looser})
@@ -286,20 +188,36 @@ class PlayGame {
     
     /// Start the fight phase
     private func fightPhase() {
+        //Characters for the actions
         var characterToUse = GameCharacter()
         var characterToFight = GameCharacter()
         var characterToHeal = GameCharacter()
-    
+        
+        //Turn couter
+        var turnCounter = Int()
+        
+        
         //The player index to iterate players array
         var playerIndex = 0
         
         while players.count > 1 { //Repeat while there is 2 players in players array
             
-            //team var
+            //******    Icon List Setting    ******//
+            //Icon to insert in argument of characterList() for team
+            let teamIcon = "👤 ☞"
+            //Icon to insert in argument of characterList() for adversary
+            let adversaryIcon = "🆚 ☞"
+            
+            
+            //Increment turnCounter
+            turnCounter += 1
+            
+            //Team let
             let team = players[playerIndex]
             
-            //adversary var
+            //Adversary let
             let adversary = players[adversaryIndex(index: playerIndex)]
+            
             
             //Contains true if all team's character are at maximum of health points
             var allCharacterAtMaxHealthPoints = Bool()
@@ -320,7 +238,7 @@ class PlayGame {
                     print()
                     
                     //Complete the game
-                    defeatedPlayer(looser: team, winner: adversary)
+                    defeatedPlayerNotification(looser: team, winner: adversary, turnCounter: turnCounter)
                     
                     //Exit method
                     break
@@ -332,8 +250,11 @@ class PlayGame {
                 print("Your adversary is \(adversary.playerName) and has ℹ️: ")
                 
                 for characterIndex in 0..<adversary.gameCharacters.count {
-                    print("ℹ️ \(adversary.gameCharacters[characterIndex].getCharacterNameString()): ✤ Type: \(adversary.gameCharacters[characterIndex].getCharacterTypeString()) ⎮ Health points: \(adversary.gameCharacters[characterIndex].healthPoints)/\(adversary.gameCharacters[characterIndex].displayMaxHealthPoints()) \(warnWeakHealthPoints(character: adversary.gameCharacters[characterIndex]))⎮ Default weapon: \(Weapon.defaultWeponTypeToDisplay(character: adversary.gameCharacters[characterIndex])) with \(getTypeOfAbility(character: adversary.gameCharacters[characterIndex])) \(adversary.gameCharacters[characterIndex].getAmountOfAbility()) ✤")
+                    
+                    let character = adversary.gameCharacters[characterIndex]
+                    print("ℹ️ \(character.characterName): ✤ Type: \(character.characterType) ⎮ Health points: \(character.healthPoints)/\(character.displayMaxHealthPoints()) \(character.warnWeakHealthPoints())⎮ Default weapon: \(Weapon.defaultWeponTypeToDisplay(character: character)) with \(character.getTypeOfAbility()) \(character.getAmountOfAbility()) ✤")
                 }
+                
                 
                 print("⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃")
                 print()
@@ -343,7 +264,7 @@ class PlayGame {
                 print("\(team.playerName), select your character to make action 👇: ")
                 
                 //Select character to use for action
-                characterToUse = teamCharactersList(player: team)
+                characterToUse = charactersList(player: team, icon: teamIcon)
                 
                 
                 
@@ -367,7 +288,7 @@ class PlayGame {
                             print("Now select a adversary’s character to strike 🗡: ")
                             
                             //Select character to fight
-                            characterToFight = adversaryCharactersList(player: adversary)
+                            characterToFight = charactersList(player: adversary, icon: adversaryIcon)
                             
                             //Strike
                             warrior.strikeWithWeaponChange(character: characterToFight)
@@ -379,10 +300,10 @@ class PlayGame {
                                 stikeSummary(characterToUseName: characterToUse.characterName, characterToFightName: characterToFight.characterName, lostHealthPoints: warrior.getLostHealthPointsValue(typeOfForce: warrior.strikeForceWithWeaponChange), characterToFightHealthPoints: characterToFight.healthPoints)
                                 
                                 //Check if character stroke is dead, and if is dead it will be removed from the array gameCharacter
-                                deadCharacter(character: characterToFight, player: adversary)
+                                deadCharacterNotification(character: characterToFight, player: adversary)
                                 
                                 //Check if player has lost the game and remove from players array
-                                defeatedPlayer(looser: adversary, winner: team)
+                                defeatedPlayerNotification(looser: adversary, winner: team, turnCounter: turnCounter)
                                 
                             }
                             
@@ -399,7 +320,7 @@ class PlayGame {
                             print("Now select a adversary’s character to strike 🗡: ")
                             
                             //Select character to use for action
-                            characterToFight = adversaryCharactersList(player: adversary)
+                            characterToFight = charactersList(player: adversary, icon: adversaryIcon)
                             
                             //Strike
                             warrior.strike(character: characterToFight)
@@ -411,10 +332,10 @@ class PlayGame {
                                 stikeSummary(characterToUseName: characterToUse.characterName, characterToFightName: characterToFight.characterName, lostHealthPoints: warrior.getLostHealthPointsValue(typeOfForce: warrior.strikeForce), characterToFightHealthPoints: characterToFight.healthPoints)
                                 
                                 //Check if character stroke is dead, and if is dead it will be removed from the array gameCharacter
-                                deadCharacter(character: characterToFight, player: adversary)
+                                deadCharacterNotification(character: characterToFight, player: adversary)
                                 
                                 //Check if player has lost the game and remove from players array
-                                defeatedPlayer(looser: adversary, winner: team)
+                                defeatedPlayerNotification(looser: adversary, winner: team, turnCounter: turnCounter)
                                 
                             }
                             
@@ -433,7 +354,7 @@ class PlayGame {
                             print("Now select a team’s character to heal 💊:")
                             
                             //Select character to heal
-                            characterToHeal = teamCharactersList(player: team)
+                            characterToHeal = charactersList(player: team, icon: teamIcon)
                             
                             //Check if characterToHeal contains a character
                             if Helper.characterSelectionExists(character: characterToHeal) {
@@ -442,7 +363,7 @@ class PlayGame {
                                 if Helper.checkIfCharacterIsMaxHealthPoints(character: characterToHeal) {
                                     
                                     //Calculated health points that will be given by the healer to display
-                                    let heathPointsAdded = getHealthPointsAddedForHealingSummary(character: characterToHeal, healer: healer)
+                                    let heathPointsAdded = characterToHeal.getHealthPointsAddedForHealingSummary(healer: healer)
                                     
                                     //Heal
                                     healer.heal(character: characterToHeal)

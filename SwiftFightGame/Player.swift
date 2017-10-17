@@ -120,7 +120,7 @@ class Player {
         print("\(playerName), please choose \(Helper.replaceNumberToOrdinal(number: characterNumber))/3️⃣ character ()==[::::::> ☟"
             + "\n1. Combatant〔 ℹ️  With classic attack, a good warrior 〕"
             + "\n2. Colossus 〔 ℹ️  Very resistant to attacks, but he doesn't cause considerable domages 〕"
-            + "\n3. dwarf    〔 ℹ️  His axe generate a lot of damage, but he doesn't have many health points 〕"
+            + "\n3. Dwarf    〔 ℹ️  His axe generate a lot of damage, but he doesn't have many health points 〕"
             + "\n4. Magus    〔 ℹ️  He doesn't fight, however he can cure you team members 〕"
         )
         
@@ -202,7 +202,7 @@ class Player {
         
         //This loop allows to get the list from the gameCharacters array in order to list the types and names chosen
         for index in 0..<gameCharacters.count {
-            print("\(index + 1). \(gameCharacters[index].characterName) as ➸ \(gameCharacters[index].getCharacterTypeString())")
+            print("\(index + 1) ➸ \(gameCharacters[index].characterName) as \(gameCharacters[index].characterType)")
         }
         
     }

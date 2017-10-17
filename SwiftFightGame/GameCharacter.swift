@@ -71,31 +71,6 @@ class GameCharacter {
     // -MARK: Methodes
     //===================
     
-    /// Return character name in the form of string
-    ///
-    /// - Returns: string
-    func getCharacterNameString() -> String {
-        return characterName
-    }
-    
-    
-    /// Return character type in the form of string
-    ///
-    /// - Returns: string
-    func getCharacterTypeString() -> String {
-        switch characterType {
-        case .combatant:
-            return "COMBATANT"
-        case .colossus:
-            return "COLOSSUS"
-        case .dwarf:
-            return "dwarf"
-        case .magus:
-            return "MAGUS"
-        }
-    }
-        
-    
     /// Determine if charcter is dead
     ///
     /// - Parameter character: Concerned character
@@ -106,6 +81,58 @@ class GameCharacter {
         } else {
             return false
         }
+    }
+    
+    
+    ///Calculation of health points that will be given by the healer to display logically
+    ///
+    /// - Parameters:
+    ///   - character: Character to heal
+    ///   - healer: Healer that makes cure
+    /// - Returns: Health points given by the healer
+    func getHealthPointsAddedForHealingSummary(healer: Healer) -> Int {
+        
+        //Cheking the health points given by the healer to get a logical amount for healing summary
+        switch characterType {
+        case .combatant:
+            if healthPoints > (GameSetting.combatantMaxHealthPoints - healer.healingAbility) {
+                return GameSetting.combatantMaxHealthPoints - healthPoints
+            } else {
+                return healer.healingAbility
+            }
+        case .colossus:
+            if healthPoints > (GameSetting.colossusMaxHealthPoints - healer.healingAbility) {
+                return GameSetting.colossusMaxHealthPoints - healthPoints
+            } else {
+                return healer.healingAbility
+            }
+        case .dwarf:
+            if healthPoints > (GameSetting.dwarfMaxHealthPoints - healer.healingAbility) {
+                return GameSetting.dwarfMaxHealthPoints - healthPoints
+            } else {
+                return healer.healingAbility
+            }
+        case .magus:
+            if healthPoints > (GameSetting.magusMaxHealthPoints - healer.healingAbility) {
+                return GameSetting.magusMaxHealthPoints - healthPoints
+                
+            } else {
+                return healer.healingAbility
+            }
+        }
+    }
+    
+    /// Warn the player if the character is at 1/3 or lower of health points
+    ///
+    /// - Parameter character: character to check
+    /// - Returns: Message that the health points are low
+    func warnWeakHealthPoints() -> String {
+        
+        if isAtthirdOfHealthPoints() {
+            return "🤢 Health points are low 🤢 "
+        }
+        
+        return ""
     }
     
     /// Get amounts of strike force or healing ability depending of character's type
@@ -121,6 +148,22 @@ class GameCharacter {
         }
         return amountOfAbility
     }
+    
+    
+    /// Get type of ability as string, depending of character's type
+    ///
+    /// - Parameter character: game character
+    /// - Returns: String "Strike force: " OR "Healing ability: "
+    func getTypeOfAbility() -> String {
+        var typeOfAbility = String()
+        if self is Warrior {
+            typeOfAbility = "Strike force: "
+        } else if self is Healer {
+            typeOfAbility = "Healing ability: "
+        }
+        return typeOfAbility
+    }
+    
     
     /// Display the maximum of health points allowed for each type of character
     ///
