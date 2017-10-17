@@ -54,17 +54,6 @@ class Player {
         } while empty == true
     }
     
-
-    
-    /**
-     Append gameCharacter array
-        - Parameters:
-            - character: character to append
-     */
-    private func appendGameCharacters(character: GameCharacter) {
-        gameCharacters.append(character)
-    }
-    
     
     /// Check if the name is unique and append to gameCharacter array
     ///
@@ -77,8 +66,7 @@ class Player {
         let notUniqueName = Helper.checkUniqueName(name: name, players: players)
         
         if !notUniqueName {
-            
-            appendGameCharacters(character: character)
+            gameCharacters.append(character)
         }
     }
     

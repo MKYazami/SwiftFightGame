@@ -108,6 +108,20 @@ class GameCharacter {
         }
     }
     
+    /// Get amounts of strike force or healing ability depending of character's type
+    ///
+    /// - Parameter character: game character
+    /// - Returns: amounts of strike force or healing ability
+    func getAmountOfAbility() -> Int {
+        var amountOfAbility = Int()
+        if let warrior = self as? Warrior {
+            amountOfAbility = warrior.strikeForce
+        } else if let healer = self as? Healer {
+            amountOfAbility = healer.healingAbility
+        }
+        return amountOfAbility
+    }
+    
     /// Display the maximum of health points allowed for each type of character
     ///
     /// - Returns: Health points
