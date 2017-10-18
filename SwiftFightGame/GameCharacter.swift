@@ -87,7 +87,6 @@ class GameCharacter {
     ///Calculation of health points that will be given by the healer to display logically
     ///
     /// - Parameters:
-    ///   - character: Character to heal
     ///   - healer: Healer that makes cure
     /// - Returns: Health points given by the healer
     func getHealthPointsAddedForHealingSummary(healer: Healer) -> Int {

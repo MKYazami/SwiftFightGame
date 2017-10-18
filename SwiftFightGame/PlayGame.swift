@@ -73,35 +73,35 @@ class PlayGame {
     /// Generate a random attack weapon
     ///
     /// - Returns: Attack weapon type
-    private func randomWeaponAttackChange() -> AttackWeaponType {
-        //Array of weapon type
-        var weaponAttack: [AttackWeaponType] = [.sword, .axe, .bat]
-        
-        //Generate random index
-        let randomWeaponAttackIndex: Int = Int(arc4random_uniform(UInt32(weaponAttack.count)))
-        
-        //Get random weapon attack
-        let randomWeaponAttack = weaponAttack[randomWeaponAttackIndex]
-        
-        
-        return randomWeaponAttack
-    }
+//    private func randomWeaponAttackChange() -> AttackWeaponType {
+//        //Array of weapon type
+//        var weaponAttack: [AttackWeaponType] = [.sword, .axe, .bat]
+//
+//        //Generate random index
+//        let randomWeaponAttackIndex: Int = Int(arc4random_uniform(UInt32(weaponAttack.count)))
+//
+//        //Get random weapon attack
+//        let randomWeaponAttack = weaponAttack[randomWeaponAttackIndex]
+//
+//
+//        return randomWeaponAttack
+//    }
     
     
     /// Determine to open the chest in random conditions
     ///
     /// - Returns: True to open chest
-    private func openChest() -> Bool {
-        //Get random number between 1 & 10
-        let randomNumber = Helper.randomNumber(fromNumber: 1, toNumber: 10)
-        
-        //Open chest when random number is generated between 2 and 6 included
-        if randomNumber >= 2 && randomNumber <= 6 {
-            return true
-        } else {
-            return false
-        }
-    }
+//    private func openChest() -> Bool {
+//        //Get random number between 1 & 10
+//        let randomNumber = Helper.randomNumber(fromNumber: 1, toNumber: 10)
+//
+//        //Open chest when random number is generated between 2 and 6 included
+//        if randomNumber >= 2 && randomNumber <= 6 {
+//            return true
+//        } else {
+//            return false
+//        }
+//    }
     
     /// Allows to show if the healer has cured him self by the display of "healerName has healed him self"
     ///
@@ -202,20 +202,20 @@ class PlayGame {
         
         while players.count > 1 { //Repeat while there is 2 players in players array
             
-            //******    Icon List Setting    ******//
+                    //******    Icon List Setting    ******//
             //Icon to insert in argument of characterList() for team
             let teamIcon = "👤 ☞"
             //Icon to insert in argument of characterList() for adversary
             let adversaryIcon = "🆚 ☞"
             
             
-            //Increment turnCounter
+            //Increment turnCounter for each game turn
             turnCounter += 1
             
-            //Team let
+            //Team let for better readability
             let team = players[playerIndex]
             
-            //Adversary let
+            //Adversary let for better readability
             let adversary = players[adversaryIndex(index: playerIndex)]
             
             
@@ -232,7 +232,7 @@ class PlayGame {
                     //Removing all characters from gameCharacters array
                     team.gameCharacters.removeAll()
                     
-                    //Message that the player has lost
+                    //Message that the player has lost because there is no more action to do
                     print()
                     print("💤💤 \(team.playerName) you lost! \n\tYour characters are all healers and their health points are at maximum allowed. They have no more action to do 💤💤")
                     print()
@@ -240,11 +240,11 @@ class PlayGame {
                     //Complete the game
                     defeatedPlayerNotification(looser: team, winner: adversary, turnCounter: turnCounter)
                     
-                    //Exit method
+                    //Exit fightPhase() method
                     break
                 }
                 
-                //Adversary List for information
+                //Adversary List for the team information only
                 print()
                 print("⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃⊂⊃")
                 print("Your adversary is \(adversary.playerName) and has ℹ️: ")
@@ -269,82 +269,48 @@ class PlayGame {
                 
                 
                 //Actions and summary of actions, depending if striking or healing
+                
+                //If character to use is warrior type
                 if let warrior = characterToUse as? Warrior {
                     
-                    //Case of open chest
-                    if openChest() {
-                        print()
-                        print("📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦")
-                        warrior.weaponChange(typeOfWeapon: randomWeaponAttackChange())
-                        print("\t🗃 The attack weapon chest is at your disposal you got: \(warrior.weaponAttackName) with strike force of \(warrior.strikeForceWithWeaponChange) 🗃")
-                        print("📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦")
-                        print()
+
+                    //Open chest notification if open chest conditions are true (The open chest action is under control in Warrior class)
+                    warrior.openChestNofication()
+                
+                    //Super strike notification if open chest condions are true (The super strike action is under control in Warrior class)
+                    warrior.superStrikeForceNotification()
+                    
+                    //Adversary selection to strike
+                    repeat {
+                        print("Now select a adversary’s character to strike 🗡: ")
                         
-                        //Super strike message if all condions are true
-                        warrior.superStrikeForceMessage(typeOfStrikeForce: warrior.strikeForceWithWeaponChange)
+                        //Select character to use for action
+                        characterToFight = charactersList(player: adversary, icon: adversaryIcon)
                         
-                        //Adversary selection to strike
-                        repeat {
-                            print("Now select a adversary’s character to strike 🗡: ")
-                            
-                            //Select character to fight
-                            characterToFight = charactersList(player: adversary, icon: adversaryIcon)
-                            
-                            //Strike
-                            warrior.strikeWithWeaponChange(character: characterToFight)
-                            
-                            //Display summary, only if a characterToMakeAction is selected. Allow to avoid an empty summary
-                            if Helper.characterSelectionExists(character: characterToFight) {
-                                
-                                //Summary of strike
-                                stikeSummary(characterToUseName: characterToUse.characterName, characterToFightName: characterToFight.characterName, lostHealthPoints: warrior.getLostHealthPointsValue(typeOfForce: warrior.strikeForceWithWeaponChange), characterToFightHealthPoints: characterToFight.healthPoints)
-                                
-                                //Check if character stroke is dead, and if is dead it will be removed from the array gameCharacter
-                                deadCharacterNotification(character: characterToFight, player: adversary)
-                                
-                                //Check if player has lost the game and remove from players array
-                                defeatedPlayerNotification(looser: adversary, winner: team, turnCounter: turnCounter)
-                                
-                            }
-                            
-                        } while !Helper.characterSelectionExists(character: characterToFight)//Will repeat while the adversary character is not selected to strike
+                        //Strike
+                        warrior.strike(character: characterToFight)
                         
-                      //Normal case (chest not open)
-                    } else {
+                        //Display summary, only if a characterToMakeAction is selected. Allow to avoid an empty summary
+                        if Helper.characterSelectionExists(character: characterToFight) {
+                            
+                            //Summary of strike
+                            stikeSummary(characterToUseName: characterToUse.characterName, characterToFightName: characterToFight.characterName, lostHealthPoints: warrior.getLostHealthPointsValue(), characterToFightHealthPoints: characterToFight.healthPoints)
+                            
+                            //Check if character stroke is dead, and if is dead it will be removed from the array gameCharacter
+                            deadCharacterNotification(character: characterToFight, player: adversary)
+                            
+                            //Check if player has lost the game and remove from players array
+                            defeatedPlayerNotification(looser: adversary, winner: team, turnCounter: turnCounter)
+                            
+                        }
                         
-                        //Super strike message if all condions are true
-                        warrior.superStrikeForceMessage(typeOfStrikeForce: warrior.strikeForce)
-                        
-                        //Adversary selection to strike
-                        repeat {
-                            print("Now select a adversary’s character to strike 🗡: ")
-                            
-                            //Select character to use for action
-                            characterToFight = charactersList(player: adversary, icon: adversaryIcon)
-                            
-                            //Strike
-                            warrior.strike(character: characterToFight)
-                            
-                            //Display summary, only if a characterToMakeAction is selected. Allow to avoid an empty summary
-                            if Helper.characterSelectionExists(character: characterToFight) {
-                                
-                                //Summary of strike
-                                stikeSummary(characterToUseName: characterToUse.characterName, characterToFightName: characterToFight.characterName, lostHealthPoints: warrior.getLostHealthPointsValue(typeOfForce: warrior.strikeForce), characterToFightHealthPoints: characterToFight.healthPoints)
-                                
-                                //Check if character stroke is dead, and if is dead it will be removed from the array gameCharacter
-                                deadCharacterNotification(character: characterToFight, player: adversary)
-                                
-                                //Check if player has lost the game and remove from players array
-                                defeatedPlayerNotification(looser: adversary, winner: team, turnCounter: turnCounter)
-                                
-                            }
-                            
-                        } while !Helper.characterSelectionExists(character: characterToFight)//Will repeat while the adversary character is not selected to strike
-                    }
+                    } while !Helper.characterSelectionExists(character: characterToFight)//Will repeat while the adversary character is not selected to strike
+                    
+                //If character to use is healer type
                 } else if let healer = characterToUse as? Healer {
                     
+                    //Check if all characters haven't reached the maximum health points to propose another action
                     if  !Helper.CheckIfAllTeamCharactersAtMaxHealthPoints(player: team) {
-                        //Team selection to heal
                         
                         //Bool that define if a character is at the maximum of health points
                         var characterWithMaxHealthPoints = Bool()
@@ -362,7 +328,7 @@ class PlayGame {
                                 //Check if the character selected to heal is not at the maximum of health points
                                 if Helper.checkIfCharacterIsMaxHealthPoints(character: characterToHeal) {
                                     
-                                    //Calculated health points that will be given by the healer to display
+                                    //Calculated health points that will be given by the healer to display (before to be healed, to get the correct value)
                                     let heathPointsAdded = characterToHeal.getHealthPointsAddedForHealingSummary(healer: healer)
                                     
                                     //Heal
@@ -450,12 +416,14 @@ class PlayGame {
             //Display the selected characters
             player.listSelectedCharacters()
         }
-        //Start fight message
+        
+        //Fight message
         print()
         print(" ❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅")
         print("❅                START FIGHT               ❅")
         print(" ❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅❅")
         
+        //Start fight
         fightPhase()
     }
 }

@@ -24,11 +24,15 @@ class Warrior: GameCharacter {
     var weaponAttackName = String()
     
     //Allow to get a random number between 1 and 10 to get random super strike
-    let randomNumberForSuperStrike: Int = Helper.randomNumber(fromNumber: 1, toNumber: 10)
+    private let randomNumberForSuperStrike: Int = Helper.randomNumber(fromNumber: 1, toNumber: 10)
+    
+    //Get random number between 1 & 10 to open the weapon attack chest
+    private let randomNumberToOpenChest: Int = Helper.randomNumber(fromNumber: 1, toNumber: 10)
     
     //===================
     // -MARK: Init
     //===================
+    
     /// Initialize the warriors
     ///
     /// - Parameters:
@@ -65,6 +69,33 @@ class Warrior: GameCharacter {
     // -MARK: Methodes
     //===================
     
+    /// Determine to open the chest in random conditions
+    ///
+    /// - Returns: True to open chest
+    private func randomOpenChest() -> Bool {
+        
+        //Open chest when random number is generated between 2 and 6 included
+        if randomNumberToOpenChest >= 2 && randomNumberToOpenChest <= 6 {
+            return true
+        } else {
+            return false
+        }
+    }
+    
+    
+    /// Determine if returns strikeForce or strikeForceWithWeaponChange value depending if the chest is open or not
+    ///
+    /// - Returns: strikeForce or strikeForceWithWeaponChange value
+    private func determineStrikeForceType() -> Int {
+        
+        //Controling if the chest is open that allows to display the correct value of skrike force
+        if randomOpenChest() {
+            return strikeForceWithWeaponChange
+        } else {
+            return strikeForce
+        }
+    }
+    
     /// Generate a random attack weapon
     ///
     /// - Returns: Attack weapon type
@@ -80,22 +111,6 @@ class Warrior: GameCharacter {
         
         
         return randomWeaponAttack
-    }
-    
-    
-    /// Determine to open the chest in random conditions
-    ///
-    /// - Returns: True to open chest
-    private func openChest() -> Bool {
-        //Get random number between 1 & 10
-        let randomNumber = Helper.randomNumber(fromNumber: 1, toNumber: 10)
-        
-        //Open chest when random number is generated between 2 and 6 included
-        if randomNumber >= 2 && randomNumber <= 6 {
-            return true
-        } else {
-            return false
-        }
     }
     
     
@@ -129,35 +144,39 @@ class Warrior: GameCharacter {
     func strike(character: GameCharacter) {
         
         if isAtthirdOfHealthPoints() && randomSuperStrike() {
-            superStrike(characterToStrike: character, typeOfStrikeForce: strikeForce)
+            superStrike(characterToStrike: character, typeOfStrikeForce: determineStrikeForceType())
         } else {
-            character.healthPoints -= strikeForce
+            character.healthPoints -= determineStrikeForceType()
         }
         
     }
     
     
-    /// Same as strike function, except when there is a change of weapon
-    ///
-    /// - Parameter character: Character to strike
-    func strikeWithWeaponChange(character: GameCharacter) {
-        
-        if isAtthirdOfHealthPoints() && randomSuperStrike() {
-            superStrike(characterToStrike: character, typeOfStrikeForce: strikeForceWithWeaponChange)
+    /// Notify when the chest is open with the type of weapon and force strike value
+    func openChestNofication() {
+        if randomOpenChest() {
+            print()
+            print("📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦")
+            weaponChange(typeOfWeapon: randomWeaponAttackChange())
+            print("\t🗃 The attack weapon chest is at your disposal you got: \(weaponAttackName) with strike force of \(strikeForceWithWeaponChange) 🗃")
+            print("📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦")
+            print()
         } else {
-            character.healthPoints -= strikeForceWithWeaponChange
+            print("")
         }
-        
     }
+    
     
     /// Allow to display the message when condions are true for super strike force
     ///
     /// - Parameter typeOfStrikeForce: The type of strike force
-    func superStrikeForceMessage(typeOfStrikeForce: Int) {
+    func superStrikeForceNotification() {
         if isAtthirdOfHealthPoints() && randomSuperStrike() {
+            
             print()
-            print("\t💪💪💪 You got a SUPER STRIKE FORCE of \(typeOfStrikeForce * 2) 👊👊👊")
+            print("\t💪💪💪 You got a SUPER STRIKE FORCE of \(determineStrikeForceType() * 2) 👊👊👊")
             print()
+            
         }
     }
     
@@ -165,16 +184,16 @@ class Warrior: GameCharacter {
     ///
     /// - Parameter typeOfForce: The type of strike force
     /// - Returns: 2 * typeOfForce is super strike force is active or 1 * typeOfForce in normal condition
-    func getLostHealthPointsValue(typeOfForce: Int) -> Int {
+    func getLostHealthPointsValue() -> Int {
         if isAtthirdOfHealthPoints() && randomSuperStrike() {
-            return typeOfForce * 2
+            return determineStrikeForceType() * 2
         }
         
-        return typeOfForce
+        return determineStrikeForceType()
     }
     
     
-    /// Allows to change weapon attack from instance
+    /// Allows to change weapon attack
     ///
     /// - Parameter typeOfWeapon: Type of weapon to make change
     func weaponChange(typeOfWeapon: AttackWeaponType) {
