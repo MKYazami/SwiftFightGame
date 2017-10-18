@@ -36,5 +36,20 @@ class AttackWeapon: Weapon {
     // MARK: Methods
     //==================
     
-    
+    /// Generate a random attack weapon
+    ///
+    /// - Returns: Attack weapon type
+    static func randomWeaponAttackChange() -> AttackWeaponType {
+        //Array of weapon type
+        var weaponAttack: [AttackWeaponType] = [.sword, .axe, .bat]
+        
+        //Generate random index
+        let randomWeaponAttackIndex: Int = Int(arc4random_uniform(UInt32(weaponAttack.count)))
+        
+        //Get random weapon attack
+        let randomWeaponAttack = weaponAttack[randomWeaponAttackIndex]
+        
+        
+        return randomWeaponAttack
+    }
 }

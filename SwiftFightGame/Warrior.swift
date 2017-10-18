@@ -96,23 +96,6 @@ class Warrior: GameCharacter {
         }
     }
     
-    /// Generate a random attack weapon
-    ///
-    /// - Returns: Attack weapon type
-    private func randomWeaponAttackChange() -> AttackWeaponType {
-        //Array of weapon type
-        var weaponAttack: [AttackWeaponType] = [.sword, .axe, .bat]
-        
-        //Generate random index
-        let randomWeaponAttackIndex: Int = Int(arc4random_uniform(UInt32(weaponAttack.count)))
-        
-        //Get random weapon attack
-        let randomWeaponAttack = weaponAttack[randomWeaponAttackIndex]
-        
-        
-        return randomWeaponAttack
-    }
-    
     
     /// Allows to get randomly the super strike and all other methods in relation with super strike
     ///
@@ -157,7 +140,7 @@ class Warrior: GameCharacter {
         if randomOpenChest() {
             print()
             print("📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦")
-            weaponChange(typeOfWeapon: randomWeaponAttackChange())
+            weaponChange(typeOfWeapon: AttackWeapon.randomWeaponAttackChange())
             print("\t🗃 The attack weapon chest is at your disposal you got: \(weaponAttackName) with strike force of \(strikeForceWithWeaponChange) 🗃")
             print("📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦")
             print()
