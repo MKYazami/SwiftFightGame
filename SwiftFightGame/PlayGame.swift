@@ -38,6 +38,7 @@ class PlayGame {
             print("\(icon) \(characterIndex + 1). \(character.characterName): ✤ Type: \(character.characterType) ⎮ Health points: \(character.healthPoints)/\(character.displayMaxHealthPoints()) \(character.warnWeakHealthPoints())⎮ Default weapon: \(Weapon.defaultWeponTypeToDisplay(character: character)) with \(character.getTypeOfAbility()) \(character.getAmountOfAbility()) ✤ ")
         }
         
+        //Character selected from selectCharacter() in Player class
         return player.selectCharacter(from: player)
     }
 
@@ -70,39 +71,6 @@ class PlayGame {
     }
     
     
-    /// Generate a random attack weapon
-    ///
-    /// - Returns: Attack weapon type
-//    private func randomWeaponAttackChange() -> AttackWeaponType {
-//        //Array of weapon type
-//        var weaponAttack: [AttackWeaponType] = [.sword, .axe, .bat]
-//
-//        //Generate random index
-//        let randomWeaponAttackIndex: Int = Int(arc4random_uniform(UInt32(weaponAttack.count)))
-//
-//        //Get random weapon attack
-//        let randomWeaponAttack = weaponAttack[randomWeaponAttackIndex]
-//
-//
-//        return randomWeaponAttack
-//    }
-    
-    
-    /// Determine to open the chest in random conditions
-    ///
-    /// - Returns: True to open chest
-//    private func openChest() -> Bool {
-//        //Get random number between 1 & 10
-//        let randomNumber = Helper.randomNumber(fromNumber: 1, toNumber: 10)
-//
-//        //Open chest when random number is generated between 2 and 6 included
-//        if randomNumber >= 2 && randomNumber <= 6 {
-//            return true
-//        } else {
-//            return false
-//        }
-//    }
-    
     /// Allows to show if the healer has cured him self by the display of "healerName has healed him self"
     ///
     /// - Parameters:
@@ -125,6 +93,7 @@ class PlayGame {
     ///   - player: Player who will be get the character deleted
     private func deadCharacterNotification(character: GameCharacter, player: Player) {
         if character.isDead() {
+            //Dead character notification
             print()
             print("\t ☠️☠️☠️☠️☠️☠️☠️☠️☠️☠️☠️☠️☠️☠️☠️☠️☠️☠️☠️☠️☠️☠️☠️☠️☠️☠️")
             print("\t \t \t \t \t \(character.characterName) is dead 💀💀💀")
@@ -139,13 +108,15 @@ class PlayGame {
         }
     }
     
+    
     /// Check if player has lost the game and remove it from players array
     ///
     /// - Parameters:
     ///   - looser: The attacked player
     ///   - winner: The attacking player
+    ///   - turnCounter: Allows to count the game turns
     private func defeatedPlayerNotification(looser: Player, winner: Player, turnCounter: Int) {
-        //Check if player has lost the game and remove from players array
+        //Check if player has lost the game and remove it from players array
         if looser.gameCharacters.count <= 0 {
             
             //Game over message
@@ -198,7 +169,7 @@ class PlayGame {
         
         
         //The player index to iterate players array
-        var playerIndex = 0
+        var playerIndex = Int()
         
         while players.count > 1 { //Repeat while there is 2 players in players array
             

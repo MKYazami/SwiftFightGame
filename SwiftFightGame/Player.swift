@@ -17,7 +17,7 @@ class Player {
     //Contains the player's name
     var playerName = String()
     
-    //Array which contains the 3 characters chosen
+    //Array which contains the characters chosen
     var gameCharacters = [GameCharacter]()
     
    
@@ -55,13 +55,13 @@ class Player {
     }
     
     
-    /// Check if the name is unique and append to gameCharacter array
+    /// Check if the character name is unique and append to gameCharacter array
     ///
     /// - Parameters:
     ///   - name: Input name
     ///   - character: character to append
     ///   - players: The array that contains the players
-    private func checkUniqueNameAndAppendGameCharacter(name: String, character: GameCharacter, players: [Player]) {
+    private func checkUniqueCharacterNameAndAppendGameCharacter(name: String, character: GameCharacter, players: [Player]) {
         //Returns true if name already exists
         let notUniqueName = Helper.checkNotUniqueName(name: name, players: players)
         
@@ -83,22 +83,22 @@ class Player {
         case "combatant":
             let character = Warrior(characterType: CharacterType.combatant, name: nameCharacter(players: players), attakWeaponType: AttackWeaponType.sword)
 
-            checkUniqueNameAndAppendGameCharacter(name: character.characterName, character: character, players: players)
+            checkUniqueCharacterNameAndAppendGameCharacter(name: character.characterName, character: character, players: players)
             
         case "colossus":
             let character = Warrior(characterType: CharacterType.colossus, name: nameCharacter(players: players), attakWeaponType: AttackWeaponType.bat)
             
-            checkUniqueNameAndAppendGameCharacter(name: character.characterName, character: character, players: players)
+            checkUniqueCharacterNameAndAppendGameCharacter(name: character.characterName, character: character, players: players)
             
         case "dwarf":
             let character = Warrior(characterType: CharacterType.dwarf, name: nameCharacter(players: players), attakWeaponType: AttackWeaponType.axe)
 
-            checkUniqueNameAndAppendGameCharacter(name: character.characterName, character: character, players: players)
+            checkUniqueCharacterNameAndAppendGameCharacter(name: character.characterName, character: character, players: players)
             
         case "magus":
             let character = Healer(characterType: CharacterType.magus, name: nameCharacter(players: players), careWeaponType: CareWeaponType.antidote)
 
-            checkUniqueNameAndAppendGameCharacter(name: character.characterName, character: character, players: players)
+            checkUniqueCharacterNameAndAppendGameCharacter(name: character.characterName, character: character, players: players)
             
         default:
             break
@@ -154,7 +154,7 @@ class Player {
     }
 
     
-    /// Function allows to enter the character's name by the player with message requiring to enter character name
+    /// Allows to enter the character's name by the player with message requiring to enter character name
     ///
     /// - Parameter players: The array that contains the names chosen
     /// - Returns: return name of characters uppercased
@@ -174,9 +174,10 @@ class Player {
             
             if let name = readLine() {
                 
+                //empty = false if not empty
                 empty = !Helper.nameIsNotEmpty(name: name)
                 
-                
+                //duplicatedName = false if unique name
                 duplicatedName = Helper.checkNotUniqueName(name: name, players: players)
                 if !duplicatedName {
                     nameUppercased = name.uppercased()
@@ -191,10 +192,7 @@ class Player {
     }
     
     
-    
-    /**
-    This function shows the player's name, characters type and names
-    */
+    /// Display summary of what characters types and their names
     func listSelectedCharacters() {
         
         

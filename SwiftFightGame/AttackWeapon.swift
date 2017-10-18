@@ -10,7 +10,16 @@ import Foundation
 
 /// Attack weapon initialized by enumeration AttackWeaponType
 class AttackWeapon: Weapon {
+    
+    //==================
+    // MARK: Properties
+    //==================
+    
     var damages: Int
+    
+    //==================
+    // MARK: Init
+    //==================
     
     init(type: AttackWeaponType) {
         switch type {
@@ -22,4 +31,10 @@ class AttackWeapon: Weapon {
             damages = GameSetting.axeDamages
         }
     }
+    
+    //==================
+    // MARK: Methods
+    //==================
+    
+    
 }

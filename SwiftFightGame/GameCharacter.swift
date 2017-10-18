@@ -73,7 +73,6 @@ class GameCharacter {
     
     /// Determine if charcter is dead
     ///
-    /// - Parameter character: Concerned character
     /// - Returns: true if healthPoints equal or lower than 0 and false if higher than 0
     func isDead() -> Bool {
         if healthPoints <= 0 {
@@ -123,7 +122,6 @@ class GameCharacter {
     
     /// Warn the player if the character is at 1/3 or lower of health points
     ///
-    /// - Parameter character: character to check
     /// - Returns: Message that the health points are low
     func warnWeakHealthPoints() -> String {
         
@@ -136,7 +134,6 @@ class GameCharacter {
     
     /// Get amounts of strike force or healing ability depending of character's type
     ///
-    /// - Parameter character: game character
     /// - Returns: amounts of strike force or healing ability
     func getAmountOfAbility() -> Int {
         var amountOfAbility = Int()
@@ -151,7 +148,6 @@ class GameCharacter {
     
     /// Get type of ability as string, depending of character's type
     ///
-    /// - Parameter character: game character
     /// - Returns: String "Strike force: " OR "Healing ability: "
     func getTypeOfAbility() -> String {
         var typeOfAbility = String()
@@ -183,7 +179,6 @@ class GameCharacter {
     
     /// Check if a character is at third or lower of health points
     ///
-    /// - Parameter character: Character to check
     /// - Returns: True if at third or bellow of health points
     func isAtthirdOfHealthPoints() -> Bool {
         

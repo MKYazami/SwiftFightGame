@@ -169,7 +169,6 @@ class Warrior: GameCharacter {
     
     /// Allow to display the message when condions are true for super strike force
     ///
-    /// - Parameter typeOfStrikeForce: The type of strike force
     func superStrikeForceNotification() {
         if isAtthirdOfHealthPoints() && randomSuperStrike() {
             
@@ -182,7 +181,6 @@ class Warrior: GameCharacter {
     
     /// Allow to give lost health points value depending if in super strike force condion or normal strike force
     ///
-    /// - Parameter typeOfForce: The type of strike force
     /// - Returns: 2 * typeOfForce is super strike force is active or 1 * typeOfForce in normal condition
     func getLostHealthPointsValue() -> Int {
         if isAtthirdOfHealthPoints() && randomSuperStrike() {

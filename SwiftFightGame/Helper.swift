@@ -39,10 +39,10 @@ class Helper {
     }
     
     
-    /// Allows to know if a string is empty or not
+    /// Allows to know if a name is empty or not
     ///
     /// - Parameters:
-    ///   - name: The string to check
+    ///   - name: The name to check
     /// - Returns: true if not empty
     static func nameIsNotEmpty(name: String) -> Bool {
         if !name.isEmpty {
@@ -242,7 +242,7 @@ class Helper {
     }
     
     
-    /// Generate an unsigned random number
+    /// Generate random number
     ///
     /// - Parameters:
     ///   - fromNumber: First number included by which, we want to get the random number
