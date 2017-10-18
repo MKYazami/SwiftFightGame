@@ -11,13 +11,13 @@ import Foundation
 /// Contains some useful type methodes that allow to make verifications generally in the project
 class Helper {
     
-    /// Allow to know if a name is already chosen
+    /// Allows to know if a name is already chosen
     ///
     /// - Parameters:
     ///   - name: The input name
     ///   - players: The array that contains the names chosen
     /// - Returns: Returns true if the the name exists
-    static func checkUniqueName(name: String, players: [Player]) -> Bool {
+    static func checkNotUniqueName(name: String, players: [Player]) -> Bool {
         for player in players {
             
             //Check name player
@@ -39,7 +39,7 @@ class Helper {
     }
     
     
-    /// Allow to know if a string is empty or not
+    /// Allows to know if a string is empty or not
     ///
     /// - Parameters:
     ///   - name: The string to check
@@ -54,7 +54,7 @@ class Helper {
     }
     
     
-    // Allow to know if a selection is did or not
+    // Allows to know if a selection is did or not
     ///
     /// - Parameters:
     ///   - name: character input to check from readLine()
@@ -69,7 +69,7 @@ class Helper {
     }
     
     
-    /// Allow to check if object contains Warrior OR Healer type
+    /// Allows to check if object contains Warrior OR Healer type
     ///
     /// - Parameter character: object to check
     /// - Returns: true if Warrior OR Healer type exist

@@ -65,6 +65,40 @@ class Warrior: GameCharacter {
     // -MARK: Methodes
     //===================
     
+    /// Generate a random attack weapon
+    ///
+    /// - Returns: Attack weapon type
+    private func randomWeaponAttackChange() -> AttackWeaponType {
+        //Array of weapon type
+        var weaponAttack: [AttackWeaponType] = [.sword, .axe, .bat]
+        
+        //Generate random index
+        let randomWeaponAttackIndex: Int = Int(arc4random_uniform(UInt32(weaponAttack.count)))
+        
+        //Get random weapon attack
+        let randomWeaponAttack = weaponAttack[randomWeaponAttackIndex]
+        
+        
+        return randomWeaponAttack
+    }
+    
+    
+    /// Determine to open the chest in random conditions
+    ///
+    /// - Returns: True to open chest
+    private func openChest() -> Bool {
+        //Get random number between 1 & 10
+        let randomNumber = Helper.randomNumber(fromNumber: 1, toNumber: 10)
+        
+        //Open chest when random number is generated between 2 and 6 included
+        if randomNumber >= 2 && randomNumber <= 6 {
+            return true
+        } else {
+            return false
+        }
+    }
+    
+    
     /// Allows to get randomly the super strike and all other methods in relation with super strike
     ///
     /// - Returns: True if get super strike

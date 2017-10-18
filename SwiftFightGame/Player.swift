@@ -63,7 +63,7 @@ class Player {
     ///   - players: The array that contains the players
     private func checkUniqueNameAndAppendGameCharacter(name: String, character: GameCharacter, players: [Player]) {
         //Returns true if name already exists
-        let notUniqueName = Helper.checkUniqueName(name: name, players: players)
+        let notUniqueName = Helper.checkNotUniqueName(name: name, players: players)
         
         if !notUniqueName {
             gameCharacters.append(character)
@@ -177,7 +177,7 @@ class Player {
                 empty = !Helper.nameIsNotEmpty(name: name)
                 
                 
-                duplicatedName = Helper.checkUniqueName(name: name, players: players)
+                duplicatedName = Helper.checkNotUniqueName(name: name, players: players)
                 if !duplicatedName {
                     nameUppercased = name.uppercased()
                 }

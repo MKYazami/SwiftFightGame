@@ -73,7 +73,7 @@ class PlayGame {
     /// Generate a random attack weapon
     ///
     /// - Returns: Attack weapon type
-    private func weaponAttackChange() -> AttackWeaponType {
+    private func randomWeaponAttackChange() -> AttackWeaponType {
         //Array of weapon type
         var weaponAttack: [AttackWeaponType] = [.sword, .axe, .bat]
         
@@ -275,7 +275,7 @@ class PlayGame {
                     if openChest() {
                         print()
                         print("📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦")
-                        warrior.weaponChange(typeOfWeapon: weaponAttackChange())
+                        warrior.weaponChange(typeOfWeapon: randomWeaponAttackChange())
                         print("\t🗃 The attack weapon chest is at your disposal you got: \(warrior.weaponAttackName) with strike force of \(warrior.strikeForceWithWeaponChange) 🗃")
                         print("📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦")
                         print()
@@ -433,7 +433,7 @@ class PlayGame {
             //Allows to check that the player's name is unique
             repeat {
                 player.namePlayer(teamNumber: teamNumber)
-                notUniqueName = Helper.checkUniqueName(name: player.playerName, players: players)
+                notUniqueName = Helper.checkNotUniqueName(name: player.playerName, players: players)
             } while notUniqueName == true
             
             //Append players array
