@@ -39,7 +39,7 @@ class AttackWeapon: Weapon {
     /// Generate a random attack weapon
     ///
     /// - Returns: Attack weapon type
-    static func randomWeaponAttackChange() -> AttackWeaponType {
+    static func randomAttackWeaponChange() -> AttackWeaponType {
         //Array of weapon type
         var weaponAttack: [AttackWeaponType] = [.sword, .axe, .bat]
         

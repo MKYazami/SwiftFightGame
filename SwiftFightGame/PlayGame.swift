@@ -35,7 +35,7 @@ class PlayGame {
             
             let character = player.gameCharacters[characterIndex]
             
-            print("\(icon) \(characterIndex + 1). \(character.characterName): ✤ Type: \(character.characterType) ⎮ Health points: \(character.healthPoints)/\(character.displayMaxHealthPoints()) \(character.warnWeakHealthPoints())⎮ Default weapon: \(Weapon.defaultWeponTypeToDisplay(character: character)) with \(character.getTypeOfAbility()) \(character.getAmountOfAbility()) ✤ ")
+            print("\(icon) \(characterIndex + 1). \(character.characterName): ✤ Type: \(character.characterType) ⎮ Health points: \(character.healthPoints)/\(character.displayMaxHealthPoints()) \(character.warnWeakHealthPoints())⎮ Default weapon: \(Weapon.defaultWeaponTypeToDisplay(character: character)) with \(character.getTypeOfAbility()) \(character.getAmountOfAbility()) ✤ ")
         }
         
         //Character selected from selectCharacter() in Player class
@@ -223,7 +223,7 @@ class PlayGame {
                 for characterIndex in 0..<adversary.gameCharacters.count {
                     
                     let character = adversary.gameCharacters[characterIndex]
-                    print("ℹ️ \(character.characterName): ✤ Type: \(character.characterType) ⎮ Health points: \(character.healthPoints)/\(character.displayMaxHealthPoints()) \(character.warnWeakHealthPoints())⎮ Default weapon: \(Weapon.defaultWeponTypeToDisplay(character: character)) with \(character.getTypeOfAbility()) \(character.getAmountOfAbility()) ✤")
+                    print("ℹ️ \(character.characterName): ✤ Type: \(character.characterType) ⎮ Health points: \(character.healthPoints)/\(character.displayMaxHealthPoints()) \(character.warnWeakHealthPoints())⎮ Default weapon: \(Weapon.defaultWeaponTypeToDisplay(character: character)) with \(character.getTypeOfAbility()) \(character.getAmountOfAbility()) ✤")
                 }
                 
                 

@@ -26,7 +26,7 @@ class Weapon {
     ///
     /// - Parameter character: Character to know what type of weapon
     /// - Returns: Type of weapon in the form of string
-    static func defaultWeponTypeToDisplay(character: GameCharacter) -> String {
+    static func defaultWeaponTypeToDisplay(character: GameCharacter) -> String {
         switch character.characterType {
         case .combatant:
             return "SWORD"

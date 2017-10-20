@@ -140,7 +140,7 @@ class Warrior: GameCharacter {
         if randomOpenChest() {
             print()
             print("📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦")
-            weaponChange(typeOfWeapon: AttackWeapon.randomWeaponAttackChange())
+            attackWeaponChange(typeOfWeapon: AttackWeapon.randomAttackWeaponChange())
             print("\t🗃 The attack weapon chest is at your disposal you got: \(weaponAttackName) with strike force of \(strikeForceWithWeaponChange) 🗃")
             print("📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦📦")
             print()
@@ -177,7 +177,7 @@ class Warrior: GameCharacter {
     /// Allows to change weapon attack
     ///
     /// - Parameter typeOfWeapon: Type of weapon to make change
-    func weaponChange(typeOfWeapon: AttackWeaponType) {
+    func attackWeaponChange(typeOfWeapon: AttackWeaponType) {
         
         let changeStrikeForce = AttackWeapon(type: typeOfWeapon)
         
