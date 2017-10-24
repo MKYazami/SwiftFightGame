@@ -50,7 +50,7 @@ class PlayGame {
     ///   - characterToFightName: Character struck
     ///   - lostHealthPoints: The health points lost during the strike
     ///   - characterToFightHealthPoints: The total of health points remaining after the strike
-    private func stikeSummary(characterToUseName: String, characterToFightName: String, lostHealthPoints: Int, characterToFightHealthPoints: Int) {
+    private func strikeSummary(characterToUseName: String, characterToFightName: String, lostHealthPoints: Int, characterToFightHealthPoints: Int) {
         print("🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶")
         print("\t \(characterToUseName) stroke \(characterToFightName) 👊  \n \t \(characterToFightName) has lost -\(lostHealthPoints) of health points and still has \(characterToFightHealthPoints) health points")
         print("🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶")
@@ -265,7 +265,7 @@ class PlayGame {
                         if Helper.characterSelectionExists(character: characterToFight) {
                             
                             //Summary of strike
-                            stikeSummary(characterToUseName: characterToUse.characterName, characterToFightName: characterToFight.characterName, lostHealthPoints: warrior.getLostHealthPointsValue(), characterToFightHealthPoints: characterToFight.healthPoints)
+                            strikeSummary(characterToUseName: characterToUse.characterName, characterToFightName: characterToFight.characterName, lostHealthPoints: warrior.getLostHealthPointsValue(), characterToFightHealthPoints: characterToFight.healthPoints)
                             
                             //Check if character stroke is dead, and if is dead it will be removed from the array gameCharacter
                             deadCharacterNotification(character: characterToFight, player: adversary)
